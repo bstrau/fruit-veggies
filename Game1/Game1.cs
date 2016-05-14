@@ -1,6 +1,10 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Game1.Content;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace Game1
 {
@@ -11,13 +15,11 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Point pos;
-        private Texture2D test;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "";
         }
 
         /// <summary>
@@ -29,7 +31,6 @@ namespace Game1
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            pos = new Point(0, 0);
             base.Initialize();
         }
 
@@ -41,8 +42,16 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            test = Content.Load<Texture2D>("test");
-            // TODO: use this.Content to load your game content here
+
+            // Liste der Grafikobjekte initialisieren
+            GraphicsObject.graphicObjects = new Dictionary<string, GraphicsObject>();
+            String[] files = Directory.GetFiles("Content\\graphics");
+            foreach(String file in files)
+            {
+                GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
+                if(test != null)
+                    GraphicsObject.graphicObjects.Add(file,test);
+            }
         }
 
         /// <summary>
@@ -51,7 +60,11 @@ namespace Game1
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // Alle Texturen freigeben
+            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
+            {
+                graphic.Waste();
+            }
         }
 
         /// <summary>
@@ -63,24 +76,6 @@ namespace Game1
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
-            if(GamePad.GetState(PlayerIndex.One).DPad.Down == ButtonState.Pressed)
-            {
-                pos.Y += 64;
-            }
-
-            if (GamePad.GetState(PlayerIndex.One).DPad.Up == ButtonState.Pressed)
-            {
-                pos.Y -= 64;
-            }
-            if (GamePad.GetState(PlayerIndex.One).DPad.Left == ButtonState.Pressed)
-            {
-                pos.X -= 64;
-            }
-            if (GamePad.GetState(PlayerIndex.One).DPad.Right == ButtonState.Pressed)
-            {
-                pos.X += 64;
-            }
-            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
@@ -92,10 +87,31 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            // TODO: Add your drawing code here
+
+            // Zeige alle geladenen Grafiken 10 Mal an; Test für die Draw-Methode der GraphicsObjects 
+            int posx = 0;
+            int posy = 0;
+            int sizex = GraphicsDevice.Viewport.Width;
             spriteBatch.Begin();
-            spriteBatch.Draw(test, new Rectangle(pos, new Point(64, 64)),Color.Red);
+            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
+            {
+                
+                for (int j = 0; j < 12; j++)
+                {
+                    if (posx + 64 > sizex)
+                    {
+                        posx = 0;
+                        posy += 64;
+                    }
+
+                    graphic.SetRect(new Rectangle(new Point(posx, posy), new Point(64, 64)));
+                    graphic.Draw(spriteBatch);
+
+                    posx += 64;
+                }
+            }
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }

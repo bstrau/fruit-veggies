@@ -25,3 +25,31 @@ c:\users\benja_000\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Deb
 c:\users\benja_000\documents\visual studio 2015\Projects\Game1\Game1\bin\Windows\x86\Debug\Content\test.bmp
 c:\users\benja_000\documents\visual studio 2015\Projects\Game1\Game1\bin\Windows\x86\Debug\Content\test.xnb
 C:\Users\benja_000\documents\visual studio 2015\Projects\Game1\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\Content\test.xnb
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\Game1.exe
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\Game1.pdb
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\MonoGame.Framework.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.XAudio2.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.DXGI.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D11.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct2D1.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.XInput.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.RawInput.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D9.dll
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\MonoGame.Framework.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.MediaFoundation.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.XAudio2.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.DXGI.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D11.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct2D1.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.XInput.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.RawInput.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
+C:\Users\Ich\Documents\fruit-veggies\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache
+C:\Users\Ich\Documents\fruit-veggies\Game1\obj\x86\Debug\Game1.exe
+C:\Users\Ich\Documents\fruit-veggies\Game1\obj\x86\Debug\Game1.pdb
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\Content\graphics\sprite1.jpg
+C:\Users\Ich\Documents\fruit-veggies\Game1\bin\Windows\x86\Debug\Content\graphics\sprite2.png
