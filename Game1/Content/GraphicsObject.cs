@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game1.Content
 {
+    // Kapselt die Darstellung von Grafiken
     class GraphicsObject
     {
         private Texture2D texture;
