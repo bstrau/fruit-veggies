@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Game1.Content
 {
     class Tile
     {
         GraphicsObject graphics;
+        // Kai war do Test push. Was sagt ein saarländer nach dem sex? Danke Mama
         int xPos, yPos;
         bool hindernis;
 
