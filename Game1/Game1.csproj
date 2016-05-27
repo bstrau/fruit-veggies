@@ -39,6 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Content\GraphicsObject.cs" />
+    <Compile Include="Content\XmlLoader.cs" />
     <Compile Include="Content\Tile.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Program.cs" />
