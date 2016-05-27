@@ -14,11 +14,12 @@ namespace Game1.Content
     {
         public static Dictionary<String, Tile> loadAllTiles(String xmlfilepath)
         {
-        
-            Dictionary<String,Tile> dict = new Dictionary<String,Tile>();
+            Dictionary<String,Tile> ret = new Dictionary<String,Tile>();
+
             XmlDocument xdoc = new XmlDocument();
            
             xdoc.Load(xmlfilepath);
+
             XmlNodeList tiles = xdoc.GetElementsByTagName("tile");
             
             for(int i=0; i< tiles.Count;i++)
@@ -32,13 +33,17 @@ namespace Game1.Content
                 String cash_amount = tiles.Item(i).SelectSingleNode("/cash/amount").Value;
                 //Content.R
                 //GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(graphic));
-                dict.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
+                //ret.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
             }
+            return ret;
         }
 
         public static Dictionary<String, String> loadAllUnits(String xmlfilepath)
         {
+            Dictionary<String, String> ret = new Dictionary<String, String>();
+
             XmlDocument xdoc = new XmlDocument();
+
             xdoc.Load(xmlfilepath);
 
             XmlNodeList units = xdoc.GetElementsByTagName("unit");
@@ -55,8 +60,8 @@ namespace Game1.Content
                 
                 //GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(graphic));
                 //dict.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
-                return new Dictionary<String,String>();
             }
+            return ret;
         }
 
         public static void LoadMap()
