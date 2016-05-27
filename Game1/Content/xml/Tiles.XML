@@ -1,0 +1,22 @@
+<doc>
+	<tiles>
+		<tile id = "0">
+			<title>TestA</title>
+			<accessible>true</accessible>
+			<graphic>sprite1</graphic>
+			<cash>
+				<rounds>0</rounds>
+				<amount>0</amount>
+			</cash>
+		</tile>
+		<tile id = "1">
+			<title>"TestB"</title>
+			<accessible>"true"</accessible>
+			<graphic>"sprite2"</graphic>
+			<cash>
+				<rounds>"0"</rounds>
+				<amount>"0"</amount>
+			</cash>
+		</tile>
+	</tiles>
+</doc>

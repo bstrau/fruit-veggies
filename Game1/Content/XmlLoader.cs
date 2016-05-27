@@ -17,23 +17,34 @@ namespace Game1.Content
             Dictionary<String,Tile> ret = new Dictionary<String,Tile>();
 
             XmlDocument xdoc = new XmlDocument();
-           
-            xdoc.Load(xmlfilepath);
+
+            try
+            {
+                xdoc.Load(xmlfilepath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return ret;
+            } 
 
             XmlNodeList tiles = xdoc.GetElementsByTagName("tile");
             
-            for(int i=0; i< tiles.Count;i++)
+            foreach(XmlNode node in tiles)
             {
-                XmlElement tile = (XmlElement)tiles.Item(i);
-                String id = tile.GetAttribute("id");
-                String title = tiles.Item(i).SelectSingleNode("/title").Value;
-                String accessible = tiles.Item(i).SelectSingleNode("/accessible").Value;
-                String graphic = tiles.Item(i).SelectSingleNode("/graphic").Value;
-                String cash_rounds = tiles.Item(i).SelectSingleNode("/cash/rounds").Value;
-                String cash_amount = tiles.Item(i).SelectSingleNode("/cash/amount").Value;
-                //Content.R
-                //GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(graphic));
-                //ret.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
+                String id = node.Attributes.GetNamedItem("id").Value;
+                String title = node.SelectSingleNode("title").InnerText;
+                bool accessible = Convert.ToBoolean(node.SelectSingleNode("accessible").InnerText);
+                String graphic = node.SelectSingleNode("graphic").InnerText;
+
+                // Gehört hier eigentlich nicht hin, da die Tiles nicht über diese Attribute verfügen
+                int cash_rounds = Convert.ToInt32(node.SelectSingleNode("cash/rounds").InnerText);
+                int cash_amount = Convert.ToInt32(node.SelectSingleNode("cash/amount").InnerText);
+
+                GraphicsObject g = GraphicsObject.graphicObjects[graphic];
+                if (g != null) {
+                    ret.Add(id, new Tile(g, 0, 0, Convert.ToBoolean(accessible)));
+                }
             }
             return ret;
         }

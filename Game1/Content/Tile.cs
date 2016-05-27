@@ -12,7 +12,7 @@ namespace Game1.Content
     class Tile
     {
         GraphicsObject graphics;
-        // Kai war do Test push. Was sagt ein saarländer nach dem sex? Danke Mama
+        
         int xPos, yPos;
         bool hindernis;
 
@@ -24,5 +24,19 @@ namespace Game1.Content
             this.hindernis = hindernis;
         }
 
+        public void SetPos(int x, int y)
+        {
+            xPos = x;
+            yPos = y;
+        }
+
+        public void Draw(SpriteBatch batch)
+        {
+            graphics.SetPos(xPos, yPos);
+            graphics.Draw(batch);
+        }
+
+        // Global erreichbare Liste aller Grafikobjekte. Wird in der ContentLoad Methode über den XML-Loader gefüllt.
+        public static Dictionary<String, Tile> Tiles = new Dictionary<string, Tile>();
     }
 }

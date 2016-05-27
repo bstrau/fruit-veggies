@@ -49,9 +49,15 @@ namespace Game1
             foreach(String file in files)
             {
                 GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
-                if(test != null)
-                    GraphicsObject.graphicObjects.Add(file,test);
+                if (test != null)
+                {
+                    String name = Path.GetFileNameWithoutExtension(file);
+                    GraphicsObject.graphicObjects.Add(name, test);
+                }
             }
+
+            // XMLs laden...
+            Tile.Tiles = XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
         }
 
         /// <summary>
@@ -93,22 +99,18 @@ namespace Game1
             int posy = 0;
             int sizex = GraphicsDevice.Viewport.Width;
             spriteBatch.Begin();
-            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
+            foreach(Tile tile in Tile.Tiles.Values)
             {
-                
-                for (int j = 0; j < 12; j++)
+                if (posx + 64 > sizex)
                 {
-                    if (posx + 64 > sizex)
-                    {
-                        posx = 0;
-                        posy += 64;
-                    }
-
-                    graphic.SetRect(new Rectangle(new Point(posx, posy), new Point(64, 64)));
-                    graphic.Draw(spriteBatch);
-
-                    posx += 64;
+                    posx = 0;
+                    posy += 64;
                 }
+
+                tile.SetPos(posx, posy);
+                tile.Draw(spriteBatch);
+
+                posx += 64;
             }
             spriteBatch.End();
 
