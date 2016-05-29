@@ -11,15 +11,24 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// 
+    
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        int SPIELFELDHOEHE = 4;
+        int SPIELFELDBREITE = 4;  
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "";
+            graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
+            graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -57,7 +66,7 @@ namespace Game1
             }
 
             // XMLs laden...
-            Tile.Tiles = XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
+            XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
         }
 
         /// <summary>
@@ -94,13 +103,19 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Zeige alle geladenen Grafiken 10 Mal an; Test für die Draw-Methode der GraphicsObjects 
+            // Zeige alle im XML-Dokument definierten Tiles an 
             int posx = 0;
             int posy = 0;
             int sizex = GraphicsDevice.Viewport.Width;
             spriteBatch.Begin();
             foreach(Tile tile in Tile.Tiles.Values)
             {
+                if(tile.GetTileType() == Tile.TileType.RESSOURCE)
+                {
+                    int loot = ((RessourcesTile)tile).GetLoot();
+                    if(loot != 0)
+                        Console.WriteLine(loot);
+                }
                 if (posx + 64 > sizex)
                 {
                     posx = 0;

@@ -1,21 +1,21 @@
 <doc>
 	<tiles>
-		<tile id = "0">
-			<title>TestA</title>
-			<accessible>true</accessible>
+		<tile id = "0" type = "Ressource">
+			<title>Berg</title>
+			<accessible>True</accessible>
 			<graphic>sprite1</graphic>
 			<cash>
-				<rounds>0</rounds>
-				<amount>0</amount>
+				<rounds>3</rounds>
+				<amount>100</amount>
 			</cash>
 		</tile>
-		<tile id = "1">
-			<title>"TestB"</title>
-			<accessible>"true"</accessible>
-			<graphic>"sprite2"</graphic>
+		<tile id = "1" type = "Ressource">
+			<title>Strasse</title>
+			<accessible>True</accessible>
+			<graphic>sprite2</graphic>
 			<cash>
-				<rounds>"0"</rounds>
-				<amount>"0"</amount>
+				<rounds>10</rounds>
+				<amount>1</amount>
 			</cash>
 		</tile>
 	</tiles>
