@@ -30,15 +30,38 @@ namespace Game1.Content
             foreach(XmlNode node in tiles)
             {
                 String type = node.Attributes.GetNamedItem("type").Value;
+                
+                // Tile erzeugen und registrieren
                 switch (type)
                 {
                     case "Ressource":
                         Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
+                        tile.Register();
 
-                        // Tile wird eigentlich vom Konstruktor registriert  
-                        //Tile.Tiles.Add(tile.GetId(), tile);
                         break;
                 }
+            }
+        }
+
+        public static void loadAllMaps(String xmlfilepath)
+        {
+            XmlDocument xdoc = new XmlDocument();
+
+            try
+            {
+                xdoc.Load(xmlfilepath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            XmlNodeList maps = xdoc.GetElementsByTagName("map");
+
+            foreach (XmlNode node in maps)
+            {
+                Map map = new Map(node);
+                map.Register();
             }
         }
 
@@ -66,10 +89,6 @@ namespace Game1.Content
                 //dict.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
             }
             return ret;
-        }
-
-        public static void LoadMap()
-        { 
         }
     }
 }

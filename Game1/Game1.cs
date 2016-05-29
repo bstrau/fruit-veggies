@@ -18,6 +18,7 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Map map;
 
         int SPIELFELDHOEHE = 4;
         int SPIELFELDBREITE = 4;  
@@ -67,6 +68,10 @@ namespace Game1
 
             // XMLs laden...
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
+            XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
+
+            // Map festlegen. Testweise die erste
+            map = Map.Maps["0"];
         }
 
         /// <summary>
@@ -103,30 +108,8 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Zeige alle im XML-Dokument definierten Tiles an 
-            int posx = 0;
-            int posy = 0;
-            int sizex = GraphicsDevice.Viewport.Width;
             spriteBatch.Begin();
-            foreach(Tile tile in Tile.Tiles.Values)
-            {
-                if(tile.GetTileType() == Tile.TileType.RESSOURCE)
-                {
-                    int loot = ((RessourcesTile)tile).GetLoot();
-                    if(loot != 0)
-                        Console.WriteLine(loot);
-                }
-                if (posx + 64 > sizex)
-                {
-                    posx = 0;
-                    posy += 64;
-                }
-
-                tile.SetPos(posx, posy);
-                tile.Draw(spriteBatch);
-
-                posx += 64;
-            }
+            map.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

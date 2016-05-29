@@ -28,7 +28,7 @@ namespace Game1.Content
             MAXTILE
         }
 
-        protected void Register() {
+        public void Register() {
             Tiles.Add(id, this);
         }
 

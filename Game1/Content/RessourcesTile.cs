@@ -16,7 +16,6 @@ namespace Game1.Content
         {
             cash_rounds = Convert.ToInt32(node.SelectSingleNode("cash/rounds").InnerText);
             cash_amount = Convert.ToInt32(node.SelectSingleNode("cash/amount").InnerText);
-            Register();
         }
 
         // Translators note: Loot heißt Beute

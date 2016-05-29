@@ -1,0 +1,10 @@
+<doc>
+	<maps>
+		<map id = "0">
+			<title>Test</title>
+			<SizeX>4</SizeX>
+			<SizeY>4</SizeY>
+			<tiles>1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0</tiles>
+		</map>
+	</maps>
+</doc>
