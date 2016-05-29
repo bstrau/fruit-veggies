@@ -12,11 +12,11 @@ namespace Game1.Content
     class GraphicsObject
     {
         private Texture2D texture;
-        private Rectangle rect;
+        private int xPos, yPos;
 
         public GraphicsObject(Texture2D texture) {
             this.texture = texture;
-            rect = new Rectangle();
+            xPos = yPos = 0;
         }
 
         public Texture2D GetTexture()
@@ -27,17 +27,13 @@ namespace Game1.Content
         public void Draw(SpriteBatch batch)
         {
 
-            batch.Draw(texture, rect, Color.White);
+            batch.Draw(texture, new Rectangle(new Point(xPos, yPos), new Point(64,64)), Color.White);
         } 
 
-        public void SetRect(Rectangle rect)
+        public void SetPos(int x, int y)
         {
-            this.rect = rect;
-        }
-
-        public Rectangle GetRect()
-        {
-            return rect;
+            xPos = x;
+            yPos = y;
         }
 
         public void Waste()
@@ -46,6 +42,6 @@ namespace Game1.Content
         }
 
         // Global erreichbare Liste aller Grafikobjekte. Wird in der LoadContent-Methode gefüllt.
-        public static Dictionary<String,GraphicsObject> graphicObjects;
+        public static Dictionary<String,GraphicsObject> graphicObjects = new Dictionary<String, GraphicsObject>();
     }
 }

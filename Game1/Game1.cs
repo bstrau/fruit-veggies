@@ -11,15 +11,24 @@ namespace Game1
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// 
+    
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        int SPIELFELDHOEHE = 4;
+        int SPIELFELDBREITE = 4;  
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "";
+            graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
+            graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -49,9 +58,15 @@ namespace Game1
             foreach(String file in files)
             {
                 GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
-                if(test != null)
-                    GraphicsObject.graphicObjects.Add(file,test);
+                if (test != null)
+                {
+                    String name = Path.GetFileNameWithoutExtension(file);
+                    GraphicsObject.graphicObjects.Add(name, test);
+                }
             }
+
+            // XMLs laden...
+            XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
         }
 
         /// <summary>
@@ -88,27 +103,29 @@ namespace Game1
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // Zeige alle geladenen Grafiken 10 Mal an; Test für die Draw-Methode der GraphicsObjects 
+            // Zeige alle im XML-Dokument definierten Tiles an 
             int posx = 0;
             int posy = 0;
             int sizex = GraphicsDevice.Viewport.Width;
             spriteBatch.Begin();
-            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
+            foreach(Tile tile in Tile.Tiles.Values)
             {
-                
-                for (int j = 0; j < 12; j++)
+                if(tile.GetTileType() == Tile.TileType.RESSOURCE)
                 {
-                    if (posx + 64 > sizex)
-                    {
-                        posx = 0;
-                        posy += 64;
-                    }
-
-                    graphic.SetRect(new Rectangle(new Point(posx, posy), new Point(64, 64)));
-                    graphic.Draw(spriteBatch);
-
-                    posx += 64;
+                    int loot = ((RessourcesTile)tile).GetLoot();
+                    if(loot != 0)
+                        Console.WriteLine(loot);
                 }
+                if (posx + 64 > sizex)
+                {
+                    posx = 0;
+                    posy += 64;
+                }
+
+                tile.SetPos(posx, posy);
+                tile.Draw(spriteBatch);
+
+                posx += 64;
             }
             spriteBatch.End();
 

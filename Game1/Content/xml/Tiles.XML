@@ -1,0 +1,22 @@
+<doc>
+	<tiles>
+		<tile id = "0" type = "Ressource">
+			<title>Berg</title>
+			<accessible>True</accessible>
+			<graphic>sprite1</graphic>
+			<cash>
+				<rounds>3</rounds>
+				<amount>100</amount>
+			</cash>
+		</tile>
+		<tile id = "1" type = "Ressource">
+			<title>Strasse</title>
+			<accessible>True</accessible>
+			<graphic>sprite2</graphic>
+			<cash>
+				<rounds>10</rounds>
+				<amount>1</amount>
+			</cash>
+		</tile>
+	</tiles>
+</doc>

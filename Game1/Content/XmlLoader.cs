@@ -12,30 +12,34 @@ namespace Game1.Content
 {
     class XmlLoader
     {
-        public static Dictionary<String, Tile> loadAllTiles(String xmlfilepath)
+        public static void loadAllTiles(String xmlfilepath)
         {
-            Dictionary<String,Tile> ret = new Dictionary<String,Tile>();
-
             XmlDocument xdoc = new XmlDocument();
-           
-            xdoc.Load(xmlfilepath);
+
+            try
+            {
+                xdoc.Load(xmlfilepath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            } 
 
             XmlNodeList tiles = xdoc.GetElementsByTagName("tile");
             
-            for(int i=0; i< tiles.Count;i++)
+            foreach(XmlNode node in tiles)
             {
-                XmlElement tile = (XmlElement)tiles.Item(i);
-                String id = tile.GetAttribute("id");
-                String title = tiles.Item(i).SelectSingleNode("/title").Value;
-                String accessible = tiles.Item(i).SelectSingleNode("/accessible").Value;
-                String graphic = tiles.Item(i).SelectSingleNode("/graphic").Value;
-                String cash_rounds = tiles.Item(i).SelectSingleNode("/cash/rounds").Value;
-                String cash_amount = tiles.Item(i).SelectSingleNode("/cash/amount").Value;
-                //Content.R
-                //GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(graphic));
-                //ret.Add(id, new Tile(, 0, 0, Convert.ToBoolean(accessible));
+                String type = node.Attributes.GetNamedItem("type").Value;
+                switch (type)
+                {
+                    case "Ressource":
+                        Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
+
+                        // Tile wird eigentlich vom Konstruktor registriert  
+                        //Tile.Tiles.Add(tile.GetId(), tile);
+                        break;
+                }
             }
-            return ret;
         }
 
         public static Dictionary<String, String> loadAllUnits(String xmlfilepath)
