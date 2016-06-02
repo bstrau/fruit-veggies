@@ -34,10 +34,19 @@ namespace Game1.Content
                 // Tile erzeugen und registrieren
                 switch (type)
                 {
-                    case "Ressource":
+                    case "DEFAULT":
+                        Tile defaultTile = new DefaultTile(Tile.TileType.DEFAULT, node);
+                        break;
+
+                    case "RESSOURCE":
                         Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
 
                         break;
+
+                    case "TREASURE":
+                        Tile treasureTile = new TreasureTile(Tile.TileType.TREASURE, node);
+                        break;
+                    
                 }
             }
         }

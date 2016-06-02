@@ -18,6 +18,12 @@ namespace Game1.Content
             cash_amount = Convert.ToInt32(node.SelectSingleNode("cash/amount").InnerText);
         }
 
+        public RessourcesTile(RessourcesTile tile) : base(tile)
+        {
+            this.cash_amount = tile.cash_amount;
+            this.cash_rounds = tile.cash_rounds;
+        }
+
         // Translators note: Loot heißt Beute
         public int GetLoot()
         {
