@@ -42,6 +42,9 @@ namespace Game1.Content
             String graphic = node.SelectSingleNode("graphic").InnerText;
 
             graphics = GraphicsObject.graphicObjects[graphic];
+
+            // Als Prototyp registrieren
+            Register();
         }
 
         public Tile(GraphicsObject graphics, int x, int y, bool accessible)
