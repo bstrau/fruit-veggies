@@ -38,8 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\DefaultTile.cs" />
     <Compile Include="Content\GraphicsObject.cs" />
     <Compile Include="Content\RessourcesTile.cs" />
+    <Compile Include="Content\TreasureTile.cs" />
     <Compile Include="Content\XmlLoader.cs" />
     <Compile Include="Content\Tile.cs" />
     <Compile Include="Game1.cs" />

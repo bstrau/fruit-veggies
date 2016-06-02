@@ -22,14 +22,25 @@ namespace Game1.Content
         // Neue Typen bitte über MAXTILE einfügen. Dient als Iterationsschranke.
         public enum TileType
         {
-            STANDARD,
+            DEFAULT,
             RESSOURCE,
-            RESSOURCEONCE,
+            TREASURE,
             MAXTILE
         }
 
         protected void Register() {
             Tiles.Add(id, this);
+        }
+
+        public Tile(Tile tile)
+        {
+            this.id = tile.id;
+            this.title = tile.title;
+            this.type = tile.type;
+            this.xPos = tile.xPos;
+            this.yPos = tile.yPos;
+            this.graphics = tile.graphics;
+            this.accessible = tile.accessible;
         }
 
         public Tile(TileType type, XmlNode node)
@@ -50,6 +61,11 @@ namespace Game1.Content
             xPos = x;
             yPos = y;
             this.accessible = accessible;
+        }
+
+        public virtual Tile GetCopy()
+        {
+            return new Tile(this);
         }
 
         public void SetPos(int x, int y)

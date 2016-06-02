@@ -1,22 +1,36 @@
 <doc>
 	<tiles>
-		<tile id = "0" type = "Ressource">
-			<title>Berg</title>
+
+    <tile id="D1" type="DEFAULT">
+      <title>Beet</title>
+      <accessible>True</accessible>
+      <graphic>sprite1</graphic>
+    </tile>
+
+    <tile id="D2" type="DEFAULT">
+      <title>Zaun</title>
+      <accessible>False</accessible>
+      <graphic>sprite1</graphic>
+    </tile>
+
+    <tile id="R1" type="RESSOURCE">
+      <title>Einkaufsladen</title>
+      <accessible>True</accessible>
+      <graphic>sprite1</graphic>
+      <cash>
+        <rounds>10</rounds>
+        <amount>1</amount>
+      </cash>
+    </tile>
+    
+		<tile id ="T1" type = "TREASURE">
+			<title>Schatzkiste</title>
 			<accessible>True</accessible>
 			<graphic>sprite1</graphic>
 			<cash>
-				<rounds>3</rounds>
 				<amount>100</amount>
 			</cash>
 		</tile>
-		<tile id = "1" type = "Ressource">
-			<title>Strasse</title>
-			<accessible>True</accessible>
-			<graphic>sprite2</graphic>
-			<cash>
-				<rounds>10</rounds>
-				<amount>1</amount>
-			</cash>
-		</tile>
+    
 	</tiles>
 </doc>

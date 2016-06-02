@@ -25,5 +25,4 @@ C:\Users\Kai\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.RawInput.xml
 C:\Users\Kai\fruit-veggies\Game1\bin\Windows\x86\Debug\SharpDX.Direct3D9.xml
 C:\Users\Kai\fruit-veggies\Game1\obj\x86\Debug\Game1.exe
 C:\Users\Kai\fruit-veggies\Game1\obj\x86\Debug\Game1.pdb
-C:\Users\Kai\fruit-veggies\Game1\bin\Windows\x86\Debug\Content\graphics\sprite3.png
 C:\Users\Kai\fruit-veggies\Game1\obj\x86\Debug\Game1.csprojResolveAssemblyReference.cache

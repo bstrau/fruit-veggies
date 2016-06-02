@@ -19,6 +19,12 @@ namespace Game1.Content
             Register();
         }
 
+        public RessourcesTile(RessourcesTile tile) : base(tile)
+        {
+            this.cash_amount = tile.cash_amount;
+            this.cash_rounds = tile.cash_rounds;
+        }
+
         // Translators note: Loot heißt Beute
         public int GetLoot()
         {

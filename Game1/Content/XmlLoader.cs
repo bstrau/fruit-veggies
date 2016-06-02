@@ -32,12 +32,20 @@ namespace Game1.Content
                 String type = node.Attributes.GetNamedItem("type").Value;
                 switch (type)
                 {
-                    case "Ressource":
-                        Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
+                    case "DEFAULT":
+                        Tile defaultTile = new DefaultTile(Tile.TileType.DEFAULT, node);
+                        break;
 
+                    case "RESSOURCE":
+                        Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
                         // Tile wird eigentlich vom Konstruktor registriert  
                         //Tile.Tiles.Add(tile.GetId(), tile);
                         break;
+
+                    case "TREASURE":
+                        Tile treasureTile = new TreasureTile(Tile.TileType.TREASURE, node);
+                        break;
+                    
                 }
             }
         }
