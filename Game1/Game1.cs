@@ -97,6 +97,18 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            // TEST: Loote alle TREASURE Tiles, um zu zeigen, dass Instanziierung funktioniert
+            foreach(Tile tile in map.GetMapTiles())
+            {
+                if(tile.GetTileType() == Tile.TileType.TREASURE)
+                {
+                    int loot = ((TreasureTile)tile).GetLoot();
+                    if(loot != 0)
+                    {
+                        Console.WriteLine("Could loot " + loot + " resources");
+                    }
+                }
+            }
             base.Update(gameTime);
         }
 

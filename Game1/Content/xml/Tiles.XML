@@ -26,7 +26,7 @@
 		<tile id ="T1" type = "TREASURE">
 			<title>Schatzkiste</title>
 			<accessible>True</accessible>
-			<graphic>sprite1</graphic>
+			<graphic>sprite2</graphic>
 			<cash>
 				<amount>100</amount>
 			</cash>

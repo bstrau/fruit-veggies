@@ -14,8 +14,7 @@ namespace Game1.Content
         public TreasureTile(TileType type, XmlNode node)
             : base(type, node)
         {
-            this.cash = 0; // TODO KP: XML
-            Register();
+            this.cash = Convert.ToInt32(node.SelectSingleNode("cash/amount").InnerText);
         }
 
         public TreasureTile(TreasureTile treasureTile) :base(treasureTile)

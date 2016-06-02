@@ -36,8 +36,7 @@ namespace Game1.Content
             {
                 for(int x = 0; x < sizeX; x++)
                 {
-                    // FIXME: Es findet noch keine Instanziierung statt, alle Tiles einer ID teilen sich ihre Eigenschaften und damit die okkupierenden Einheiten.
-                    tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]];
+                    tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();
                 }
             }
         }
@@ -58,6 +57,19 @@ namespace Game1.Content
                 }
             }
         }
+
+        public List<Tile> GetMapTiles()
+        {
+            List<Tile> tilelist = new List<Tile>();
+
+            foreach(Tile tile in tiles)
+            {
+                tilelist.Add(tile);
+            }
+
+            return tilelist;
+        }
+
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();
     }
 }

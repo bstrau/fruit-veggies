@@ -13,12 +13,10 @@ namespace Game1.Content
         public DefaultTile(TileType type, XmlNode node)
             : base(type, node)
         {
-            Register();
         }
 
         public DefaultTile(DefaultTile tile) : base(tile)
         {
-            
         }
 
         public override Tile GetCopy()

@@ -40,7 +40,6 @@ namespace Game1.Content
 
                     case "RESSOURCE":
                         Tile tile = new RessourcesTile(Tile.TileType.RESSOURCE, node);
-
                         break;
 
                     case "TREASURE":
