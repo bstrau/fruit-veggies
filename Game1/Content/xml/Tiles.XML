@@ -1,22 +1,40 @@
 <doc>
 	<tiles>
 		<tile id = "0" type = "Ressource">
-			<title>Berg</title>
+			<title>Hochhaus</title>
 			<accessible>True</accessible>
-			<graphic>sprite1</graphic>
+			<graphic>hochhaus</graphic>
 			<cash>
 				<rounds>3</rounds>
 				<amount>100</amount>
 			</cash>
 		</tile>
 		<tile id = "1" type = "Ressource">
-			<title>Strasse</title>
+			<title>Apfel</title>
 			<accessible>True</accessible>
-			<graphic>sprite2</graphic>
+			<graphic>apfel</graphic>
 			<cash>
 				<rounds>10</rounds>
 				<amount>1</amount>
 			</cash>
 		</tile>
+    <tile id = "2" type = "Ressource">
+      <title>Strasse</title>
+      <accessible>True</accessible>
+      <graphic>strasse</graphic>
+      <cash>
+        <rounds>10</rounds>
+        <amount>1</amount>
+      </cash>
+    </tile>
+    <tile id = "3" type = "Ressource">
+      <title>Strasse1</title>
+      <accessible>True</accessible>
+      <graphic>strasse1</graphic>
+      <cash>
+        <rounds>10</rounds>
+        <amount>1</amount>
+      </cash>
+    </tile>
 	</tiles>
 </doc>
