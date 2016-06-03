@@ -1,0 +1,12 @@
+﻿<doc>
+  <units>
+    <unit id = "0" type = "Apfel">
+      <title>Apfel</title>
+      <graphic>apfel</graphic>
+    </unit>
+    <unit id = "1" type = "Banane">
+      <title>Banane</title>
+      <graphic>banane</graphic>
+    </unit>
+  </units>
+</doc>
