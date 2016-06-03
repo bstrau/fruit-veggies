@@ -4,19 +4,19 @@
     <tile id="D1" type="DEFAULT">
       <title>Beet</title>
       <accessible>True</accessible>
-      <graphic>sprite1</graphic>
+      <graphic>test</graphic>
     </tile>
 
     <tile id="D2" type="DEFAULT">
       <title>Zaun</title>
       <accessible>False</accessible>
-      <graphic>sprite1</graphic>
+      <graphic>test</graphic>
     </tile>
 
     <tile id="R1" type="RESSOURCE">
       <title>Einkaufsladen</title>
       <accessible>True</accessible>
-      <graphic>sprite1</graphic>
+      <graphic>strasse1</graphic>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -26,7 +26,7 @@
 		<tile id ="T1" type = "TREASURE">
 			<title>Schatzkiste</title>
 			<accessible>True</accessible>
-			<graphic>sprite2</graphic>
+			<graphic>hochhaus</graphic>
 			<cash>
 				<amount>100</amount>
 			</cash>

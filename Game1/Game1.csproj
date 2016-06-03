@@ -65,15 +65,25 @@
     <Content Include="Content\graphics\hochhaus.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\xml\Maps.XML">
-    <Content Include="Content\graphics\strasse.png" />
+    <Content Include="Content\graphics\test.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    <Content Include="Content\graphics\strasse1.png" />
+    </Content>
+    <Content Include="Content\xml\Maps.XML">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\graphics\strasse.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\graphics\strasse1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\xml\Tiles.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\xml\Units.xml" />
+    <Content Include="Content\xml\Units.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup />
