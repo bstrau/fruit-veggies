@@ -20,8 +20,8 @@ namespace Game1
         SpriteBatch spriteBatch;
         Map map;
 
-        int SPIELFELDHOEHE = 4;
-        int SPIELFELDBREITE = 4;  
+        int SPIELFELDHOEHE = 16;
+        int SPIELFELDBREITE = 16;  
 
         public Game1()
         {

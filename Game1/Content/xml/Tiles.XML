@@ -1,18 +1,5 @@
 <doc>
 	<tiles>
-
-    <tile id="D1" type="DEFAULT">
-      <title>Beet</title>
-      <accessible>True</accessible>
-      <graphic>test</graphic>
-    </tile>
-
-    <tile id="D2" type="DEFAULT">
-      <title>Zaun</title>
-      <accessible>False</accessible>
-      <graphic>test</graphic>
-    </tile>
-
     <tile id="R1" type="RESSOURCE">
       <title>Einkaufsladen</title>
       <accessible>True</accessible>
@@ -22,7 +9,6 @@
         <amount>1</amount>
       </cash>
     </tile>
-    
 		<tile id ="T1" type = "TREASURE">
 			<title>Schatzkiste</title>
 			<accessible>True</accessible>
@@ -31,8 +17,6 @@
 				<amount>100</amount>
 			</cash>
 		</tile>
-    
-	</tiles>
     <tile id = "4" type = "Ressource">
       <title>Strasse2</title>
       <accessible>True</accessible>
@@ -42,7 +26,6 @@
         <amount>1</amount>
       </cash>
     </tile>
-
     <tile id = "5" type = "Ressource">
       <title>Strasse3</title>
       <accessible>True</accessible>
@@ -206,11 +189,5 @@
         <amount>1</amount>
       </cash>
     </tile>
-
-
-
-
-
-
   </tiles>
 </doc>
