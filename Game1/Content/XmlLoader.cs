@@ -10,7 +10,7 @@ using System.Xml;
 // test
 namespace Game1.Content
 {
-    class XmlLoader
+    public class XmlLoader
     {
         public static void loadAllTiles(String xmlfilepath)
         {

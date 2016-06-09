@@ -8,12 +8,12 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class Map
+    public class Map
     {
-        String id;
-        String title;
-        int sizeX, sizeY;
-        Tile[,] tiles;
+        private String id;
+        private String title;
+        private int sizeX, sizeY;
+        private Tile[,] tiles;
 
 
         // künftig public Map(XMLNode node)

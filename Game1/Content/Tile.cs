@@ -9,7 +9,7 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class Tile
+    public class Tile
     {
         GraphicsObject graphics;
 

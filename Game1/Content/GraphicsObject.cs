@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Game1.Content
 {
     // Kapselt die Darstellung von Grafiken
-    class GraphicsObject
+    public class GraphicsObject
     {
         private Texture2D texture;
         private int xPos, yPos;
@@ -18,6 +19,17 @@ namespace Game1.Content
         public GraphicsObject(Texture2D texture) {
             this.texture = texture;
             xPos = yPos = 0;
+        }
+
+        // TODO
+        public GraphicsObject(Bitmap bitmap)
+        { 
+        }
+
+        // TODO
+        public Bitmap GetBitmap()
+        {
+            return null;
         }
 
         public Texture2D GetTexture()
