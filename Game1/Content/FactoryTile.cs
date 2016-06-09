@@ -15,10 +15,10 @@ namespace Game1.Content
  
         }
 
-        public Unit createUnit(String unit_id)
-        {
-            return (Unit.Units[unit_id]).GetCopy();
-        }
+        //public Unit createUnit(String unit_id)
+        //{
+        //    return (Unit.Units[unit_id]).GetCopy();
+        //}
 
 
     }
