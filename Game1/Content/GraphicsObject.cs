@@ -13,6 +13,7 @@ namespace Game1.Content
     {
         private Texture2D texture;
         private int xPos, yPos;
+        private int width, height;
 
         public GraphicsObject(Texture2D texture) {
             this.texture = texture;
@@ -34,6 +35,12 @@ namespace Game1.Content
         {
             xPos = x;
             yPos = y;
+        }
+
+        public void setDimension(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
         }
 
         public void Waste()
