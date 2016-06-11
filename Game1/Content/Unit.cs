@@ -32,10 +32,27 @@ namespace Game1.Content
         }
         public enum UnitType
         {
-            STANDARD,
-            APFEL,
-            BANANE,         
+            DEFAULT,
+            APPLE,
+            BANANA,         
             MAXEINHEIT
+        }
+
+        public void Register()
+        {
+            Units.Add(id, this);
+        }
+
+        public Unit(Unit unit)
+        {
+            this.id = unit.id;
+            this.title = unit.title;
+            this.type = unit.type;
+            this.spieler = unit.spieler;
+            this.xPos = unit.xPos;
+            this.yPos = unit.yPos;
+            this.sound = unit.sound;
+            this.graphics = unit.graphics;
         }
 
         public Unit(UnitType type, XmlNode node)
@@ -48,6 +65,8 @@ namespace Game1.Content
             String graphic = node.SelectSingleNode("graphic").InnerText;
 
             graphics = GraphicsObject.graphicObjects[graphic];
+
+            Register();
         }
 
         public Unit(GraphicsObject graphics, int x, int y, bool accessible)
@@ -56,6 +75,13 @@ namespace Game1.Content
             xPos = x;
             yPos = y;
         }
+
+        public virtual Unit GetCopy()
+        {
+            return new Unit(this);
+        }
+
+
 
         public void Draw(SpriteBatch batch)
         {

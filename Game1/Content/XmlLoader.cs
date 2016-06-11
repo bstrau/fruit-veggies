@@ -72,5 +72,43 @@ namespace Game1.Content
             }
         }
 
+        public static void loadAllUnits(String xmlfilepath)
+        {
+            XmlDocument xdoc = new XmlDocument();
+
+            try
+            {
+                xdoc.Load(xmlfilepath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            XmlNodeList units = xdoc.GetElementsByTagName("unit");
+
+            foreach (XmlNode node in units)
+            {
+                String type = node.Attributes.GetNamedItem("type").Value;
+
+                // Unit erzeugen und registrieren
+                switch (type)
+                {
+                    case "DEFAULT":
+                        Unit defaultTile = new Unit(Unit.UnitType.DEFAULT, node);
+                        break;
+
+                    case "APPLE":
+                        Unit tile = new AttackUnit(Unit.UnitType.APPLE, node);
+                        break;
+
+                    case "BANANA":
+                        Unit treasureTile = new AttackUnit(Unit.UnitType.BANANA, node);
+                        break;
+
+                }
+            }
+        }
+
     }
 }

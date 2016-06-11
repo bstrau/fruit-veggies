@@ -1,12 +1,14 @@
 ﻿<doc>
   <units>
-    <unit id = "0" type = "Apfel">
+    <unit id = "0" type = "APPLE">
       <title>Apfel</title>
       <graphic>apfel</graphic>
+      <attackpower>10</attackpower>
     </unit>
-    <unit id = "1" type = "Banane">
+    <unit id = "1" type = "BANANA">
       <title>Banane</title>
-      <graphic>banane</graphic>
+      <graphic>apfel</graphic>
+      <attackpower>10</attackpower>
     </unit>
   </units>
 </doc>

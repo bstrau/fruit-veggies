@@ -37,8 +37,11 @@ namespace Game1.Content
                 for(int x = 0; x < sizeX; x++)
                 {
                     tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();
+                    tiles[y, x].enter(Unit.Units["0"]);
                 }
             }
+
+            
         }
 
         public void Register()
