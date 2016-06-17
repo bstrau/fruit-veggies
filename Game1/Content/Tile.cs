@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Drawing;
 
 namespace Game1.Content
 {
@@ -77,6 +78,11 @@ namespace Game1.Content
             yPos = y;
         }
 
+        public Point getPos()
+        {
+            return new Point(this.xPos, this.yPos);
+        }
+
         public String GetId()
         {
             return id;
@@ -91,6 +97,12 @@ namespace Game1.Content
         {
             graphics.SetPos(xPos, yPos);
             graphics.Draw(batch);
+        }
+
+        public void Draw(Graphics g)
+        {
+            graphics.SetPos(xPos, yPos);
+            graphics.Draw(g);
         }
 
         // Global erreichbare Liste aller Tiles.

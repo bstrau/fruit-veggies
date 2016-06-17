@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Drawing;
+using System.IO;
 
 namespace Game1.Content
 {
@@ -41,6 +43,38 @@ namespace Game1.Content
             }
         }
 
+        public Map()
+        {
+            this.id = "";
+            this.sizeX = 16;
+            this.sizeY = 9;
+            this.setMapTiles("R1");
+        }
+
+        // Setzt alle Kacheln der Map die übergebene Kachel id
+        public void setMapTiles(String id)
+        {
+            tiles = new Tile[sizeY, sizeX];
+
+            for (int y = 0; y < sizeY; y++)
+            {
+                for (int x = 0; x < sizeX; x++)
+                {
+                    this.tiles[y, x] = Tile.Tiles[id].GetCopy();
+                }
+            }
+        }
+
+        public int getSizeX()
+        {
+            return this.sizeX;
+        }
+
+        public int getSizeY()
+        {
+            return this.sizeY;
+        }
+
         public void Register()
         {
             Maps.Add(id, this);
@@ -58,6 +92,17 @@ namespace Game1.Content
             }
         }
 
+        public void Draw(Graphics g)
+        {
+            for (int y = 0; y < sizeY; y++)
+            {
+                for (int x = 0; x < sizeX; x++)
+                {
+                    tiles[y, x].SetPos(x * 64, y * 64);
+                    tiles[y, x].Draw(g);
+                }
+            }
+        }
         public List<Tile> GetMapTiles()
         {
             List<Tile> tilelist = new List<Tile>();
@@ -68,6 +113,52 @@ namespace Game1.Content
             }
 
             return tilelist;
+        }
+
+        public void writeToFile(String path)
+        {
+            XmlDocument doc = null;
+            XmlElement maps = null;
+
+            if (File.Exists(path) == false)
+            {
+                doc = new XmlDocument();
+                XmlElement root = doc.CreateElement("doc");
+                maps = doc.CreateElement("maps");
+            }
+            else
+            {
+                doc = new XmlDocument();
+                doc.Load(path);
+                maps = (XmlElement)doc.SelectSingleNode("/doc/maps/");
+            }
+            XmlElement map = doc.CreateElement("map");
+            XmlElement title = doc.CreateElement("title");
+            title.InnerText = this.title;
+            XmlElement SizeX = doc.CreateElement("SizeX");
+            SizeX.InnerText = this.sizeX.ToString();
+            XmlElement SizeY = doc.CreateElement("SizeY");
+            SizeY.InnerText = this.sizeY.ToString();
+            XmlElement tiles = doc.CreateElement("tiles");
+
+            String tileIdRange = "";
+            for (int y = 0; y < sizeY; y++)
+            {
+                for (int x = 0; x < sizeX; x++)
+                {
+                    tileIdRange = tileIdRange + this.tiles[y, x].GetId()+",";
+                }
+            }
+            tiles.InnerText = tileIdRange;
+
+            map.SetAttribute("id", id);
+            map.AppendChild(title);
+            map.AppendChild(SizeX);
+            map.AppendChild(SizeY);
+            map.AppendChild(tiles);
+
+            maps.AppendChild(map);
+            doc.Save(path);
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

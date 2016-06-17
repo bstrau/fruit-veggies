@@ -13,23 +13,31 @@ namespace Game1.Content
     public class GraphicsObject
     {
         private Texture2D texture;
+        private Bitmap bitmap;
         private int xPos, yPos;
         private int width, height;
+
 
         public GraphicsObject(Texture2D texture) {
             this.texture = texture;
             xPos = yPos = 0;
         }
 
-        // TODO
-        public GraphicsObject(Bitmap bitmap)
-        { 
+        public GraphicsObject(Bitmap bm)
+        {
+            this.bitmap = bm;
+            xPos = yPos = 0;
+        }
+
+        public void SetBitmap(Bitmap bm)
+        {
+            this.bitmap = bm;
         }
 
         // TODO
         public Bitmap GetBitmap()
         {
-            return null;
+            return bitmap;
         }
 
         public Texture2D GetTexture()
@@ -40,8 +48,13 @@ namespace Game1.Content
         public void Draw(SpriteBatch batch)
         {
 
-            batch.Draw(texture, new Rectangle(new Point(xPos, yPos), new Point(64,64)), Color.White);
-        } 
+            batch.Draw(texture, new Microsoft.Xna.Framework.Rectangle(new Microsoft.Xna.Framework.Point(xPos, yPos), new Microsoft.Xna.Framework.Point(64, 64)), Microsoft.Xna.Framework.Color.White);
+        }
+
+        public void Draw(Graphics g)
+        {
+            g.DrawImage(bitmap, xPos, yPos);
+        }
 
         public void SetPos(int x, int y)
         {

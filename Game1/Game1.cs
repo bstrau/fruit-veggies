@@ -29,6 +29,10 @@ namespace Game1
             graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
+
+            MapEditor form = new MapEditor();
+            form.Show();
+
         }
 
         /// <summary>

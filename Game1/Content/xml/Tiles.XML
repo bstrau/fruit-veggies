@@ -1,5 +1,5 @@
 <doc>
-	<tiles>
+  <tiles>
     <tile id = "R1" type = "RESSOURCE">
       <title>Wald</title>
       <accessible>True</accessible>
@@ -20,3 +20,4 @@
     </tile>
   </tiles>
 </doc>
+
