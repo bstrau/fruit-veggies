@@ -23,8 +23,5 @@ namespace Game1.Content
         {
             return id;
         }
-
-
-
     }
 }

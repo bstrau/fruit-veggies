@@ -71,6 +71,7 @@ namespace Game1.Content
         public void Waste()
         {
             texture.Dispose();
+            bitmap.Dispose();
         }
 
         // Global erreichbare Liste aller Grafikobjekte. Wird in der LoadContent-Methode gefüllt.
