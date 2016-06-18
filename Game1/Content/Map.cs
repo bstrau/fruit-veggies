@@ -16,7 +16,7 @@ namespace Game1.Content
         private String title;
         private int sizeX, sizeY;
         private Tile[,] tiles;
-
+        private SoundObject bgSound;
 
         // künftig public Map(XMLNode node)
         public Map(XmlNode node)
@@ -25,6 +25,10 @@ namespace Game1.Content
             title = node.SelectSingleNode("title").InnerText;
             sizeX = Convert.ToInt32(node.SelectSingleNode("SizeX").InnerText);
             sizeY = Convert.ToInt32(node.SelectSingleNode("SizeY").InnerText);
+
+            String sound = node.SelectSingleNode("sound") .InnerText;
+            bgSound = SoundObject.soundObjects[sound];
+
             tiles = new Tile[sizeY, sizeX];
 
             string[] tileids = node.SelectSingleNode("tiles").InnerText.Split(',');
@@ -159,6 +163,11 @@ namespace Game1.Content
 
             maps.AppendChild(map);
             doc.Save(path);
+        }
+
+        public void Init()
+        {
+            bgSound.startPlaying();
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

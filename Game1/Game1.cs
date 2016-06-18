@@ -1,7 +1,9 @@
 ﻿using Game1.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -21,7 +23,9 @@ namespace Game1
         Map map;
 
         int SPIELFELDHOEHE = 16;
-        int SPIELFELDBREITE = 16;  
+        int SPIELFELDBREITE = 16;
+
+        MapEditor editor;
 
         public Game1()
         {
@@ -31,9 +35,8 @@ namespace Game1
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
 
-            MapEditor form = new MapEditor();
-            form.Show();
-
+            editor = new MapEditor();
+            editor.Show();
         }
 
         /// <summary>
@@ -62,6 +65,7 @@ namespace Game1
             String[] files = Directory.GetFiles("Content\\graphics");
             foreach(String file in files)
             {
+                String name = Path.GetFileNameWithoutExtension(file);
                 GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
 
                 // Bitmap für WindowsForms laden
@@ -70,8 +74,24 @@ namespace Game1
                 // GraphicsObject in Dictionary übernehmen
                 if (test != null)
                 {
-                    String name = Path.GetFileNameWithoutExtension(file);
                     GraphicsObject.graphicObjects.Add(name, test);
+                }
+            }
+
+            // Soundobjecte initialisieren
+            SoundObject.soundObjects = new Dictionary<string, SoundObject>();
+            Content.RootDirectory = "Content";
+
+            files = Directory.GetFiles("Content\\sounds\\bg");
+            foreach (String file in files)
+            {
+                String name = Path.GetFileNameWithoutExtension(file);
+                SoundObject sound = new SoundObject(Content.Load<SoundEffect>("sounds/bg/" + name));
+
+                // GraphicsObject in Dictionary übernehmen
+                if (sound != null)
+                {
+                    SoundObject.soundObjects.Add(name, sound);
                 }
             }
 
@@ -79,8 +99,9 @@ namespace Game1
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
 
-            // Map festlegen. Testweise die erste.
+            // Map festlegen und initialisieren. Testweise die erste.
             map = Map.Maps["0"];
+            map.Init();
         }
 
         /// <summary>
@@ -89,8 +110,11 @@ namespace Game1
         /// </summary>
         protected override void UnloadContent()
         {
+            // Mapeditor schliessen, sollte er noch offen sein
+            editor.Close();
+
             // Alle Texturen freigeben
-            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
+            foreach (GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
             {
                 graphic.Waste();
             }
