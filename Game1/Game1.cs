@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 
 namespace Game1
@@ -62,6 +63,11 @@ namespace Game1
             foreach(String file in files)
             {
                 GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
+
+                // Bitmap für WindowsForms laden
+                test.SetBitmap(new Bitmap(file));
+
+                // GraphicsObject in Dictionary übernehmen
                 if (test != null)
                 {
                     String name = Path.GetFileNameWithoutExtension(file);
@@ -73,7 +79,7 @@ namespace Game1
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
 
-            // Map festlegen. Testweise die erste
+            // Map festlegen. Testweise die erste.
             map = Map.Maps["0"];
         }
 
@@ -121,7 +127,7 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
 
             spriteBatch.Begin();
             map.Draw(spriteBatch);

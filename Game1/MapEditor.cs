@@ -25,24 +25,10 @@ namespace Game1
             this.formSize = this.Size;
             
             this.TileXMLPath = "Content\\xml\\Tiles.XML";
-            String[] files = Directory.GetFiles("Content\\graphics");
 
-            foreach (String file in files)
-            {
-                String name = Path.GetFileNameWithoutExtension(file);
-                if (GraphicsObject.graphicObjects.ContainsKey(name))
-                {
-                    GraphicsObject.graphicObjects[name].SetBitmap(new Bitmap(file));
-                    
-                }
-                else {
-                    GraphicsObject gObj = new GraphicsObject(new Bitmap(file));
-                    GraphicsObject.graphicObjects.Add(name, gObj);
-                }   
-            }
             InitializeComponent();
+
             this.timer1.Interval = 100;
-            
         }
 
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
