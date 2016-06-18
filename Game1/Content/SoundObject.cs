@@ -28,6 +28,12 @@ namespace Game1.Content
             soundInstance.Stop();
         }
 
+        public void Waste()
+        {
+            sound.Dispose();
+            soundInstance.Dispose();
+        }
+
         public static Dictionary<String,SoundObject> soundObjects;
     }
 }

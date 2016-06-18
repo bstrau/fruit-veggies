@@ -118,6 +118,12 @@ namespace Game1
             {
                 graphic.Waste();
             }
+
+            // Alle Sounds freigeben
+            foreach (SoundObject sound in SoundObject.soundObjects.Values)
+            {
+                sound.Waste();
+            }
         }
 
         /// <summary>
