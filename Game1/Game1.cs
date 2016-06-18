@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Drawing;
 
 namespace Game1
 {
@@ -29,10 +30,6 @@ namespace Game1
             graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
-
-            MapEditor form = new MapEditor();
-            form.Show();
-
         }
 
         /// <summary>
@@ -45,6 +42,9 @@ namespace Game1
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            MapEditor form = new MapEditor();
+            form.Show();
+
         }
 
         /// <summary>
@@ -65,6 +65,7 @@ namespace Game1
                 if (test != null)
                 {
                     String name = Path.GetFileNameWithoutExtension(file);
+                    test.SetBitmap(new Bitmap(file));
                     GraphicsObject.graphicObjects.Add(name, test);
                 }
             }
@@ -121,7 +122,7 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
 
             spriteBatch.Begin();
             map.Draw(spriteBatch);

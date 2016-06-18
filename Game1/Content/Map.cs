@@ -115,6 +115,11 @@ namespace Game1.Content
             return tilelist;
         }
 
+        public void setTileTo(int xPos, int yPos, Tile t)
+        {
+            tiles[yPos, xPos] = t;
+        }
+
         public void writeToFile(String path)
         {
             XmlDocument doc = null;

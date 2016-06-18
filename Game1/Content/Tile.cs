@@ -16,8 +16,10 @@ namespace Game1.Content
 
         protected int xPos, yPos;
         protected bool accessible;
-        protected String id;
-        protected String title;
+        // Getter Setter werden für Map Editor benötigt
+        public string title { get; set; }
+        public string id { get; set; }
+
         protected TileType type;
 
         // Neue Typen bitte über MAXTILE einfügen. Dient als Iterationsschranke.
