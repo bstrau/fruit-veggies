@@ -6,14 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Drawing;
 
 namespace Game1.Content
 {
-    class Tile
+    public class Tile
     {
         GraphicsObject graphics;
 
         protected int xPos, yPos;
+        protected Point pos;
         protected bool accessible;
         protected String id;
         protected String title;
@@ -80,6 +82,11 @@ namespace Game1.Content
             yPos = y;
         }
 
+        public Point getPos()
+        {
+            return new Point(this.xPos, this.yPos);
+        }
+
         public String GetId()
         {
             return id;
@@ -111,6 +118,12 @@ namespace Game1.Content
             occupant = unit;
 
             return true;
+        }
+
+        public void Draw(Graphics g)
+        {
+            graphics.SetPos(xPos, yPos);
+            graphics.Draw(g);
         }
 
         // Global erreichbare Liste aller Tiles.

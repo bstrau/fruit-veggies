@@ -6,25 +6,21 @@ using System.Threading.Tasks;
 
 namespace Game1.Content
 {
-    class Spieler
+    public class Spieler
     {
         GraphicsObject graphics;
-        GraphicsObject RessourcesTile;
+        SoundObject sound;
 
         protected string title;
-        protected bool tot ;
+        protected bool defeated ;
         protected string id;
         //FIXME 1 Noch zu klären
-        protected int Fraktion;
-        protected int Sound;
+        protected int fraction;
         //END VON FIXME 1
-
+        
         public String GetId()
         {
             return id;
         }
-
-
-
     }
 }

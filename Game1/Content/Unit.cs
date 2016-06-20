@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,24 +9,28 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class Unit
+    public class Unit
     {
-        GraphicsObject graphics;
+        protected GraphicsObject graphics;
+        protected SoundObject sound;
 
         protected int xPos, yPos;
+        protected Point pos;
         protected Spieler spieler;
         protected string id;
         protected string title;
         protected UnitType type;
-        //FIXMEE Noch zu klären 1
-        protected string sound;
-        //Ende 1
 
         public void SetPos(int x, int y)
         {
-            xPos = x;
-            yPos = y;
+            pos = new Point(x, y);
         }
+
+        public void SetPos(Point pos)
+        {
+            this.pos = pos;
+        }
+
         public String GetId()
         {
             return id;
@@ -45,14 +50,14 @@ namespace Game1.Content
 
         public Unit(Unit unit)
         {
+            this.sound = unit.sound;
+            this.graphics = unit.graphics;
+
             this.id = unit.id;
             this.title = unit.title;
             this.type = unit.type;
             this.spieler = unit.spieler;
-            this.xPos = unit.xPos;
-            this.yPos = unit.yPos;
-            this.sound = unit.sound;
-            this.graphics = unit.graphics;
+            this.pos = unit.pos;
         }
 
         public Unit(UnitType type, XmlNode node)
@@ -72,8 +77,7 @@ namespace Game1.Content
         public Unit(GraphicsObject graphics, int x, int y, bool accessible)
         {
             this.graphics = graphics;
-            xPos = x;
-            yPos = y;
+            pos = new Point(x,y);
         }
 
         public virtual Unit GetCopy()
@@ -81,16 +85,13 @@ namespace Game1.Content
             return new Unit(this);
         }
 
-
-
         public void Draw(SpriteBatch batch)
         {
-            graphics.SetPos(xPos, yPos);
+            graphics.SetPos(pos);
             graphics.Draw(batch);
         }
 
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Unit> Units = new Dictionary<string, Unit>();
-
     }
 }
