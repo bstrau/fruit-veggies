@@ -25,6 +25,8 @@ namespace Game1
         int SPIELFELDHOEHE = 16;
         int SPIELFELDBREITE = 16;
 
+        KeyboardState oldState;
+
         MapEditor editor;
 
         public Game1()
@@ -34,6 +36,8 @@ namespace Game1
             graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
+
+            this.IsMouseVisible = true;
 
             editor = new MapEditor();
             editor.Show();
@@ -133,8 +137,20 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            KeyboardState newState = Keyboard.GetState();
+
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newState.IsKeyDown(Keys.Escape))
                 Exit();
+
+            if (oldState.IsKeyDown(Keys.Tab) && newState.IsKeyUp(Keys.Tab))
+            {
+                if (editor.Visible)
+                    editor.Hide();
+                else
+                    editor.Show();
+            }
+
+            oldState = newState;
 
             // TEST: Loote alle TREASURE Tiles, um zu zeigen, dass Instanziierung funktioniert
             foreach(Tile tile in map.GetMapTiles())
