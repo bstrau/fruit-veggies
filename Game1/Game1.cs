@@ -42,7 +42,6 @@ namespace Game1
             this.IsMouseVisible = true;
 
             editor = new MapEditor();
-            editor.Show();
         }
 
         /// <summary>
@@ -134,6 +133,7 @@ namespace Game1
             editor.Close();
 
             // Alle Texturen freigeben
+            foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
             {
                 graphic.Waste();
             }
