@@ -83,7 +83,7 @@ namespace Game1
         private void speichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                this.map.writeToFile(saveFileDialog1.FileName);
+                map.writeToFile(saveFileDialog1.FileName);
         }
 
         // Neue Map
