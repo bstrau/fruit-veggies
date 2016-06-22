@@ -17,8 +17,10 @@ namespace Game1.Content
         protected int xPos, yPos;
         protected Point pos;
         protected bool accessible;
-        protected String id;
-        protected String title;
+        // Getter Setter werden für Map Editor benötigt
+        public string title { get; set; }
+        public string id { get; set; }
+
         protected TileType type;
 
         // Speichert Verweis auf eine Einheit die evtl. auf diesem Tile steht

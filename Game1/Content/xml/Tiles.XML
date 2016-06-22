@@ -9,15 +9,62 @@
         <amount>1</amount>
       </cash>
     </tile>
-    <tile id = "T1" type = "RESSOURCE">
-      <title>Berg</title>
+    
+    <tile id = "R2" type = "RESSOURCE">
+      <title>Hochhaus</title>
       <accessible>True</accessible>
-      <graphic>rasen</graphic>
+      <graphic>hochhaus</graphic>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
       </cash>
     </tile>
+
+    <tile id = "R3" type = "RESSOURCE">
+      <title>Hochhaus1</title>
+      <accessible>True</accessible>
+      <graphic>hochhaus1</graphic>
+      <cash>
+        <rounds>10</rounds>
+        <amount>1</amount>
+      </cash>
+    </tile>
+
+    <tile id = "T1" type = "TREASURE">
+      <title>Hochhaus1</title>
+      <accessible>True</accessible>
+      <graphic>hochhaus1</graphic>
+      <cash>
+        <rounds>10</rounds>
+        <amount>1</amount>
+      </cash>
+    </tile>
+
+    
+    <tile id = "D1" type = "DEFAULT">
+      <title>Rasen</title>
+      <accessible>True</accessible>
+      <graphic>rasen</graphic>
+    </tile>
+
+    <tile id = "D2" type = "DEFAULT">
+      <title>Berg</title>
+      <accessible>True</accessible>
+      <graphic>berg</graphic>
+    </tile>
+
+    <tile id = "D3" type = "DEFAULT">
+      <title>Strasse</title>
+      <accessible>True</accessible>
+      <graphic>strasse</graphic>
+    </tile>
+
+    <tile id = "D4" type = "DEFAULT">
+      <title>Strasse1</title>
+      <accessible>True</accessible>
+      <graphic>strasse1</graphic>
+    </tile>
+
   </tiles>
 </doc>
 

@@ -52,6 +52,7 @@ namespace Game1.Content
         public Map()
         {
             this.id = "";
+            this.title = "New";
             this.sizeX = 16;
             this.sizeY = 9;
             this.setMapTiles("R1");
@@ -121,15 +122,21 @@ namespace Game1.Content
             return tilelist;
         }
 
+        public void setTileTo(int xPos, int yPos, Tile t)
+        {
+            tiles[yPos, xPos] = t;
+        }
+
         public void writeToFile(String path)
         {
             XmlDocument doc = null;
             XmlElement maps = null;
+            XmlElement root = null;
 
             if (File.Exists(path) == false)
             {
                 doc = new XmlDocument();
-                XmlElement root = doc.CreateElement("doc");
+                root = doc.CreateElement("doc");
                 maps = doc.CreateElement("maps");
             }
             else
@@ -138,32 +145,48 @@ namespace Game1.Content
                 doc.Load(path);
                 maps = (XmlElement)doc.SelectSingleNode("/doc/maps/");
             }
-            XmlElement map = doc.CreateElement("map");
-            XmlElement title = doc.CreateElement("title");
-            title.InnerText = this.title;
-            XmlElement SizeX = doc.CreateElement("SizeX");
-            SizeX.InnerText = this.sizeX.ToString();
-            XmlElement SizeY = doc.CreateElement("SizeY");
-            SizeY.InnerText = this.sizeY.ToString();
-            XmlElement tiles = doc.CreateElement("tiles");
 
-            String tileIdRange = "";
-            for (int y = 0; y < sizeY; y++)
+            foreach (Map curmap in Map.Maps.Values)
             {
-                for (int x = 0; x < sizeX; x++)
+                XmlElement map = doc.CreateElement("map");
+
+                XmlElement title = doc.CreateElement("title");
+                title.InnerText = curmap.title;
+
+                XmlElement SizeX = doc.CreateElement("SizeX");
+                SizeX.InnerText = curmap.sizeX.ToString();
+
+                XmlElement SizeY = doc.CreateElement("SizeY");
+                SizeY.InnerText = curmap.sizeY.ToString();
+
+                XmlElement tiles = doc.CreateElement("tiles");
+                String tileIdRange = "";
+                for (int y = 0; y < sizeY; y++)
                 {
-                    tileIdRange = tileIdRange + this.tiles[y, x].GetId()+",";
+                    for (int x = 0; x < sizeX; x++)
+                    {
+                        if (y != 0 || x != 0)
+                        {
+                            tileIdRange += ',';
+                        }
+                        tileIdRange += curmap.tiles[y, x].GetId();
+                    }
                 }
+                tiles.InnerText = tileIdRange;
+
+                map.SetAttribute("id", id);
+                map.AppendChild(title);
+                map.AppendChild(SizeX);
+                map.AppendChild(SizeY);
+                map.AppendChild(tiles);
+
+                maps.AppendChild(map);
             }
-            tiles.InnerText = tileIdRange;
 
-            map.SetAttribute("id", id);
-            map.AppendChild(title);
-            map.AppendChild(SizeX);
-            map.AppendChild(SizeY);
-            map.AppendChild(tiles);
+            root.AppendChild(maps);
 
-            maps.AppendChild(map);
+            doc.AppendChild(root);
+
             doc.Save(path);
         }
 

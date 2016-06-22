@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Drawing;
 
 namespace Game1
 {
@@ -83,7 +84,7 @@ namespace Game1
                 }
             }
 
-            // Soundobjecte initialisieren
+            // Soundobjekte initialisieren
             SoundObject.soundObjects = new Dictionary<string, SoundObject>();
             Content.RootDirectory = "Content";
 
@@ -133,7 +134,6 @@ namespace Game1
             editor.Close();
 
             // Alle Texturen freigeben
-            foreach (GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
             {
                 graphic.Waste();
             }
