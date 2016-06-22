@@ -34,6 +34,11 @@ namespace Game1.Content
             soundInstance.Dispose();
         }
 
+        public void setLooped(bool looped)
+        {
+            soundInstance.IsLooped = looped;
+        }
+
         public static Dictionary<String,SoundObject> soundObjects;
     }
 }

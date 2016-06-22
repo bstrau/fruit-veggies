@@ -21,12 +21,14 @@ namespace Game1.Content
         public GraphicsObject(Texture2D texture) {
             this.texture = texture;
             pos = new System.Drawing.Point(0, 0);
+            size = new Size(64, 64);
         }
 
         public GraphicsObject(Bitmap bm)
         {
             this.bitmap = bm;
             pos = new System.Drawing.Point(0, 0);
+            size = new Size(64, 64);
         }
 
         public void SetBitmap(Bitmap bm)
@@ -47,7 +49,7 @@ namespace Game1.Content
 
         public void Draw(SpriteBatch batch)
         {
-            batch.Draw(texture, new Microsoft.Xna.Framework.Rectangle(new Microsoft.Xna.Framework.Point(pos.X, pos.Y), new Microsoft.Xna.Framework.Point(64, 64)), Microsoft.Xna.Framework.Color.White);
+            batch.Draw(texture, new Microsoft.Xna.Framework.Rectangle(new Microsoft.Xna.Framework.Point(pos.X, pos.Y), new Microsoft.Xna.Framework.Point(size.Width, size.Height)), Microsoft.Xna.Framework.Color.White);
         }
 
         public void Draw(Graphics g)

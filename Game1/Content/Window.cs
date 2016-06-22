@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework;
+using System.Drawing;
 
 namespace Game1.Content
 {
@@ -21,10 +20,10 @@ namespace Game1.Content
 
     class Window : Component
     {
-        // panel
         private GraphicsObject panel;
-        // Position des Fensters auf dem Programmmbildschirm
-        private int xPos, yPos;
+        private System.Drawing.Point pos;
+        private Size size;
+
         // Kind Objekte
         private Dictionary<String,Window> container;
 
@@ -37,22 +36,35 @@ namespace Game1.Content
         /// <param name="component_id"></param>
         public Window(String background_id, String component_id)  : base(component_id)
         {
-            xPos = 0;
-            yPos = 0;
+            pos = new Point(0, 0);
+            size = new Size(320, 180);
 
             // Background und Dimension des Panels konfigurieren
             panel = GraphicsObject.graphicObjects[background_id];
-            panel.setDimension(320,180);
+
+            container = new Dictionary<string, Window>();
+        }
+
+        public void setPosition(Point pos)
+        {
+            this.pos = pos;
+        }
+
+        public void setDimensions(Size size)
+        {
+            this.size = size;
         }
 
         /// <summary>
         /// Zeichnet das Fenster mit allen seinen enthaltenen Kind-Objekten
         /// </summary>
         /// <param name="batch"></param>
-        public void Draw(SpriteBatch batch)
+        public void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
         {
-            panel.SetPos(xPos, yPos);
+            panel.SetPos(absolute_position());
+            panel.setDimension(size);
             panel.Draw(batch);
+
             foreach (Window w in this.container.Values)
             {
                 w.Draw(batch);
@@ -81,17 +93,20 @@ namespace Game1.Content
 
         public Point absolute_position()
         {
-            return new Point(this.xPos + parent.absolute_position().X, this.yPos + parent.absolute_position().Y); 
+            if (parent != null)
+                return new Point(pos.X + parent.absolute_position().X, pos.Y + parent.absolute_position().Y);
+            else
+                return pos; 
         }
 
         public void onClick(MouseState state)
         {
-            Point pos = state.Position;
+            Point pos = new Point(state.Position.X, state.Position.Y);
             foreach(Window w in this.container.Values)
             {
                 if (w.absolute_position().X == pos.X && w.absolute_position().Y == pos.Y)
                 {
- 
+                    
                 }
             }
             

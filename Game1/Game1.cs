@@ -28,6 +28,7 @@ namespace Game1
         KeyboardState oldState;
 
         MapEditor editor;
+        Window mainMenu;
 
         public Game1()
         {
@@ -109,6 +110,17 @@ namespace Game1
             // Map festlegen und initialisieren. Testweise die erste.
             map = Map.Maps["0"];
             map.Init();
+
+            // MainMenu erzeugen
+            mainMenu = new Window("menu", "menu");
+            mainMenu.setPosition(new System.Drawing.Point(100, 100));
+            mainMenu.setDimensions(new Size(900, 540));
+
+            // LevelEditor Menu
+            Window editorMenu = new Window("menuoption", "editor");
+            editorMenu.setPosition(new System.Drawing.Point(10, 10));
+            editorMenu.setDimensions(new Size(880, 80));
+            mainMenu.AddWindow(editorMenu);
         }
 
         /// <summary>
@@ -180,6 +192,7 @@ namespace Game1
 
             spriteBatch.Begin();
             map.Draw(spriteBatch);
+            mainMenu.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

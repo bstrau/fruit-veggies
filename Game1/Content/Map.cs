@@ -28,6 +28,7 @@ namespace Game1.Content
 
             String sound = node.SelectSingleNode("sound") .InnerText;
             bgSound = SoundObject.soundObjects[sound];
+            bgSound.setLooped(true);
 
             tiles = new Tile[sizeY, sizeX];
 
@@ -46,8 +47,6 @@ namespace Game1.Content
                     tiles[y, x].enter(Unit.Units["0"]);
                 }
             }
-
-            
         }
 
         public Map()
@@ -166,6 +165,35 @@ namespace Game1.Content
 
             maps.AppendChild(map);
             doc.Save(path);
+        }
+
+        public Point getTilePos(Tile tile)
+        {
+            for(int y = 0; y < sizeY; y++)
+            {
+                for(int x = 0; x < sizeX; x++)
+                {
+                    if(tiles[y,x] == tile)
+                    {
+                        return new Point(x, y);
+                    }
+                }
+            }
+
+            return new Point(-1, -1);
+        }
+
+        public Tile findUnit(Unit unit)
+        {
+            foreach(Tile tile in tiles)
+            {
+                if(tile.getOccupant() == unit)
+                {
+                    return tile;
+                }
+            }
+
+            return null;
         }
 
         public void Init()

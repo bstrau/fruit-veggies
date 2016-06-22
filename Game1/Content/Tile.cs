@@ -126,6 +126,11 @@ namespace Game1.Content
             graphics.Draw(g);
         }
 
+        public Unit getOccupant()
+        {
+            return occupant;
+        }
+
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Tile> Tiles = new Dictionary<string, Tile>();
     }
