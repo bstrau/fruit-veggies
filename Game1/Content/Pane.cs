@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
 
+
 namespace Game1.Content
 {
     class Component
@@ -18,23 +19,24 @@ namespace Game1.Content
         }
     }
 
-    class Window : Component
+    class Pane : Component
     {
         private GraphicsObject panel;
         private System.Drawing.Point pos;
         private Size size;
 
         // Kind Objekte
-        private Dictionary<String,Window> container;
+        private Dictionary<String,Pane> container;
 
-        protected Window parent;
+        protected Pane parent;
 
         /// <summary>
-        /// Window Klasse zum erstellen eines Menüs
+        /// Pane Klasse zum erstellen eines Menüs
+        /// 
         /// </summary>
-        /// <param name="background_id"></param>
-        /// <param name="component_id"></param>
-        public Window(String background_id, String component_id)  : base(component_id)
+        /// <param name="background_id">Graphicsobject</param>
+        /// <param name="component_id">Id der Componente</param>
+        public Pane(String background_id, String component_id)  : base(component_id)
         {
             pos = new Point(0, 0);
             size = new Size(320, 180);
@@ -42,7 +44,7 @@ namespace Game1.Content
             // Background und Dimension des Panels konfigurieren
             panel = GraphicsObject.graphicObjects[background_id];
 
-            container = new Dictionary<string, Window>();
+            container = new Dictionary<string, Pane>();
         }
 
         public void setPosition(Point pos)
@@ -50,9 +52,19 @@ namespace Game1.Content
             this.pos = pos;
         }
 
+        public void setPosition(int x, int y)
+        {
+            this.pos = new Point(x, y);
+        }
+
         public void setDimensions(Size size)
         {
             this.size = size;
+        }
+
+        public void setDimensions(int width, int height)
+        {
+            this.size = new Size(width, height);
         }
 
         /// <summary>
@@ -65,28 +77,28 @@ namespace Game1.Content
             panel.setDimension(size);
             panel.Draw(batch);
 
-            foreach (Window w in this.container.Values)
+            foreach (Pane w in this.container.Values)
             {
                 w.Draw(batch);
             }
         }
 
         /// <summary>
-        /// Hinzufügen von einem Window Objekt
+        /// Hinzufügen von einem Pane Objekt
         /// </summary>
         /// <param name="w"></param>
-        public void AddWindow(Window w)
+        public void AddPane(Pane w)
         {
             w.parent = this;
             this.container.Add(w.id,w);
         }
 
         /// <summary>
-        /// Windowobj über die Id des Objekts
+        /// Paneobj über die Id des Objekts
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Window getWindow(String id)
+        public Pane getPane(String id)
         {
             return this.container[id];
         }
@@ -102,7 +114,7 @@ namespace Game1.Content
         public void onClick(MouseState state)
         {
             Point pos = new Point(state.Position.X, state.Position.Y);
-            foreach(Window w in this.container.Values)
+            foreach(Pane w in this.container.Values)
             {
                 if (w.absolute_position().X == pos.X && w.absolute_position().Y == pos.Y)
                 {
@@ -111,6 +123,51 @@ namespace Game1.Content
             }
             
         }
+
+        public void Register()
+        {
+            Panes.Add(id, this);
+        }
+
+        public bool isVisible()
+        {
+            return currentPanes.Contains(id);
+        }
+
+        /// <summary>
+        /// Trägt sich in die CurrentPanes ein. Wird somit gezeichnet.
+        /// </summary>
+        public void Show()
+        {
+            currentPanes.Add(id);
+        }
+
+        /// <summary>
+        /// Trägt sich aus aus den CurrentPanes aus. Wird somit nicht mehr gezeichnet.
+        /// </summary>
+        public void Hide()
+        {
+            currentPanes.Remove(id);
+        }
+
+        /// <summary>
+        /// Zeichnet die aktuellen anzuzeigenden Panes auf den Bildschirm. Dafür wird 
+        /// die statische liste currentpanes verwendet
+        /// </summary>
+        /// <param name="batch"></param>
+        public static void DrawPanes(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
+        {
+            foreach (string cp in currentPanes)
+            {
+                Panes[cp].Draw(batch);
+            }
+        }
+
+        // Verwaltet aktuell anzuzeigende Panes.
+        public static List<string> currentPanes = new List<string>();
+
+        // Hier werden alle Menüs aufbewahrt.
+        public static Dictionary<String, Pane> Panes = new Dictionary<String,Pane>();
     }
 
 }

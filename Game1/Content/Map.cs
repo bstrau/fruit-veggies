@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Game1.Content
 {
@@ -43,8 +44,7 @@ namespace Game1.Content
             {
                 for(int x = 0; x < sizeX; x++)
                 {
-                    tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();
-                    tiles[y, x].enter(Unit.Units["0"]);
+                    tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();                  
                 }
             }
         }
@@ -133,18 +133,11 @@ namespace Game1.Content
             XmlElement maps = null;
             XmlElement root = null;
 
-            if (File.Exists(path) == false)
-            {
-                doc = new XmlDocument();
-                root = doc.CreateElement("doc");
-                maps = doc.CreateElement("maps");
-            }
-            else
-            {
-                doc = new XmlDocument();
-                doc.Load(path);
-                maps = (XmlElement)doc.SelectSingleNode("/doc/maps/");
-            }
+           
+            doc = new XmlDocument();
+            root = doc.CreateElement("doc");
+            maps = doc.CreateElement("maps");
+            
 
             foreach (Map curmap in Map.Maps.Values)
             {
@@ -152,6 +145,9 @@ namespace Game1.Content
 
                 XmlElement title = doc.CreateElement("title");
                 title.InnerText = curmap.title;
+
+                XmlElement sound = doc.CreateElement("sound");
+                sound.InnerText = SoundObject.soundObjects.First(x => x.Value == curmap.bgSound).Key;
 
                 XmlElement SizeX = doc.CreateElement("SizeX");
                 SizeX.InnerText = curmap.sizeX.ToString();
@@ -176,10 +172,11 @@ namespace Game1.Content
 
                 map.SetAttribute("id", id);
                 map.AppendChild(title);
+                map.AppendChild(sound);
                 map.AppendChild(SizeX);
                 map.AppendChild(SizeY);
                 map.AppendChild(tiles);
-
+                
                 maps.AppendChild(map);
             }
 
@@ -222,6 +219,38 @@ namespace Game1.Content
         public void Init()
         {
             bgSound.startPlaying();
+        }
+
+        public void MuteSound(bool muted)
+        {
+            if (muted)
+                bgSound.stopPlaying();
+            else
+                bgSound.startPlaying();
+        }
+
+        public void onClick(MouseEventArgs e)
+        {
+            foreach (Tile t in this.GetMapTiles())
+            {
+                // Tile Position TODO: Eventuell auslagern. 
+                if (t.getPos().X <= e.X && t.getPos().X + 64 >= e.X && t.getPos().Y <= e.Y && t.getPos().Y + 64 >= e.Y)
+                {
+                    t.onClick(e);
+                }
+            }
+        }
+
+        public void onClick(Microsoft.Xna.Framework.Input.MouseState e)
+        {
+            foreach (Tile t in this.GetMapTiles())
+            {
+                // Tile Position TODO: Eventuell auslagern. 
+                if (t.getPos().X <= e.X && t.getPos().X + 64 >= e.X && t.getPos().Y <= e.Y && t.getPos().Y + 64 >= e.Y)
+                {
+                    t.onClick(e);
+                }
+            }
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

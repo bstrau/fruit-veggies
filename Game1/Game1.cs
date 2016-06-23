@@ -27,9 +27,10 @@ namespace Game1
         int SPIELFELDBREITE = 16;
 
         KeyboardState oldState;
+        MouseState oldMouseEvent;
 
         MapEditor editor;
-        Window mainMenu;
+        Pane mainMenu;
 
         public Game1()
         {
@@ -103,24 +104,24 @@ namespace Game1
             // XMLs laden...
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
             XmlLoader.loadAllUnits("Content\\xml\\Units.XML");
-
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
             
-
             // Map festlegen und initialisieren. Testweise die erste.
             map = Map.Maps["0"];
             map.Init();
+            map.MuteSound(true);
 
             // MainMenu erzeugen
-            mainMenu = new Window("menu", "menu");
+            mainMenu = new Pane("menu", "menu");
             mainMenu.setPosition(new System.Drawing.Point(100, 100));
             mainMenu.setDimensions(new Size(900, 540));
+            mainMenu.Register();
 
             // LevelEditor Menu
-            Window editorMenu = new Window("menuoption", "editor");
+            Pane editorMenu = new Pane("menuoption", "editor");
             editorMenu.setPosition(new System.Drawing.Point(10, 10));
             editorMenu.setDimensions(new Size(880, 80));
-            mainMenu.AddWindow(editorMenu);
+            mainMenu.AddPane(editorMenu);
         }
 
         /// <summary>
@@ -153,11 +154,21 @@ namespace Game1
         protected override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
+            MouseState newMouseEvent = Mouse.GetState();
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newState.IsKeyDown(Keys.Escape))
                 Exit();
 
             if (oldState.IsKeyDown(Keys.Tab) && newState.IsKeyUp(Keys.Tab))
+            {
+                if (mainMenu.isVisible())
+                    mainMenu.Hide();
+                else
+                    mainMenu.Show();
+            }
+
+            //&& newState.IsKeyUp(Keys.LeftControl & Keys.M)
+            if ((oldState.IsKeyDown(Keys.LeftControl) && oldState.IsKeyDown(Keys.M)) && (newState.IsKeyUp(Keys.LeftControl) || newState.IsKeyUp(Keys.M)))
             {
                 if (editor.Visible)
                     editor.Hide();
@@ -165,7 +176,13 @@ namespace Game1
                     editor.Show();
             }
 
+            if (oldMouseEvent.LeftButton == ButtonState.Pressed && oldMouseEvent.LeftButton == ButtonState.Released)
+            {
+                map.onClick(newMouseEvent);
+            }
+
             oldState = newState;
+            oldMouseEvent = newMouseEvent;
 
             // TEST: Loote alle TREASURE Tiles, um zu zeigen, dass Instanziierung funktioniert
             foreach(Tile tile in map.GetMapTiles())
@@ -192,7 +209,7 @@ namespace Game1
 
             spriteBatch.Begin();
             map.Draw(spriteBatch);
-            mainMenu.Draw(spriteBatch);
+            Pane.DrawPanes(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

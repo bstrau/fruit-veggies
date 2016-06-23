@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Game1.Content
 {
@@ -32,6 +33,7 @@ namespace Game1.Content
             DEFAULT,
             RESSOURCE,
             TREASURE,
+            FACTORY,
             MAXTILE
         }
 
@@ -131,6 +133,17 @@ namespace Game1.Content
         public Unit getOccupant()
         {
             return occupant;
+        }
+
+
+        public virtual void onClick(MouseEventArgs e)
+        {
+            if (occupant != null){}
+        }
+
+        public virtual void onClick(Microsoft.Xna.Framework.Input.MouseState e)
+        {
+            if (occupant != null){}
         }
 
         // Global erreichbare Liste aller Tiles.

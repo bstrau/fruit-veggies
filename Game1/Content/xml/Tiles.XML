@@ -10,8 +10,8 @@
       </cash>
     </tile>
     
-    <tile id = "R2" type = "RESSOURCE">
-      <title>Hochhaus</title>
+    <tile id = "R2" type = "FACTORY">
+      <title>Factory</title>
       <accessible>True</accessible>
       <graphic>hochhaus</graphic>
       <cash>

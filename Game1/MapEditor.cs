@@ -56,8 +56,11 @@ namespace Game1
                 {
                     if (t.getPos().X <= e.X && t.getPos().X + 64 >= e.X && t.getPos().Y <= e.Y && t.getPos().Y + 64 >= e.Y)
                     {
-                        String v = ((Tile)this.lb_tileitems.SelectedItem).id;
-                        map.setTileTo(t.getPos().X /64 , t.getPos().Y/64, Tile.Tiles[Convert.ToString(v)].GetCopy()); 
+                        if (this.lb_tileitems.SelectedItem != null)
+                        {
+                            String v = ((Tile)this.lb_tileitems.SelectedItem).id;
+                            map.setTileTo(t.getPos().X / 64, t.getPos().Y / 64, Tile.Tiles[Convert.ToString(v)].GetCopy());
+                        }
                     }
                 }
             }
