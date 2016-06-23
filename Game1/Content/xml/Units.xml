@@ -1,12 +1,20 @@
 ﻿<doc>
   <units>
-    <unit id = "0" type = "Apfel">
+    <unit id = "0" type = "APPLE">
       <title>Apfel</title>
       <graphic>apfel</graphic>
+      <price>100</price>
+      <attackpower>10</attackpower>
+      <healthpoints>10</healthpoints>
+      <ripostefactor>0</ripostefactor>
     </unit>
-    <unit id = "1" type = "Banane">
+    <unit id = "1" type = "BANANA">
       <title>Banane</title>
-      <graphic>banane</graphic>
+      <graphic>apfel</graphic>
+      <price>100</price>
+      <attackpower>10</attackpower>
+      <healthpoints>10</healthpoints>
+      <ripostefactor>0</ripostefactor>
     </unit>
   </units>
 </doc>

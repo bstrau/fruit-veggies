@@ -38,6 +38,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\AttackUnit.cs" />
+    <Compile Include="Content\FightManager.cs" />
     <Compile Include="Content\Unit.cs" />
     <Compile Include="Content\DefaultTile.cs" />
     <Compile Include="Content\GraphicsObject.cs" />

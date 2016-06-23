@@ -19,6 +19,9 @@ namespace Game1.Content
         protected String title;
         protected TileType type;
 
+        // Speichert Verweis auf eine Einheit die evtl. auf diesem Tile steht
+        protected Unit occupant;
+
         // Neue Typen bitte über MAXTILE einfügen. Dient als Iterationsschranke.
         public enum TileType
         {
@@ -91,6 +94,23 @@ namespace Game1.Content
         {
             graphics.SetPos(xPos, yPos);
             graphics.Draw(batch);
+            if (occupant != null)
+            {
+                occupant.SetPos(xPos, yPos);
+                occupant.Draw(batch);
+            }
+        }
+
+        public bool enter(Unit unit)
+        {
+            if (accessible == false)
+            {
+                return false;
+            }
+
+            occupant = unit;
+
+            return true;
         }
 
         // Global erreichbare Liste aller Tiles.

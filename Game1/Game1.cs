@@ -68,7 +68,10 @@ namespace Game1
 
             // XMLs laden...
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
+            XmlLoader.loadAllUnits("Content\\xml\\Units.XML");
+
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
+            
 
             // Map festlegen. Testweise die erste
             map = Map.Maps["0"];

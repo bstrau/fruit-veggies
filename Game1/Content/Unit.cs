@@ -17,6 +17,7 @@ namespace Game1.Content
         protected string id;
         protected string title;
         protected UnitType type;
+        protected int price;
         //FIXMEE Noch zu klären 1
         protected string sound;
         //Ende 1
@@ -32,22 +33,43 @@ namespace Game1.Content
         }
         public enum UnitType
         {
-            STANDARD,
-            APFEL,
-            BANANE,         
+            DEFAULT,
+            APPLE,
+            BANANA,         
             MAXEINHEIT
+        }
+
+        public void Register()
+        {
+            Units.Add(id, this);
+        }
+
+        public Unit(Unit unit)
+        {
+            this.id = unit.id;
+            this.title = unit.title;
+            this.type = unit.type;
+            this.price = unit.price;
+            this.spieler = unit.spieler;
+            this.xPos = unit.xPos;
+            this.yPos = unit.yPos;
+            this.sound = unit.sound;
+            this.graphics = unit.graphics;
         }
 
         public Unit(UnitType type, XmlNode node)
         {
             id = node.Attributes.GetNamedItem("id").Value;
             this.type = type;
+            price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
 
             title = node.SelectSingleNode("title").InnerText;
 
             String graphic = node.SelectSingleNode("graphic").InnerText;
 
             graphics = GraphicsObject.graphicObjects[graphic];
+
+            Register();
         }
 
         public Unit(GraphicsObject graphics, int x, int y, bool accessible)
@@ -56,6 +78,13 @@ namespace Game1.Content
             xPos = x;
             yPos = y;
         }
+
+        public virtual Unit GetCopy()
+        {
+            return new Unit(this);
+        }
+
+
 
         public void Draw(SpriteBatch batch)
         {
