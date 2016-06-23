@@ -86,6 +86,8 @@ namespace Game1.Content
 
 
 
+
+
         public void Draw(SpriteBatch batch)
         {
             graphics.SetPos(xPos, yPos);

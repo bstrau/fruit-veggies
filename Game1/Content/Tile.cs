@@ -28,6 +28,7 @@ namespace Game1.Content
             DEFAULT,
             RESSOURCE,
             TREASURE,
+            BASE,
             MAXTILE
         }
 

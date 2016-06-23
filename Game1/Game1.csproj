@@ -39,6 +39,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Content\AttackUnit.cs" />
+    <Compile Include="Content\BaseTile.cs" />
+    <Compile Include="Content\CaptureTile.cs" />
     <Compile Include="Content\FightManager.cs" />
     <Compile Include="Content\Unit.cs" />
     <Compile Include="Content\DefaultTile.cs" />

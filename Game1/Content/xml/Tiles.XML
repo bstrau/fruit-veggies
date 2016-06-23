@@ -4,6 +4,7 @@
       <title>Einkaufsladen</title>
       <accessible>True</accessible>
       <graphic>strasse1</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -21,6 +22,7 @@
       <title>Strasse2</title>
       <accessible>True</accessible>
       <graphic>strasse2</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -30,6 +32,7 @@
       <title>Strasse3</title>
       <accessible>True</accessible>
       <graphic>strasse3</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -39,6 +42,7 @@
       <title>Strasse4</title>
       <accessible>True</accessible>
       <graphic>strasse4</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -48,6 +52,7 @@
       <title>Strasse5</title>
       <accessible>True</accessible>
       <graphic>strasse5</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -57,6 +62,7 @@
       <title>Wald</title>
       <accessible>True</accessible>
       <graphic>wald</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -66,6 +72,7 @@
       <title>Berg</title>
       <accessible>True</accessible>
       <graphic>berg</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -75,6 +82,7 @@
       <title>Wiese</title>
       <accessible>True</accessible>
       <graphic>rasen</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -85,6 +93,7 @@
       <title>Banane</title>
       <accessible>True</accessible>
       <graphic>Banane</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -94,6 +103,7 @@
       <title>Bank</title>
       <accessible>True</accessible>
       <graphic>Bank</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -103,6 +113,7 @@
       <title>Birne</title>
       <accessible>True</accessible>
       <graphic>Birne</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -112,6 +123,7 @@
       <title>Fabrik</title>
       <accessible>True</accessible>
       <graphic>fabrick</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -121,6 +133,7 @@
       <title>Hochhaus1</title>
       <accessible>True</accessible>
       <graphic>hochhaus1</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -130,6 +143,7 @@
       <title>Hochhaus3</title>
       <accessible>True</accessible>
       <graphic>hochhaus3</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -139,6 +153,7 @@
       <title>Karotte</title>
       <accessible>True</accessible>
       <graphic>Karotte</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -148,6 +163,7 @@
       <title>Kartoffel</title>
       <accessible>True</accessible>
       <graphic>Kartoffel</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -157,6 +173,7 @@
       <title>Kirche</title>
       <accessible>True</accessible>
       <graphic>Kirche</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -166,6 +183,7 @@
       <title>Paprika</title>
       <accessible>True</accessible>
       <graphic>paprika</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -175,6 +193,7 @@
       <title>Suppermarkt</title>
       <accessible>True</accessible>
       <graphic>Suppermarkt</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -184,6 +203,7 @@
       <title>Tomate</title>
       <accessible>True</accessible>
       <graphic>Tomate</graphic>
+      <capturepoint>3</capturepoint>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>

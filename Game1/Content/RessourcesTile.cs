@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class RessourcesTile : Tile
+    class RessourcesTile : CaptureTile
     {
         protected int cash_rounds;
         protected int cash_amount;
@@ -35,5 +35,7 @@ namespace Game1.Content
 
             return 0;
         }
+
+
     }
 }

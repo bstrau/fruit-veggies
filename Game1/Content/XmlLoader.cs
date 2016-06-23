@@ -45,6 +45,11 @@ namespace Game1.Content
                     case "TREASURE":
                         Tile treasureTile = new TreasureTile(Tile.TileType.TREASURE, node);
                         break;
+
+                    case "BASE":
+                        Tile baseTile = new BaseTile(Tile.TileType.BASE, node);
+                        break;
+                    
                     
                 }
             }
