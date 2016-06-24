@@ -21,7 +21,8 @@ namespace Game1.Content
             UP,
             RIGHT,
             DOWN,
-            LEFT
+            LEFT,
+            MAXDIRECTION
         };
 
         Spieler currentPlayer;
@@ -51,36 +52,33 @@ namespace Game1.Content
             currentPlayer = cp;
         }
 
-        public void findWay(List<Tile> tiles, Tile waypoint, DIRECTION direction, int movepoints, int directionChanges)
+        public void findWay(List<Tile> tiles, Tile waypoint, int movepoints)
         {
-            Tile neighbour = currentMap.getNeighbour(waypoint, direction);
-            if (movepoints == 0 || ( directionChanges == 3 && neighbour == null))
-            {
+            // Abbruchbedingung
+            if (movepoints == 0)
                 return;
-            }
 
-            if (direction == DIRECTION.LEFT)
-                direction = DIRECTION.UP;
-                
-            else
-                direction++;
-
-            directionChanges++;
-
-            if (neighbour != null)
-            {    
-                if (tiles.Contains(waypoint) == false)
-                {
-                    tiles.Add(waypoint);        
-                }
-               
-                findWay(tiles, neighbour, direction, movepoints - 1, 0);
-                
-            }
-            else {
-                findWay(tiles, waypoint, direction, movepoints, directionChanges);
-            }
             
+            for(DIRECTION direction = DIRECTION.UP; direction < DIRECTION.MAXDIRECTION; direction++)
+            {
+                Tile neighbour = null;
+                if (direction == DIRECTION.UP)
+                {
+                    int a = 9;
+                }
+
+                neighbour = currentMap.getNeighbour(waypoint, direction);
+                if (neighbour != null)
+                {
+                    // Nächstes erreichbares Tile in Liste aufnehmen
+                    if (!tiles.Contains(neighbour))
+                    {
+                        neighbour.enter(Unit.Units["0"].GetCopy());
+                        tiles.Add(neighbour);
+                    }
+                    findWay(tiles, neighbour, movepoints - 1);
+                }
+            }
         }
 
         public void onClick(MouseState e)

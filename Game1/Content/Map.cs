@@ -234,17 +234,17 @@ namespace Game1.Content
         {
             Point pos = this.getTilePos(tile);
             
-            if (direction == Cursor.DIRECTION.LEFT && pos.X < sizeX)     
-                return tiles[pos.Y, pos.X +1];
-            
-            if (direction == Cursor.DIRECTION.RIGHT && pos.X > sizeX)
+            if (direction == Cursor.DIRECTION.LEFT && pos.X > 0)     
                 return tiles[pos.Y, pos.X - 1];
             
-            if (direction == Cursor.DIRECTION.UP && pos.Y > sizeY)
+            if (direction == Cursor.DIRECTION.RIGHT && pos.X < sizeX)
+                return tiles[pos.Y, pos.X + 1];
+            
+            if (direction == Cursor.DIRECTION.UP && pos.Y > 0)
                 return tiles[pos.Y - 1, pos.X];
             
             if (direction == Cursor.DIRECTION.DOWN && pos.Y < sizeY)
-                return tiles[pos.Y + 1 , pos.X + 1];
+                return tiles[pos.Y + 1 , pos.X];
 
             else
                 return null;

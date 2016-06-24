@@ -123,12 +123,12 @@ namespace Game1
 
             // Cursor
 
-            cursor = new Cursor(map, map.GetMapTiles()[0]);
+            cursor = new Cursor(map, map.GetMapTiles()[25]);
             cursor.setPlayer(player_one);
-            List<Tile> availTiles = new List<Tile>();
-            cursor.findWay(availTiles, cursor.getCurrentTile(), Cursor.DIRECTION.UP, 5, 0);
+            cursor.getCurrentTile().enter(Unit.Units["1"]);
 
-            int penis = 0; // cm :D
+            List<Tile> availTiles = new List<Tile>();
+            cursor.findWay(availTiles, cursor.getCurrentTile(), 5);
         }
 
         /// <summary>
