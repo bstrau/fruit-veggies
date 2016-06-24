@@ -4,6 +4,7 @@
       <title>Wald</title>
       <accessible>True</accessible>
       <graphic>wald</graphic>
+      <capturepoints>10</capturepoints>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -24,6 +25,7 @@
       <title>Hochhaus1</title>
       <accessible>True</accessible>
       <graphic>hochhaus1</graphic>
+      <capturepoints>10</capturepoints>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>

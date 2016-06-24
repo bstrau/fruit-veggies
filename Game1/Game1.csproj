@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Content\AttackUnit.cs" />
     <Compile Include="Content\BaseTile.cs" />
+    <Compile Include="Content\CaptureTile.cs" />
     <Compile Include="Content\FactoryTile.cs" />
     <Compile Include="Content\SoundObject.cs" />
     <Compile Include="Content\FightManager.cs" />

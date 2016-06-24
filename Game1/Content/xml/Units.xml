@@ -3,12 +3,16 @@
     <unit id = "0" type = "APPLE">
       <title>Apfel</title>
       <graphic>apfel</graphic>
+      <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>
+      <price>10</price>
     </unit>
     <unit id = "1" type = "BANANA">
       <title>Banane</title>
       <graphic>apfel</graphic>
+      <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>
+      <price>10</price>
     </unit>
   </units>
 </doc>

@@ -147,18 +147,6 @@ namespace Game1.Content
             if (occupant != null){}
         }
 
-        public bool enter(Unit unit)
-        {
-            if (accessible == false)
-            {
-                return false;
-            }
-
-            occupant = unit;
-
-            return true;
-        }
-
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Tile> Tiles = new Dictionary<string, Tile>();
     }
