@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Drawing;
 using System.Windows.Forms;
+using static Game1.Content.Cursor;
 
 namespace Game1.Content
 {

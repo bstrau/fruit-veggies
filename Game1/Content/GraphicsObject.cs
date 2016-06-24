@@ -1,11 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace Game1.Content
 {
@@ -81,6 +79,25 @@ namespace Game1.Content
         {
             texture.Dispose();
             bitmap.Dispose();
+        }
+
+        public static void LoadGraphics(String path, ContentManager content)
+        {
+            String[] files = Directory.GetFiles(path);
+            foreach(String file in files)
+            {
+                String name = Path.GetFileNameWithoutExtension(file);
+                GraphicsObject test = new GraphicsObject(content.Load<Texture2D>(file));
+
+                // Bitmap für WindowsForms laden
+                test.SetBitmap(new Bitmap(file));
+
+                // GraphicsObject in Dictionary übernehmen
+                if (test != null)
+                {
+                    GraphicsObject.graphicObjects.Add(name, test);
+                }
+            }
         }
 
         // Global erreichbare Liste aller Grafikobjekte. Wird in der LoadContent-Methode gefüllt.

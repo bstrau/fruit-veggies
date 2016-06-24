@@ -3,7 +3,7 @@
     <tile id = "R1" type = "RESSOURCE">
       <title>Wald</title>
       <accessible>True</accessible>
-      <graphic>wald</graphic>
+      <graphic>forest</graphic>
       <capturepoints>10</capturepoints>
       <cash>
         <rounds>10</rounds>
@@ -12,9 +12,9 @@
     </tile>
     
     <tile id = "R2" type = "FACTORY">
-      <title>Factory</title>
+      <title>Fabrik</title>
       <accessible>True</accessible>
-      <graphic>hochhaus</graphic>
+      <graphic>factory</graphic>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -22,9 +22,9 @@
     </tile>
 
     <tile id = "R3" type = "RESSOURCE">
-      <title>Hochhaus1</title>
+      <title>Hochhaus</title>
       <accessible>True</accessible>
-      <graphic>hochhaus1</graphic>
+      <graphic>skyscraper</graphic>
       <capturepoints>10</capturepoints>
       <cash>
         <rounds>10</rounds>
@@ -33,9 +33,9 @@
     </tile>
 
     <tile id = "T1" type = "TREASURE">
-      <title>Hochhaus1</title>
+      <title>TwinTowers</title>
       <accessible>True</accessible>
-      <graphic>hochhaus1</graphic>
+      <graphic>skyscrapertwins</graphic>
       <cash>
         <rounds>10</rounds>
         <amount>1</amount>
@@ -46,27 +46,38 @@
     <tile id = "D1" type = "DEFAULT">
       <title>Rasen</title>
       <accessible>True</accessible>
-      <graphic>rasen</graphic>
+      <graphic>gras</graphic>
     </tile>
 
     <tile id = "D2" type = "DEFAULT">
-      <title>Berg</title>
+      <title>StrasseSN</title>
       <accessible>True</accessible>
-      <graphic>berg</graphic>
+      <graphic>streetSN</graphic>
     </tile>
 
     <tile id = "D3" type = "DEFAULT">
-      <title>Strasse</title>
+      <title>StrasseEW</title>
       <accessible>True</accessible>
-      <graphic>strasse</graphic>
+      <graphic>streetEW</graphic>
     </tile>
 
     <tile id = "D4" type = "DEFAULT">
-      <title>Strasse1</title>
+      <title>Kreuzung</title>
       <accessible>True</accessible>
-      <graphic>strasse1</graphic>
+      <graphic>streetcrossing</graphic>
     </tile>
 
+    <tile id = "D5" type = "DEFAULT">
+      <title>SchienenNS</title>
+      <accessible>True</accessible>
+      <graphic>railsSN</graphic>
+    </tile>
+
+    <tile id = "D6" type = "DEFAULT">
+      <title>SchienenEW</title>
+      <accessible>True</accessible>
+      <graphic>railsEW</graphic>
+    </tile>
   </tiles>
 </doc>
 

@@ -68,27 +68,16 @@ namespace Game1
 
             // Liste der Grafikobjekte initialisieren
             GraphicsObject.graphicObjects = new Dictionary<string, GraphicsObject>();
-            String[] files = Directory.GetFiles("Content\\graphics");
-            foreach(String file in files)
-            {
-                String name = Path.GetFileNameWithoutExtension(file);
-                GraphicsObject test = new GraphicsObject(Content.Load<Texture2D>(file));
-
-                // Bitmap für WindowsForms laden
-                test.SetBitmap(new Bitmap(file));
-
-                // GraphicsObject in Dictionary übernehmen
-                if (test != null)
-                {
-                    GraphicsObject.graphicObjects.Add(name, test);
-                }
-            }
+            GraphicsObject.LoadGraphics("Content\\graphics\\tiles", Content);
+            GraphicsObject.LoadGraphics("Content\\graphics\\units", Content);
+            GraphicsObject.LoadGraphics("Content\\graphics\\menus", Content);
 
             // Soundobjekte initialisieren
             SoundObject.soundObjects = new Dictionary<string, SoundObject>();
             Content.RootDirectory = "Content";
 
-            files = Directory.GetFiles("Content\\sounds\\bg");
+           
+            String[] files = Directory.GetFiles("Content\\sounds\\bg");
             foreach (String file in files)
             {
                 String name = Path.GetFileNameWithoutExtension(file);

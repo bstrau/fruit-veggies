@@ -43,7 +43,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
     <DefineConstants>TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -56,6 +56,7 @@
     <Compile Include="Content\AttackUnit.cs" />
     <Compile Include="Content\BaseTile.cs" />
     <Compile Include="Content\CaptureTile.cs" />
+    <Compile Include="Content\Cursor.cs" />
     <Compile Include="Content\FactoryTile.cs" />
     <Compile Include="Content\SoundObject.cs" />
     <Compile Include="Content\FightManager.cs" />
@@ -90,76 +91,75 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\graphics\apfel.png">
+    <Content Include="Content\graphics\menus\menu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\banane.png" />
-    <Content Include="Content\graphics\berg.png">
+    <Content Include="Content\graphics\menus\menuoption.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\Birne.png">
+    <Content Include="Content\graphics\tiles\factory.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\fabrick.png">
+    <Content Include="Content\graphics\tiles\forest.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\hochhaus.png">
+    <Content Include="Content\graphics\tiles\gras.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\hochhaus1.png">
+    <Content Include="Content\graphics\tiles\skyscrapertwins.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\hochhaus3.png">
+    <Content Include="Content\graphics\tiles\skyscraper.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\karotte.png">
+    <Content Include="Content\graphics\tiles\skyscraperthin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\kartoffel.png">
+    <Content Include="Content\graphics\tiles\railsEW.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\Kirche.png">
+    <Content Include="Content\graphics\tiles\railsSN.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\menu.png">
+    <Content Include="Content\graphics\tiles\streetcrossing.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\menuoption.png">
+    <Content Include="Content\graphics\tiles\streetEW.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\paprika.png">
+    <Content Include="Content\graphics\tiles\streetSN.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\rasen.png">
+    <Content Include="Content\graphics\tiles\zebracrossing.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\strasse2.png">
+    <Content Include="Content\graphics\units\apfel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\strasse3.png">
+    <Content Include="Content\graphics\units\banane.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\strasse4.png">
+    <Content Include="Content\graphics\units\Birne.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\strasse5.png">
+    <Content Include="Content\graphics\units\karotte.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\Tomate.png">
+    <Content Include="Content\graphics\units\kartoffel.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\graphics\wald.png">
+    <Content Include="Content\graphics\units\Kirche.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\graphics\units\paprika.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\graphics\units\Tomate.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\xml\Maps.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
-    </Content>
-    <Content Include="Content\graphics\strasse.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\graphics\strasse1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\xml\Tiles.XML">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

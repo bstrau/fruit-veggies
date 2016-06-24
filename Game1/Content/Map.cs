@@ -8,6 +8,7 @@ using System.Xml;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using static Game1.Content.Cursor;
 
 namespace Game1.Content
 {
@@ -45,11 +46,8 @@ namespace Game1.Content
                 for(int x = 0; x < sizeX; x++)
                 {
                     tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();                  
-                    tiles[y, x].enter(Unit.Units["0"]);
                 }
-            }
-
-            
+            }  
         }
 
         public Map()
@@ -230,6 +228,11 @@ namespace Game1.Content
                 bgSound.stopPlaying();
             else
                 bgSound.startPlaying();
+        }
+
+        public Tile getNeighbour(Tile tile, DIRECTION direction)
+        {
+            return null;
         }
 
         public void onClick(MouseEventArgs e)

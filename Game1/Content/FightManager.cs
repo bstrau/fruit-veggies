@@ -11,9 +11,10 @@ namespace Game1.Content
         Random rand;
         Map map;
 
-        public FightManager()
+        public FightManager(Map map)
         {
             rand = new Random();
+            this.map = map;
         }
 
         public void Fight (AttackUnit attacking, AttackUnit defender)
