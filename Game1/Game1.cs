@@ -29,8 +29,11 @@ namespace Game1
         KeyboardState oldState;
         MouseState oldMouseEvent;
 
+        Spieler player_one;
+        Spieler player_two;
         MapEditor editor;
         Pane mainMenu;
+        Cursor cursor;
 
         public Game1()
         {
@@ -41,7 +44,7 @@ namespace Game1
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
-
+            
             editor = new MapEditor();
         }
 
@@ -95,6 +98,11 @@ namespace Game1
             XmlLoader.loadAllUnits("Content\\xml\\Units.XML");
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
             
+            // Player Festlegen
+
+            player_one = new Spieler();
+            player_two = new Spieler();
+
             // Map festlegen und initialisieren. Testweise die erste.
             map = Map.Maps["0"];
             map.Init();
@@ -111,6 +119,16 @@ namespace Game1
             editorMenu.setPosition(new System.Drawing.Point(10, 10));
             editorMenu.setDimensions(new Size(880, 80));
             mainMenu.AddPane(editorMenu);
+
+
+            // Cursor
+
+            cursor = new Cursor(map, map.GetMapTiles()[0]);
+            cursor.setPlayer(player_one);
+            List<Tile> availTiles = new List<Tile>();
+            cursor.findWay(availTiles, cursor.getCurrentTile(), Cursor.DIRECTION.UP, 5, 0);
+
+            int penis = 0; // cm :D
         }
 
         /// <summary>

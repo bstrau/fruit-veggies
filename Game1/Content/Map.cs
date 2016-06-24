@@ -8,7 +8,7 @@ using System.Xml;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
-using static Game1.Content.Cursor;
+using Game1.Content;
 
 namespace Game1.Content
 {
@@ -230,9 +230,24 @@ namespace Game1.Content
                 bgSound.startPlaying();
         }
 
-        public Tile getNeighbour(Tile tile, DIRECTION direction)
+        public Tile getNeighbour(Tile tile, Cursor.DIRECTION direction)
         {
-            return null;
+            Point pos = this.getTilePos(tile);
+            
+            if (direction == Cursor.DIRECTION.LEFT && pos.X < sizeX)     
+                return tiles[pos.Y, pos.X +1];
+            
+            if (direction == Cursor.DIRECTION.RIGHT && pos.X > sizeX)
+                return tiles[pos.Y, pos.X - 1];
+            
+            if (direction == Cursor.DIRECTION.UP && pos.Y > sizeY)
+                return tiles[pos.Y - 1, pos.X];
+            
+            if (direction == Cursor.DIRECTION.DOWN && pos.Y < sizeY)
+                return tiles[pos.Y + 1 , pos.X + 1];
+
+            else
+                return null;
         }
 
         public void onClick(MouseEventArgs e)
