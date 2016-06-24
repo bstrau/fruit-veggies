@@ -42,11 +42,12 @@ namespace Game1.Content
                     case "TREASURE":
                         Tile treasureTile = new TreasureTile(Tile.TileType.TREASURE, node);
                         break;
-
+                    case "BASE":
+                        Tile baseTile = new BaseTile(Tile.TileType.BASE, node);
+                        break;
                     case "FACTORY":
                         Tile factory = new FactoryTile(Tile.TileType.FACTORY, node);
                         break;
-
                     case "DEFAULT":
                     default:
                         Tile defaultTile = new DefaultTile(Tile.TileType.DEFAULT, node);

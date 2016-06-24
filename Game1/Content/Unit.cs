@@ -20,6 +20,7 @@ namespace Game1.Content
         protected string id;
         protected string title;
         protected UnitType type;
+        protected int price;
 
         public void SetPos(int x, int y)
         {
@@ -53,6 +54,7 @@ namespace Game1.Content
             this.sound = unit.sound;
             this.graphics = unit.graphics;
 
+            this.price = unit.price;
             this.id = unit.id;
             this.title = unit.title;
             this.type = unit.type;
@@ -64,6 +66,7 @@ namespace Game1.Content
         {
             id = node.Attributes.GetNamedItem("id").Value;
             this.type = type;
+            price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
 
             title = node.SelectSingleNode("title").InnerText;
 

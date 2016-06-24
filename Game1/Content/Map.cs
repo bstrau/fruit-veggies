@@ -45,8 +45,11 @@ namespace Game1.Content
                 for(int x = 0; x < sizeX; x++)
                 {
                     tiles[y, x] = Tile.Tiles[tileids[y * sizeY + x]].GetCopy();                  
+                    tiles[y, x].enter(Unit.Units["0"]);
                 }
             }
+
+            
         }
 
         public Map()
@@ -251,6 +254,11 @@ namespace Game1.Content
                     t.onClick(e);
                 }
             }
+        }
+
+        public void Update()
+        {
+
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

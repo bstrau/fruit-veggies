@@ -34,6 +34,7 @@ namespace Game1.Content
             RESSOURCE,
             TREASURE,
             FACTORY,
+            BASE,
             MAXTILE
         }
 
@@ -144,6 +145,18 @@ namespace Game1.Content
         public virtual void onClick(Microsoft.Xna.Framework.Input.MouseState e)
         {
             if (occupant != null){}
+        }
+
+        public bool enter(Unit unit)
+        {
+            if (accessible == false)
+            {
+                return false;
+            }
+
+            occupant = unit;
+
+            return true;
         }
 
         // Global erreichbare Liste aller Tiles.
