@@ -25,7 +25,7 @@ namespace Game1.Content
             MAXDIRECTION
         };
 
-        Spieler currentPlayer;
+        Player currentPlayer;
         Map currentMap;
         Unit currenUnit;
         Tile currentTile;
@@ -47,7 +47,7 @@ namespace Game1.Content
             this.currentTile = currentTile;
         }
 
-        public void setPlayer(Spieler cp)
+        public void setPlayer(Player cp)
         {
             currentPlayer = cp;
         }

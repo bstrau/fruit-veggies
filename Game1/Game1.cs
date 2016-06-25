@@ -29,8 +29,8 @@ namespace Game1
         KeyboardState oldState;
         MouseState oldMouseEvent;
 
-        Spieler player_one;
-        Spieler player_two;
+        Player player_one;
+        Player player_two;
         MapEditor editor;
         Pane mainMenu;
         Cursor cursor;
@@ -100,8 +100,8 @@ namespace Game1
             
             // Player Festlegen
 
-            player_one = new Spieler();
-            player_two = new Spieler();
+            player_one = new Player();
+            player_two = new Player();
 
             // Map festlegen und initialisieren. Testweise die erste.
             map = Map.Maps["0"];
@@ -122,7 +122,6 @@ namespace Game1
 
 
             // Cursor
-
             cursor = new Cursor(map, map.GetMapTiles()[25]);
             cursor.setPlayer(player_one);
             cursor.getCurrentTile().enter(Unit.Units["1"]);

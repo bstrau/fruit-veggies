@@ -65,7 +65,7 @@
     <Compile Include="Content\GraphicsObject.cs" />
     <Compile Include="Content\Map.cs" />
     <Compile Include="Content\RessourcesTile.cs" />
-    <Compile Include="Content\Spieler.cs" />
+    <Compile Include="Content\Player.cs" />
     <Compile Include="Content\TreasureTile.cs" />
     <Compile Include="Content\Pane.cs" />
     <Compile Include="Content\XmlLoader.cs" />

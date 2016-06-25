@@ -16,7 +16,7 @@ namespace Game1.Content
 
         protected int xPos, yPos;
         protected Point pos;
-        protected Spieler spieler;
+        protected Player player;
         protected string id;
         protected string title;
         protected UnitType type;
@@ -58,7 +58,7 @@ namespace Game1.Content
             this.id = unit.id;
             this.title = unit.title;
             this.type = unit.type;
-            this.spieler = unit.spieler;
+            this.player = unit.player;
             this.pos = unit.pos;
         }
 
