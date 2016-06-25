@@ -74,6 +74,7 @@ namespace Game1
             GraphicsObject.LoadGraphics("Content\\graphics\\tiles", Content);
             GraphicsObject.LoadGraphics("Content\\graphics\\units", Content);
             GraphicsObject.LoadGraphics("Content\\graphics\\menus", Content);
+            GraphicsObject.LoadGraphics("Content\\graphics\\marks", Content);
 
             // Soundobjekte initialisieren
             SoundObject.soundObjects = new Dictionary<string, SoundObject>();
@@ -122,7 +123,7 @@ namespace Game1
 
 
             // Cursor
-            cursor = new Cursor(map, map.GetMapTiles()[25]);
+            cursor = new Cursor(map, map.GetMapTiles()[25],spriteBatch);
             cursor.setPlayer(player_one);
             cursor.getCurrentTile().enter(Unit.Units["1"]);
 

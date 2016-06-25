@@ -48,6 +48,7 @@ namespace Game1.Content
         public void Draw(SpriteBatch batch)
         {
             batch.Draw(texture, new Microsoft.Xna.Framework.Rectangle(new Microsoft.Xna.Framework.Point(pos.X, pos.Y), new Microsoft.Xna.Framework.Point(size.Width, size.Height)), Microsoft.Xna.Framework.Color.White);
+
         }
 
         public void Draw(Graphics g)

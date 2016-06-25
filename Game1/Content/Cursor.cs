@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +26,15 @@ namespace Game1.Content
             MAXDIRECTION
         };
 
+        SpriteBatch batch;
         Player currentPlayer;
         Map currentMap;
         Unit currenUnit;
         Tile currentTile;
 
-        public Cursor(Map cm, Tile ct)
+        public Cursor(Map cm, Tile ct, SpriteBatch batch)
         {
+            this.batch = batch;
             currentMap = cm;
             currentTile = ct;
             currenUnit = null;
@@ -73,7 +76,11 @@ namespace Game1.Content
                     // Nächstes erreichbares Tile in Liste aufnehmen
                     if (!tiles.Contains(neighbour))
                     {
-                        neighbour.enter(Unit.Units["0"].GetCopy());
+
+                        //GraphicsObject mark = GraphicsObject.graphicObjects["marked"];
+                        //mark.SetPos(neighbour.getPos());
+                        //mark.setDimension(64,64);
+                        //mark.Draw(batch);
                         tiles.Add(neighbour);
                     }
                     findWay(tiles, neighbour, movepoints - 1);
