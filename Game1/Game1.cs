@@ -21,19 +21,10 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Map map;
+        GameManager gameManager;
 
         int SPIELFELDHOEHE = 16;
         int SPIELFELDBREITE = 16;
-
-        KeyboardState oldState;
-        MouseState oldMouseEvent;
-
-        Player player_one;
-        Player player_two;
-        MapEditor editor;
-        Pane mainMenu;
-        Cursor cursor;
 
         public Game1()
         {
@@ -44,8 +35,6 @@ namespace Game1
             graphics.ApplyChanges();
 
             this.IsMouseVisible = true;
-            
-            editor = new MapEditor();
         }
 
         /// <summary>
@@ -98,37 +87,8 @@ namespace Game1
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
             XmlLoader.loadAllUnits("Content\\xml\\Units.XML");
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
-            
-            // Player Festlegen
 
-            player_one = new Player();
-            player_two = new Player();
-
-            // Map festlegen und initialisieren. Testweise die erste.
-            map = Map.Maps["0"];
-            map.Init();
-            map.MuteSound(true);
-
-            // MainMenu erzeugen
-            mainMenu = new Pane("menu", "menu");
-            mainMenu.setPosition(new System.Drawing.Point(100, 100));
-            mainMenu.setDimensions(new Size(900, 540));
-            mainMenu.Register();
-
-            // LevelEditor Menu
-            Pane editorMenu = new Pane("menuoption", "editor");
-            editorMenu.setPosition(new System.Drawing.Point(10, 10));
-            editorMenu.setDimensions(new Size(880, 80));
-            mainMenu.AddPane(editorMenu);
-
-
-            // Cursor
-            cursor = new Cursor(map, map.GetMapTiles()[25],spriteBatch);
-            cursor.setPlayer(player_one);
-            cursor.getCurrentTile().enter(Unit.Units["1"]);
-
-            List<Tile> availTiles = new List<Tile>();
-            cursor.findWay(availTiles, cursor.getCurrentTile(), 5);
+            gameManager = new GameManager(spriteBatch);
         }
 
         /// <summary>
@@ -137,9 +97,6 @@ namespace Game1
         /// </summary>
         protected override void UnloadContent()
         {
-            // Mapeditor schliessen, sollte er noch offen sein
-            editor.Close();
-
             // Alle Texturen freigeben
             foreach(GraphicsObject graphic in GraphicsObject.graphicObjects.Values)
             {
@@ -160,49 +117,7 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
-            MouseState newMouseEvent = Mouse.GetState();
-
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newState.IsKeyDown(Keys.Escape))
-                Exit();
-
-            if (oldState.IsKeyDown(Keys.Tab) && newState.IsKeyUp(Keys.Tab))
-            {
-                if (mainMenu.isVisible())
-                    mainMenu.Hide();
-                else
-                    mainMenu.Show();
-            }
-
-            //&& newState.IsKeyUp(Keys.LeftControl & Keys.M)
-            if ((oldState.IsKeyDown(Keys.LeftControl) && oldState.IsKeyDown(Keys.M)) && (newState.IsKeyUp(Keys.LeftControl) || newState.IsKeyUp(Keys.M)))
-            {
-                if (editor.Visible)
-                    editor.Hide();
-                else
-                    editor.Show();
-            }
-
-            if (oldMouseEvent.LeftButton == ButtonState.Pressed && oldMouseEvent.LeftButton == ButtonState.Released)
-            {
-                map.onClick(newMouseEvent);
-            }
-
-            oldState = newState;
-            oldMouseEvent = newMouseEvent;
-
-            // TEST: Loote alle TREASURE Tiles, um zu zeigen, dass Instanziierung funktioniert
-            foreach(Tile tile in map.GetMapTiles())
-            {
-                if(tile.GetTileType() == Tile.TileType.TREASURE)
-                {
-                    int loot = ((TreasureTile)tile).GetLoot();
-                    if(loot != 0)
-                    {
-                        Console.WriteLine("Could loot " + loot + " resources");
-                    }
-                }
-            }
+            gameManager.Update();
             base.Update(gameTime);
         }
 
@@ -213,12 +128,7 @@ namespace Game1
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Microsoft.Xna.Framework.Color.CornflowerBlue);
-
-            spriteBatch.Begin();
-            map.Draw(spriteBatch);
-            Pane.DrawPanes(spriteBatch);
-            spriteBatch.End();
-
+            gameManager.Render();
             base.Draw(gameTime);
         }
     }

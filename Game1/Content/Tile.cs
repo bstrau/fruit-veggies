@@ -144,7 +144,10 @@ namespace Game1.Content
 
         public virtual void onClick(Microsoft.Xna.Framework.Input.MouseState e)
         {
-            if (occupant != null){}
+            if (occupant != null)
+            {
+
+            }
         }
 
         // Global erreichbare Liste aller Tiles.

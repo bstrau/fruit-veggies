@@ -71,6 +71,7 @@
     <Compile Include="Content\XmlLoader.cs" />
     <Compile Include="Content\Tile.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameManager.cs" />
     <Compile Include="MapEditor.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -274,9 +274,19 @@ namespace Game1.Content
             }
         }
 
+
+        public Tile getTilebyPos(int x, int y)
+        {
+            // Wenn x und y Werte zwischen 0 und size
+            if((x <= sizeX && y <= sizeY) && (x >= 0 && y >= 0))
+                return tiles[y,x];
+            else
+                return null;
+        }
+
         public void Update()
         {
-
+            // KP: ???
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

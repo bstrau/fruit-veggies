@@ -27,17 +27,19 @@ namespace Game1.Content
         };
 
         SpriteBatch batch;
+        
         Player currentPlayer;
         Map currentMap;
-        Unit currenUnit;
+        Unit currentUnit;
         Tile currentTile;
+        CURSORSTATE currentCursorState;
 
         public Cursor(Map cm, Tile ct, SpriteBatch batch)
         {
             this.batch = batch;
             currentMap = cm;
             currentTile = ct;
-            currenUnit = null;
+            currentUnit = null;
         }
 
         public Tile getCurrentTile()
@@ -90,7 +92,8 @@ namespace Game1.Content
 
         public void onClick(MouseState e)
         {
-
+            // TODO: Noch nicht geklärt
+            //currentTile = currentMap.getTilebyPos(e.X, e.Y);
         }
     }
 }
