@@ -220,6 +220,12 @@ namespace Game1.Content
         public void Init()
         {
             bgSound.startPlaying();
+
+        }
+
+        public void AddPlayerPane()
+        {
+            
         }
 
         public void MuteSound(bool muted)

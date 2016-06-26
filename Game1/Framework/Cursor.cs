@@ -91,11 +91,6 @@ namespace Game1.Content
                     // Nächstes erreichbares Tile in Liste aufnehmen
                     if (!tiles.Contains(neighbour) && neighbour.Reachable())
                     {
-
-                        //GraphicsObject mark = GraphicsObject.graphicObjects["marked"];
-                        //mark.SetPos(neighbour.getPos());
-                        //mark.setDimension(64,64);
-                        //mark.Draw(batch);
                         tiles.Add(neighbour);
                     }
                     if(neighbour.Passable(currentUnit))

@@ -138,19 +138,6 @@ namespace Game1.Content
                 return pos; 
         }
 
-        public void onClick(MouseState state)
-        {
-            Point pos = new Point(state.Position.X, state.Position.Y);
-            foreach(Pane w in this.container.Values)
-            {
-                if (w.absolute_position().X == pos.X && w.absolute_position().Y == pos.Y)
-                {
-                    
-                }
-            }
-            
-        }
-
         public void Register()
         {
             Panes.Add(id, this);
@@ -207,7 +194,7 @@ namespace Game1.Content
             }
 
             // KlickEvent auslösen
-            Clicked?.Invoke(this, EventArgs.Empty);
+            Clicked.Invoke(this, EventArgs.Empty);
         }
 
         public bool isHit(Point pos)
