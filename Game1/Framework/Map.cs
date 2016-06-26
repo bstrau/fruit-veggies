@@ -101,7 +101,6 @@ namespace Game1.Content
                     tiles[y, x].Draw(batch);
                 }
             }
-            playerBar.Draw(batch);
         }
 
         public void Draw(Graphics g)
@@ -245,7 +244,7 @@ namespace Game1.Content
             playerTwo.setPosition(this.sizeX * 64 / 4 * 3, this.sizeY * 64);
             playerTwo.setDimensions(this.sizeX * 64 / 4, 64);
             playerTwo.setFont(new FontObject(Game1.font));
-            //playerTwo.addText("Player 1", new Point(this.sizeX * 64 / 4 * 3 +10, 10));
+            playerTwo.addText("Player 1", new Point(this.sizeX * 64 / 4 * 3 +10, 10));
 
             playerBar.AddPane(playerOne);
             playerBar.AddPane(playerTwo);

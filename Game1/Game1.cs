@@ -59,7 +59,9 @@ namespace Game1
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
+            
+            
             // Liste der Grafikobjekte initialisieren
             GraphicsObject.graphicObjects = new Dictionary<string, GraphicsObject>();
             GraphicsObject.LoadGraphics("Content\\graphics\\tiles", Content);
@@ -71,7 +73,9 @@ namespace Game1
             SoundObject.soundObjects = new Dictionary<string, SoundObject>();
             Content.RootDirectory = "Content";
 
-           
+            // Font laden
+            font = Content.Load<SpriteFont>("fonts/font");
+
             String[] files = Directory.GetFiles("Content\\sounds\\bg");
             foreach (String file in files)
             {
@@ -84,9 +88,6 @@ namespace Game1
                     SoundObject.soundObjects.Add(name, sound);
                 }
             }
-
-            // Font laden
-            SpriteFont font = Content.Load<SpriteFont>("fonts/font");
 
             // XMLs laden...
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
