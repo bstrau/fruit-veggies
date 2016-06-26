@@ -16,15 +16,16 @@ namespace Game1
 
     public class Game1 : Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public static SpriteFont font;
+        public static SpriteBatch spriteBatch;
 
+        GraphicsDeviceManager graphics;
         GameManager gameManager;
 
         KeyboardState oldKeyState;
         MouseState oldMouseState;
 
-        int SPIELFELDHOEHE = 16;
+        int SPIELFELDHOEHE = 9;
         int SPIELFELDBREITE = 16;
 
         public Game1()

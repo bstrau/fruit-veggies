@@ -47,7 +47,7 @@ namespace Game1
             playerTwo = new Player("Two");
 
             // Aktuell gewählte Map
-            currentMap = Map.Maps["0"];
+            currentMap = Map.Maps["TEST"];
             currentMap.Init();
             currentMap.MuteSound(true);
 

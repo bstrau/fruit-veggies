@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 using Game1.Content;
+using Game1.Framework;
 
 namespace Game1.Content
 {
@@ -19,6 +20,8 @@ namespace Game1.Content
         private int sizeX, sizeY;
         private Tile[,] tiles;
         private SoundObject bgSound;
+
+        private Pane playerBar;
 
         // künftig public Map(XMLNode node)
         public Map(XmlNode node)
@@ -98,10 +101,12 @@ namespace Game1.Content
                     tiles[y, x].Draw(batch);
                 }
             }
+            playerBar.Draw(batch);
         }
 
         public void Draw(Graphics g)
         {
+            
             for (int y = 0; y < sizeY; y++)
             {
                 for (int x = 0; x < sizeX; x++)
@@ -220,12 +225,31 @@ namespace Game1.Content
         public void Init()
         {
             bgSound.startPlaying();
+            AddPlayerPane();
 
         }
 
         public void AddPlayerPane()
         {
+            playerBar = new Pane("menu", "playerbar");
+            playerBar.setPosition(0, this.sizeY * 64);
+            playerBar.setDimensions(this.sizeX * 64 , 64);
             
+            Pane playerOne = new Pane("menuoption","playerone");
+            playerOne.setPosition(0, this.sizeY * 64);
+            playerOne.setDimensions(this.sizeX * 64 / 4, 64);
+            playerOne.setFont(new FontObject(Game1.font));
+            playerOne.addText("Player 1", new Point(10, 10));
+
+            Pane playerTwo = new Pane("menuoption", "playertwo");
+            playerTwo.setPosition(this.sizeX * 64 / 4 * 3, this.sizeY * 64);
+            playerTwo.setDimensions(this.sizeX * 64 / 4, 64);
+            playerTwo.setFont(new FontObject(Game1.font));
+            //playerTwo.addText("Player 1", new Point(this.sizeX * 64 / 4 * 3 +10, 10));
+
+            playerBar.AddPane(playerOne);
+            playerBar.AddPane(playerTwo);
+            playerBar.Register();
         }
 
         public void MuteSound(bool muted)
