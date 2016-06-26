@@ -53,6 +53,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Framework\FontObject.cs" />
     <Compile Include="Framework\Unit\AttackUnit.cs" />
     <Compile Include="Framework\Tile\BaseTile.cs" />
     <Compile Include="Framework\Tile\CaptureTile.cs" />

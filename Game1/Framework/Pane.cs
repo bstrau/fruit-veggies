@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
-
+using Game1.Framework;
 
 namespace Game1.Content
 {
@@ -22,6 +22,8 @@ namespace Game1.Content
     class Pane : Component
     {
         private GraphicsObject panel;
+        private FontObject font;
+
         private System.Drawing.Point pos;
         private Size size;
 
@@ -161,6 +163,11 @@ namespace Game1.Content
             {
                 Panes[cp].Draw(batch);
             }
+        }
+
+        public void setFont(FontObject font)
+        {
+            this.font = font;
         }
 
         // Verwaltet aktuell anzuzeigende Panes.

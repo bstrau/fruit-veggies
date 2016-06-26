@@ -21,7 +21,11 @@ namespace Game1
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
         GameManager gameManager;
+
+        KeyboardState oldKeyState;
+        MouseState oldMouseState;
 
         int SPIELFELDHOEHE = 16;
         int SPIELFELDBREITE = 16;
@@ -83,12 +87,15 @@ namespace Game1
                 }
             }
 
+            // Font laden
+            SpriteFont font = Content.Load<SpriteFont>("fonts/font");
+
             // XMLs laden...
             XmlLoader.loadAllTiles("Content\\xml\\Tiles.XML");
             XmlLoader.loadAllUnits("Content\\xml\\Units.XML");
             XmlLoader.loadAllMaps("Content\\xml\\Maps.XML");
 
-            gameManager = new GameManager(spriteBatch);
+            gameManager = new GameManager(spriteBatch, font);
         }
 
         /// <summary>
@@ -117,7 +124,19 @@ namespace Game1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            KeyboardState newKeyState = Keyboard.GetState();
+            MouseState newMouseState = Mouse.GetState();
+
+            if (newKeyState.IsKeyDown(Keys.Escape))
+            {
+                Exit();
+            }
+
             gameManager.Update();
+
+            oldMouseState = newMouseState;
+            oldKeyState = newKeyState;
+
             base.Update(gameTime);
         }
 

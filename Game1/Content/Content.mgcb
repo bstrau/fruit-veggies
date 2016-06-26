@@ -19,3 +19,9 @@
 /processorParam:Quality=Best
 /build:sounds\bg\MACINTOSH_PLUS
 
+#begin fonts/font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:fonts/font.spritefont
+

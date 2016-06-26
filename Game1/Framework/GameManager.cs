@@ -11,12 +11,14 @@ using System.Threading.Tasks;
 using Game1.Content;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using Game1.Framework;
 
 namespace Game1
 {
     class GameManager
     {
         SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
 
         // Spieler
         Player playerOne;
@@ -41,11 +43,13 @@ namespace Game1
         // Das Oberste Pane auf dem Bildschirm
         //Pane frontPane; // KP: Nur eine Idee
 
-        public GameManager(SpriteBatch spriteBatch)
+        public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
-            // Menüs initialisieren
-            this.InitializePanes();
             this.spriteBatch = spriteBatch;
+            this.spriteFont = spriteFont;
+
+            // Menüs initialisieren
+            InitializePanes();
 
             // Spieler Initialisieren
             playerOne = new Player("One");
@@ -63,11 +67,6 @@ namespace Game1
 
             List<Tile> availTiles = new List<Tile>();
             cursor.findWay(availTiles, cursor.getCurrentTile(), 5);
-
-            // TESTS FÜR NEUE METHODE GET TILE POS BESTANDEN
-            //Tile t0 = currentMap.getTilebyPos(0, 0);
-            //Tile t1 = currentMap.getTilebyPos(1, 2);
-            //Tile t2 = currentMap.getTilebyPos(28, 2);
 
             // Map Editor
             editor = new MapEditor();
@@ -87,21 +86,25 @@ namespace Game1
             mainMenu.AddPane(new Pane("menuoption", "close"));
             mainMenu.setDimensions(800,500);
             mainMenu.setPosition(50,50);
+            mainMenu.setFont(new FontObject(spriteFont));
 
             // LevelEditor Menu
             Pane editorMenu = new Pane("menuoption", "editor");
             editorMenu.setPosition(new System.Drawing.Point(10, 10));
             editorMenu.setDimensions(880, 80);
             editorMenu.AddPane(editorMenu);
+            editorMenu.setFont(new FontObject(spriteFont));
 
             // Factory Menü
             factoryMenu = new Pane("menu", "factoryMenue");
             factoryMenu.setDimensions(200, 300);
             factoryMenu.setPosition(20, 20);
+            factoryMenu.setFont(new FontObject(spriteFont));
 
             unitMenu = new Pane("menu","unitMenue");
             unitMenu.setDimensions(200,200);
             unitMenu.setPosition(10,10);
+            unitMenu.setFont(new FontObject(spriteFont));
 
             // Register Panes
             mainMenu.Register();
@@ -138,9 +141,6 @@ namespace Game1
         /// </summary>
         public void MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newkeyboardEvent.IsKeyDown(Keys.Escape))
-                //Exit();
-
                 if (oldState.IsKeyDown(Keys.Tab) && newkeyboardEvent.IsKeyUp(Keys.Tab))
                 {
                     if (mainMenu.isVisible())
