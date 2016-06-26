@@ -53,25 +53,25 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Content\AttackUnit.cs" />
-    <Compile Include="Content\BaseTile.cs" />
-    <Compile Include="Content\CaptureTile.cs" />
-    <Compile Include="Content\Cursor.cs" />
-    <Compile Include="Content\FactoryTile.cs" />
-    <Compile Include="Content\SoundObject.cs" />
-    <Compile Include="Content\FightManager.cs" />
-    <Compile Include="Content\Unit.cs" />
-    <Compile Include="Content\DefaultTile.cs" />
-    <Compile Include="Content\GraphicsObject.cs" />
-    <Compile Include="Content\Map.cs" />
-    <Compile Include="Content\RessourcesTile.cs" />
-    <Compile Include="Content\Player.cs" />
-    <Compile Include="Content\TreasureTile.cs" />
-    <Compile Include="Content\Pane.cs" />
-    <Compile Include="Content\XmlLoader.cs" />
-    <Compile Include="Content\Tile.cs" />
+    <Compile Include="Framework\Unit\AttackUnit.cs" />
+    <Compile Include="Framework\Tile\BaseTile.cs" />
+    <Compile Include="Framework\Tile\CaptureTile.cs" />
+    <Compile Include="Framework\Cursor.cs" />
+    <Compile Include="Framework\Tile\FactoryTile.cs" />
+    <Compile Include="Framework\SoundObject.cs" />
+    <Compile Include="Framework\FightManager.cs" />
+    <Compile Include="Framework\Unit\Unit.cs" />
+    <Compile Include="Framework\Tile\DefaultTile.cs" />
+    <Compile Include="Framework\GraphicsObject.cs" />
+    <Compile Include="Framework\Map.cs" />
+    <Compile Include="Framework\Tile\RessourcesTile.cs" />
+    <Compile Include="Framework\Player.cs" />
+    <Compile Include="Framework\Tile\TreasureTile.cs" />
+    <Compile Include="Framework\Pane.cs" />
+    <Compile Include="Framework\XmlLoader.cs" />
+    <Compile Include="Framework\Tile.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="GameManager.cs" />
+    <Compile Include="Framework\GameManager.cs" />
     <Compile Include="MapEditor.cs">
       <SubType>Form</SubType>
     </Compile>
