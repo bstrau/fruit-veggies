@@ -107,8 +107,6 @@ namespace Game1
             mainMenu.Register();
             factoryMenu.Register();
             unitMenu.Register();
-
-            
         }
 
         public void Render()
@@ -116,6 +114,7 @@ namespace Game1
             spriteBatch.Begin();
             //mainMenu.Draw(spriteBatch);
             currentMap.Draw(spriteBatch);
+            cursor.Draw();
             spriteBatch.End();
  
         }
@@ -129,6 +128,9 @@ namespace Game1
             this.MenuEvents(newKeyEvent, newMouseEvent);
             //Events, die mit dem Spiel zu tun haben
             this.GameEvents(newKeyEvent, newMouseEvent);
+
+            oldState = newKeyEvent;
+            oldMouseEvent = newMouseEvent;
         }
 
         /// <summary>
@@ -137,7 +139,7 @@ namespace Game1
         public void MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || newkeyboardEvent.IsKeyDown(Keys.Escape))
-                // Exit();
+                //Exit();
 
                 if (oldState.IsKeyDown(Keys.Tab) && newkeyboardEvent.IsKeyUp(Keys.Tab))
                 {
@@ -155,22 +157,24 @@ namespace Game1
                 else
                     editor.Show();
             }
-
-            if (oldMouseEvent.LeftButton == ButtonState.Pressed && oldMouseEvent.LeftButton == ButtonState.Released)
-            {
-                currentMap.onClick(newMouseEvent);
-            }
-
-            oldState = newkeyboardEvent;
-            oldMouseEvent = newMouseEvent;
-        
         }
 
         /// <summary>
         /// Soll alle Events enthalten die mit dem Spiel zu tun haben
         /// </summary>
         public void GameEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent)
-        { 
+        {
+            // Left Click
+            if (oldMouseEvent.LeftButton == ButtonState.Pressed && newMouseEvent.LeftButton == ButtonState.Released)
+            {
+                cursor.onLeftClick(new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y));
+            }
+
+            // MouseMove
+            if (oldMouseEvent.Position != newMouseEvent.Position)
+            {
+                cursor.onMouseMove(new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y));
+            }
         }
 
 

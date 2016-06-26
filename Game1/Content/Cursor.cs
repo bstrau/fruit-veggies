@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,12 +28,19 @@ namespace Game1.Content
         };
 
         SpriteBatch batch;
-        
+        GraphicsObject graphics;
+        GraphicsObject target;
+
         Player currentPlayer;
         Map currentMap;
         Unit currentUnit;
+
         Tile currentTile;
-        CURSORSTATE currentCursorState;
+        Tile originTile;
+
+        List<Tile> reachableTiles;
+
+        CURSORSTATE cursorState;
 
         public Cursor(Map cm, Tile ct, SpriteBatch batch)
         {
@@ -40,6 +48,15 @@ namespace Game1.Content
             currentMap = cm;
             currentTile = ct;
             currentUnit = null;
+            originTile = null;
+
+            reachableTiles = new List<Tile>();
+
+            graphics = GraphicsObject.graphicObjects["cursor"];
+            target = GraphicsObject.graphicObjects["target"];
+
+            graphics.setDimension(64, 64);
+            target.setDimension(64, 64);
         }
 
         public Tile getCurrentTile()
@@ -89,11 +106,56 @@ namespace Game1.Content
                 }
             }
         }
-
-        public void onClick(MouseState e)
+        
+        public void Draw()
         {
-            // TODO: Noch nicht geklärt
-            //currentTile = currentMap.getTilebyPos(e.X, e.Y);
+            if(cursorState == CURSORSTATE.MOVE)
+            {
+                foreach(Tile tile in reachableTiles)
+                {
+                    target.SetPos(tile.getPos());
+                    target.Draw(batch);
+                }
+            }
+
+            graphics.SetPos(currentTile.getPos());
+            graphics.Draw(batch);
+        }
+
+        public void onLeftClick(Point pos)
+        {
+            if(cursorState == CURSORSTATE.MOVE)
+            {
+                if (reachableTiles.Contains(currentTile))
+                {
+                    currentTile.enter(originTile.leave());
+                }
+                reachableTiles.Clear();
+                cursorState = CURSORSTATE.SELECT;
+            }
+
+            else if(cursorState == CURSORSTATE.SELECT) 
+            {
+                if (currentUnit != null)
+                {
+                    cursorState = CURSORSTATE.MOVE;
+                    originTile = currentTile;
+                    findWay(reachableTiles, originTile, currentUnit.getMovePoints());
+                }
+            }
+        }
+
+        public void onMouseMove(Point pos)
+        {
+            // FIXME: Es kann momentan noch passieren, das die Positon der Maus negativ wird. Das sollte verhindert werden!
+            if (currentMap.getTilebyPos(pos.X / 64, pos.Y / 64) != null)
+            {
+                currentTile = currentMap.getTilebyPos(pos.X / 64, pos.Y / 64);
+                if (cursorState == CURSORSTATE.SELECT)
+                {
+                    currentUnit = currentTile.getOccupant();
+                }
+            }
         }
     }
 }

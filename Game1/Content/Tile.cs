@@ -142,6 +142,13 @@ namespace Game1.Content
             if (occupant != null){}
         }
 
+        public Unit leave()
+        {
+            Unit ret = occupant;
+            occupant = null;
+            return ret;
+        }
+
         public virtual void onClick(Microsoft.Xna.Framework.Input.MouseState e)
         {
             if (occupant != null)

@@ -21,6 +21,10 @@ namespace Game1.Content
         protected string title;
         protected UnitType type;
         protected int price;
+        protected int movePoints;
+
+        // Wird true gesetzt, nachdem in einer Runde mit dieser Einheit gezogen wurde
+        bool moved;
 
         public void SetPos(int x, int y)
         {
@@ -60,6 +64,7 @@ namespace Game1.Content
             this.type = unit.type;
             this.player = unit.player;
             this.pos = unit.pos;
+            this.moved = false;
         }
 
         public Unit(UnitType type, XmlNode node)
@@ -67,6 +72,8 @@ namespace Game1.Content
             id = node.Attributes.GetNamedItem("id").Value;
             this.type = type;
             price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
+
+            movePoints = Convert.ToInt32(node.SelectSingleNode("movepoints").InnerText);
 
             title = node.SelectSingleNode("title").InnerText;
 
@@ -92,6 +99,11 @@ namespace Game1.Content
         {
             graphics.SetPos(pos);
             graphics.Draw(batch);
+        }
+
+        public int getMovePoints()
+        {
+            return movePoints;   
         }
 
         // Global erreichbare Liste aller Tiles.
