@@ -134,7 +134,13 @@ namespace Game1.Content
                     originTile = currentTile;
                     findWay(reachableTiles, originTile, currentUnit.getMovePoints());
                 }
+                else {
+                    currentTile.onClick(pos);
+                    
+                }
             }
+
+           
         }
 
         public void onMouseMove(Point pos)

@@ -15,10 +15,7 @@
       <title>Fabrik</title>
       <accessible>True</accessible>
       <graphic>factory</graphic>
-      <cash>
-        <rounds>10</rounds>
-        <amount>1</amount>
-      </cash>
+      <capturepoints>10</capturepoints>
     </tile>
 
     <tile id = "R3" type = "RESSOURCE">

@@ -32,7 +32,7 @@ namespace Game1
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "";
-            graphics.PreferredBackBufferHeight = 64 * SPIELFELDHOEHE;
+            graphics.PreferredBackBufferHeight = 64 * (SPIELFELDHOEHE + 1);
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
 

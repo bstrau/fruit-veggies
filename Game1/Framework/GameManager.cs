@@ -7,23 +7,23 @@ using System.Drawing;
 
 namespace Game1
 {
-    enum GAMESTATE
+    public enum GAMESTATE
     {
         MENU,
         MAP
     }
 
-    class GameManager
+    public class GameManager
     {
         SpriteBatch spriteBatch;
         SpriteFont spriteFont;
 
         // Spieler
-        Player playerOne;
-        Player playerTwo;
+        public static Player playerOne;
+        public static Player playerTwo;
 
         // Cursor 
-        Cursor cursor;
+        public static Cursor cursor;
 
         // Aktuell gewählte Map
         Map currentMap;
@@ -35,7 +35,7 @@ namespace Game1
         // States
         KeyboardState oldState;
         MouseState oldMouseEvent;
-        static GAMESTATE gameState;
+        public static GAMESTATE gameState;
 
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
@@ -46,8 +46,11 @@ namespace Game1
             playerOne = new Player("One");
             playerTwo = new Player("Two");
 
+            playerOne.SetResourcePoints(500);
+            playerTwo.SetResourcePoints(500);
+
             // Aktuell gewählte Map
-            currentMap = Map.Maps["0"];
+            currentMap = Map.Maps["TEST"];
             currentMap.Init();
             currentMap.MuteSound(true);
 

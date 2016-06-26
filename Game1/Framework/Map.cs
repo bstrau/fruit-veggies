@@ -235,20 +235,27 @@ namespace Game1.Content
             playerBar.setDimensions(this.sizeX * 64 , 64);
             
             Pane playerOne = new Pane("menuoption","playerone");
-            playerOne.setPosition(0, this.sizeY * 64);
+            playerOne.setPosition(0, 0);
             playerOne.setDimensions(this.sizeX * 64 / 4, 64);
             playerOne.setFont(new FontObject(Game1.font));
             playerOne.addText("Player 1", new Point(10, 10));
+            playerOne.addText("Resourcen:"+ GameManager.playerOne.GetResourcePoints(), new Point(10,40));
 
             Pane playerTwo = new Pane("menuoption", "playertwo");
-            playerTwo.setPosition(this.sizeX * 64 / 4 * 3, this.sizeY * 64);
+            playerTwo.setPosition(this.sizeX * 64 / 4 * 3, 0);
             playerTwo.setDimensions(this.sizeX * 64 / 4, 64);
             playerTwo.setFont(new FontObject(Game1.font));
-            playerTwo.addText("Player 1", new Point(this.sizeX * 64 / 4 * 3 +10, 10));
+            playerTwo.addText("Player 2", new Point(10, 10));
+            playerTwo.addText("Resourcen:" + GameManager.playerTwo.GetResourcePoints(), new Point(10, 40));
 
             playerBar.AddPane(playerOne);
             playerBar.AddPane(playerTwo);
+
             playerBar.Register();
+            playerBar.Show();
+            playerOne.Show();
+            playerTwo.Show();
+
         }
 
         public void MuteSound(bool muted)
@@ -293,14 +300,7 @@ namespace Game1.Content
 
         public void onClick(Microsoft.Xna.Framework.Input.MouseState e)
         {
-            foreach (Tile t in this.GetMapTiles())
-            {
-                // Tile Position TODO: Eventuell auslagern. 
-                if (t.getPos().X <= e.X && t.getPos().X + 64 >= e.X && t.getPos().Y <= e.Y && t.getPos().Y + 64 >= e.Y)
-                {
-                    t.onClick(e);
-                }
-            }
+         
         }
 
 

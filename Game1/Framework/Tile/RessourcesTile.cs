@@ -24,6 +24,11 @@ namespace Game1.Content
             this.cash_rounds = tile.cash_rounds;
         }
 
+        public override Tile GetCopy()
+        {
+            return new RessourcesTile(this);
+        }
+
         // Translators note: Loot heißt Beute
         public int GetLoot()
         {

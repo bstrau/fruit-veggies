@@ -15,6 +15,11 @@ namespace Game1.Content
         {
             this.id = id;
         }
+
+        public String GetId()
+        {
+            return id;
+        }
     }
 
     class Text
@@ -171,7 +176,9 @@ namespace Game1.Content
         /// <param name="batch"></param>
         public static void DrawPanes(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
         {
-            foreach (Pane pane in currentPanes)
+            Pane[] copy = new Pane[currentPanes.Count];
+            currentPanes.CopyTo(copy);
+            foreach (Pane pane in copy)
             {
                 pane.Draw(batch);
             }
@@ -194,7 +201,10 @@ namespace Game1.Content
             }
 
             // KlickEvent auslösen
-            Clicked.Invoke(this, EventArgs.Empty);
+            if (Clicked != null)
+            {
+                Clicked.Invoke(this, EventArgs.Empty);
+            }
         }
 
         public bool isHit(Point pos)

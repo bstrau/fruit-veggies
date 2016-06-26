@@ -18,6 +18,8 @@ namespace Game1.Content
         protected int fraction;
         //END VON FIXME 1
 
+        protected Int32 resourcePoints;
+
         public Player()
         { 
         }
@@ -37,10 +39,19 @@ namespace Game1.Content
             return title;
         }
 
+        public Int32 GetResourcePoints()
+        {
+            return resourcePoints;
+        }
+
         public void SetTitle(String title)
         {
             this.title = title;
         }
 
+        public void SetResourcePoints(int points)
+        {
+            this.resourcePoints = points;
+        }
     }
 }

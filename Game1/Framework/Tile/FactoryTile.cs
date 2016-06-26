@@ -5,45 +5,82 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Windows.Forms;
+using Game1.Framework;
+using System.Drawing;
 
 namespace Game1.Content
 {
-    class FactoryTile : Tile
+    public class FactoryTile : CaptureTile
     {
+        private Pane buyMenu;
+
         public FactoryTile(TileType type, XmlNode node)
             : base(type, node)
         {
  
         }
 
-        public Unit buyUnit(int x, int y)
+        public FactoryTile(FactoryTile ftile) 
+            : base(ftile)
         {
-            Pane pane = new Pane("menu", "buy Player");
-            pane.Register(); // Als Pane Registrieren
-            pane.setPosition(x, y);
-            pane.setDimensions(350, 450);
-            pane.Show();
-            return null;
+            
         }
 
-        public override void onClick(MouseEventArgs e)
+        
+        public override Tile GetCopy()
         {
-            // Window Open
-            if (occupant != null)
+            return new FactoryTile(this);
+        }
+        
+
+        public void BuyUnit(object sender, EventArgs eventArgs)
+        {
+            Pane clickedPane = (Pane)sender;
+            Unit unit = Unit.Units[clickedPane.GetId()].GetCopy();
+
+            unit.setPlayer(owner);
+            GameManager.cursor.getCurrentTile().enter(unit);
+            GameManager.gameState = GAMESTATE.MAP;
+            buyMenu.Hide();
+           
+
+        }
+
+        public void BuyMenu()
+        {
+            FontObject font = new FontObject(Game1.font);
+            buyMenu = new Pane("menu", "buyMenu");
+            buyMenu.setPosition(0, 0);
+            buyMenu.setDimensions(200, 200);
+            buyMenu.setFont(font);
+
+            int i = 10;
+            foreach (Unit u in Unit.Units.Values)
             {
-                buyUnit(e.X,e.Y);
+                Pane buyUnitP = new Pane("menuoption", u.GetId());
+                buyUnitP.setPosition(10, i);
+                buyUnitP.setDimensions(100, 25);
+                buyUnitP.setFont(font);
+                buyUnitP.addText(u.GetTitle() + ": " + u.GetPrice() , new Point(5, 5));
+                buyUnitP.Clicked += BuyUnit;
+                buyMenu.AddPane(buyUnitP);
+                buyUnitP.Register();
+                
+                buyUnitP.Show();
+                i += 32;
             }
+            buyMenu.Register();
+            buyMenu.Show();
         }
 
-        public override void onClick(Microsoft.Xna.Framework.Input.MouseState e)
+        public override void onClick(Point pos)
         {
-            // Window Open
-            if (occupant != null)
-            {
-                buyUnit(e.X, e.Y);
-            }
-        }
+            base.onClick(pos);
+            GameManager.gameState = GAMESTATE.MENU;
+            BuyMenu();
 
+
+        }
         //public Unit createUnit(String unit_id)
         //{
         //    return (Unit.Units[unit_id]).GetCopy();

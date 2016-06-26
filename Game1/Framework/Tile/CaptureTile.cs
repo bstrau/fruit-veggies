@@ -7,9 +7,10 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class CaptureTile : Tile
+    public class CaptureTile : Tile
     {
         protected int capturepoints;
+        protected Player owner;
 
         public CaptureTile(TileType type, XmlNode node): base(type,node)
         {
@@ -19,7 +20,21 @@ namespace Game1.Content
         public CaptureTile(CaptureTile tile) : base(tile)
         {
             this.capturepoints = tile.capturepoints;
+        }
 
+        public override void onClick(System.Drawing.Point pos)
+        {
+ 	         base.onClick(pos);
+        }
+
+        public void setOwner(Player o)
+        {
+            owner = o;
+        }
+
+        public Player getOwner()
+        {
+            return owner;
         }
     }
 }

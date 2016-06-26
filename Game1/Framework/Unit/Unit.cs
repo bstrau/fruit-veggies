@@ -40,6 +40,16 @@ namespace Game1.Content
         {
             return id;
         }
+
+        public String GetTitle()
+        {
+            return title;
+        }
+
+        public Int32 GetPrice()
+        {
+            return price;
+        }
         public enum UnitType
         {
             DEFAULT,
