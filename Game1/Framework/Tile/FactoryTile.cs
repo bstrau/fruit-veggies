@@ -26,20 +26,18 @@ namespace Game1.Content
             
         }
 
-        
         public override Tile GetCopy()
         {
             return new FactoryTile(this);
         }
         
-
         public void BuyUnit(object sender, EventArgs eventArgs)
         {
             Pane clickedPane = (Pane)sender;
             Unit unit = Unit.Units[clickedPane.GetId()].GetCopy();
 
             unit.setPlayer(owner);
-            GameManager.cursor.getCurrentTile().enter(unit);
+            enter(unit);
             GameManager.gameState = GAMESTATE.MAP;
             buyMenu.Hide();
            
@@ -64,12 +62,12 @@ namespace Game1.Content
                 buyUnitP.addText(u.GetTitle() + ": " + u.GetPrice() , new Point(5, 5));
                 buyUnitP.Clicked += BuyUnit;
                 buyMenu.AddPane(buyUnitP);
-                buyUnitP.Register();
+                //buyUnitP.Register();
                 
                 buyUnitP.Show();
                 i += 32;
             }
-            buyMenu.Register();
+            //buyMenu.Register();
             buyMenu.Show();
         }
 

@@ -50,7 +50,7 @@ namespace Game1
             playerTwo.SetResourcePoints(500);
 
             // Aktuell gewählte Map
-            currentMap = Map.Maps["TEST"];
+            currentMap = Map.Maps["0"];
             currentMap.Init();
             currentMap.MuteSound(true);
 
@@ -186,7 +186,9 @@ namespace Game1
             {
                 if (gameState == GAMESTATE.MENU)
                 {
-                    foreach(Pane pane in Pane.currentPanes)
+                    Pane[] copy = new Pane[Pane.currentPanes.Count];
+                    Pane.currentPanes.CopyTo(copy);
+                    foreach (Pane pane in copy)
                     {
                         if (pane.isHit(pos))
                             pane.onClick(pos);

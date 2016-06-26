@@ -166,6 +166,10 @@ namespace Game1.Content
         /// </summary>
         public void Hide()
         {
+            foreach(Pane child in container.Values)
+            {
+                child.Hide();
+            }
             currentPanes.Remove(this);
         }
 
