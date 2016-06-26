@@ -57,7 +57,7 @@ namespace Game1.Content
         {
             this.sound = unit.sound;
             this.graphics = unit.graphics;
-
+            this.movePoints = unit.movePoints;
             this.price = unit.price;
             this.id = unit.id;
             this.title = unit.title;
@@ -104,6 +104,16 @@ namespace Game1.Content
         public int getMovePoints()
         {
             return movePoints;   
+        }
+
+        public Player getPlayer()
+        {
+            return player;
+        }
+
+        public void setPlayer(Player player)
+        {
+            this.player = player;
         }
 
         // Global erreichbare Liste aller Tiles.

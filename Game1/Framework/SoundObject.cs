@@ -13,20 +13,24 @@ namespace Game1.Content
     {
         private SoundEffect sound;
         private SoundEffectInstance soundInstance;
+        public bool muted;
 
         public SoundObject(SoundEffect sound)
         {
             this.sound = sound;
             this.soundInstance = sound.CreateInstance();
+            muted = true;
         }
 
         public void startPlaying()
         {
+            muted = false;
             soundInstance.Play();
         }
 
         public void stopPlaying()
         {
+            muted = true;
             soundInstance.Stop();
         }
 

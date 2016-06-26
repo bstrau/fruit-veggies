@@ -149,6 +149,24 @@ namespace Game1.Content
             return ret;
         }
 
+        public bool Reachable()
+        {
+            if (this.accessible == true && occupant == null)
+                return true;
+            else
+                return false;
+        }
+
+        public bool Passable(Unit unit)
+        {
+            if(occupant != null && (occupant.getPlayer() != unit.getPlayer()))
+            {
+                return false;
+            }
+            else
+                return true;
+        }
+
         public virtual void onClick(Microsoft.Xna.Framework.Input.MouseState e)
         {
             if (occupant != null)

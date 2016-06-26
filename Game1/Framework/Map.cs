@@ -278,10 +278,22 @@ namespace Game1.Content
         public Tile getTilebyPos(int x, int y)
         {
             // Wenn x und y Werte zwischen 0 und size
-            if((x <= sizeX && y <= sizeY) && (x >= 0 && y >= 0))
+            if((x <= sizeX - 1 && y <= sizeY - 1) && (x >= 0 && y >= 0))
                 return tiles[y,x];
             else
                 return null;
+        }
+
+        public void ToggleSound(object sender, EventArgs eventArgs)
+        {
+            if(bgSound.muted)
+            {
+                bgSound.startPlaying();
+            }
+            else
+            {
+                bgSound.stopPlaying();
+            }
         }
 
         public void Update()

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Input;
 using System.Drawing;
 using Game1.Framework;
+
 
 namespace Game1.Content
 {
@@ -19,6 +17,18 @@ namespace Game1.Content
         }
     }
 
+    class Text
+    {
+        public Point pos;
+        public String text;
+
+        public Text(String text, int x, int y)
+        {
+            this.pos = new Point(x, y);
+            this.text = text;
+        }
+    }
+
     class Pane : Component
     {
         private GraphicsObject panel;
@@ -29,8 +39,10 @@ namespace Game1.Content
 
         // Kind Objekte
         private Dictionary<String,Pane> container;
+        private List<Text> texts;
 
         protected Pane parent;
+        public event EventHandler Clicked;
 
         /// <summary>
         /// Pane Klasse zum erstellen eines Menüs
@@ -45,6 +57,9 @@ namespace Game1.Content
 
             // Background und Dimension des Panels konfigurieren
             panel = GraphicsObject.graphicObjects[background_id];
+
+            // Texte initialisieren
+            texts = new List<Text>();
 
             container = new Dictionary<string, Pane>();
         }
@@ -79,6 +94,11 @@ namespace Game1.Content
             panel.setDimension(size);
             panel.Draw(batch);
 
+            foreach(Text text in texts)
+            {
+                batch.DrawString(font.getSpriteFont(), text.text, new Microsoft.Xna.Framework.Vector2( absolute_position().X + text.pos.X, absolute_position().Y + text.pos.Y), Microsoft.Xna.Framework.Color.Black);
+            }
+
             foreach (Pane w in this.container.Values)
             {
                 w.Draw(batch);
@@ -93,6 +113,11 @@ namespace Game1.Content
         {
             w.parent = this;
             this.container.Add(w.id,w);
+        }
+
+        public void addText(String text, Point pos)
+        {
+            texts.Add(new Text(text, pos.X, pos.Y));
         }
 
         /// <summary>
@@ -133,7 +158,7 @@ namespace Game1.Content
 
         public bool isVisible()
         {
-            return currentPanes.Contains(id);
+            return currentPanes.Contains(this);
         }
 
         /// <summary>
@@ -141,7 +166,7 @@ namespace Game1.Content
         /// </summary>
         public void Show()
         {
-            currentPanes.Add(id);
+            currentPanes.Add(this);
         }
 
         /// <summary>
@@ -149,7 +174,7 @@ namespace Game1.Content
         /// </summary>
         public void Hide()
         {
-            currentPanes.Remove(id);
+            currentPanes.Remove(this);
         }
 
         /// <summary>
@@ -159,9 +184,9 @@ namespace Game1.Content
         /// <param name="batch"></param>
         public static void DrawPanes(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
         {
-            foreach (string cp in currentPanes)
+            foreach (Pane pane in currentPanes)
             {
-                Panes[cp].Draw(batch);
+                pane.Draw(batch);
             }
         }
 
@@ -170,8 +195,32 @@ namespace Game1.Content
             this.font = font;
         }
 
+        public void onClick(Point pos)
+        {
+            foreach(Pane child in container.Values)
+            {
+                if (child.isHit(pos))
+                {
+                    child.onClick(pos);
+                    return;
+                }
+            }
+
+            // KlickEvent auslösen
+            Clicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        public bool isHit(Point pos)
+        {
+            if ((pos.X <= absolute_position().X + size.Width) && (pos.X > absolute_position().X) &&
+                (pos.Y <= absolute_position().Y + size.Height) && (pos.Y > absolute_position().Y))
+                return true;
+            else
+                return false;
+        }
+
         // Verwaltet aktuell anzuzeigende Panes.
-        public static List<string> currentPanes = new List<string>();
+        public static List<Pane> currentPanes = new List<Pane>();
 
         // Hier werden alle Menüs aufbewahrt.
         public static Dictionary<String, Pane> Panes = new Dictionary<String,Pane>();

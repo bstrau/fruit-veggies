@@ -84,16 +84,12 @@ namespace Game1.Content
             for(DIRECTION direction = DIRECTION.UP; direction < DIRECTION.MAXDIRECTION; direction++)
             {
                 Tile neighbour = null;
-                if (direction == DIRECTION.UP)
-                {
-                    int a = 9;
-                }
 
                 neighbour = currentMap.getNeighbour(waypoint, direction);
                 if (neighbour != null)
                 {
                     // Nächstes erreichbares Tile in Liste aufnehmen
-                    if (!tiles.Contains(neighbour))
+                    if (!tiles.Contains(neighbour) && neighbour.Reachable())
                     {
 
                         //GraphicsObject mark = GraphicsObject.graphicObjects["marked"];
@@ -102,7 +98,8 @@ namespace Game1.Content
                         //mark.Draw(batch);
                         tiles.Add(neighbour);
                     }
-                    findWay(tiles, neighbour, movepoints - 1);
+                    if(neighbour.Passable(currentUnit))
+                        findWay(tiles, neighbour, movepoints - 1);
                 }
             }
         }
