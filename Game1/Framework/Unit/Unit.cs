@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Game1.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -14,6 +15,7 @@ namespace Game1.Content
         protected GraphicsObject graphics;
         protected SoundObject sound;
 
+        protected int healthpoints;
         protected int xPos, yPos;
         protected Point pos;
         protected Player player;
@@ -22,9 +24,74 @@ namespace Game1.Content
         protected UnitType type;
         protected int price;
         protected int movePoints;
-
+        
         // Wird true gesetzt, nachdem in einer Runde mit dieser Einheit gezogen wurde
         bool moved;
+
+        public enum UnitType
+        {
+            DEFAULT,
+            APPLE,
+            BANANA,         
+            MAXEINHEIT
+        }
+
+        public void Register()
+        {
+            Units.Add(id, this);
+        }
+
+        public Unit(Unit unit)
+        {
+            this.healthpoints = unit.healthpoints;
+            this.sound = unit.sound;
+            this.graphics = unit.graphics;
+            this.movePoints = unit.movePoints;
+            this.price = unit.price;
+            this.id = unit.id;
+            this.title = unit.title;
+            this.type = unit.type;
+            this.player = unit.player;
+            this.pos = unit.pos;
+            this.moved = false;
+        }
+
+        public Unit(UnitType type, XmlNode node)
+        {
+            id = node.Attributes.GetNamedItem("id").Value;
+            this.type = type;
+            price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
+
+            movePoints = Convert.ToInt32(node.SelectSingleNode("movepoints").InnerText);
+            title = node.SelectSingleNode("title").InnerText;
+
+            this.healthpoints = Convert.ToInt32(node.SelectSingleNode("healthpoints").InnerText);
+
+            String graphic = node.SelectSingleNode("graphic").InnerText;
+
+            graphics = GraphicsObject.graphicObjects[graphic];
+
+            Register();
+        }
+
+        public Unit(GraphicsObject graphics, int x, int y, bool accessible)
+        {
+            this.graphics = graphics;
+            pos = new Point(x,y);
+        }
+
+        public void LifePointsDisplay(int x, int y)
+        {
+            FontObject font = new FontObject(Game1.font);
+            Pane lifePointsDisplay = new Pane("menu", "lifePointsDisplay"+ this.id);
+            lifePointsDisplay.setPosition(x, y);
+            lifePointsDisplay.setDimensions(64, 12);
+            lifePointsDisplay.setFont(font);
+            lifePointsDisplay.addText(this.healthpoints.ToString(), new Point(2, 2));
+
+            //lifePointsDisplay.Register();
+            lifePointsDisplay.Show();
+        }
 
         public void SetPos(int x, int y)
         {
@@ -49,55 +116,6 @@ namespace Game1.Content
         public Int32 GetPrice()
         {
             return price;
-        }
-        public enum UnitType
-        {
-            DEFAULT,
-            APPLE,
-            BANANA,         
-            MAXEINHEIT
-        }
-
-        public void Register()
-        {
-            Units.Add(id, this);
-        }
-
-        public Unit(Unit unit)
-        {
-            this.sound = unit.sound;
-            this.graphics = unit.graphics;
-            this.movePoints = unit.movePoints;
-            this.price = unit.price;
-            this.id = unit.id;
-            this.title = unit.title;
-            this.type = unit.type;
-            this.player = unit.player;
-            this.pos = unit.pos;
-            this.moved = false;
-        }
-
-        public Unit(UnitType type, XmlNode node)
-        {
-            id = node.Attributes.GetNamedItem("id").Value;
-            this.type = type;
-            price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
-
-            movePoints = Convert.ToInt32(node.SelectSingleNode("movepoints").InnerText);
-
-            title = node.SelectSingleNode("title").InnerText;
-
-            String graphic = node.SelectSingleNode("graphic").InnerText;
-
-            graphics = GraphicsObject.graphicObjects[graphic];
-
-            Register();
-        }
-
-        public Unit(GraphicsObject graphics, int x, int y, bool accessible)
-        {
-            this.graphics = graphics;
-            pos = new Point(x,y);
         }
 
         public virtual Unit GetCopy()
@@ -126,6 +144,15 @@ namespace Game1.Content
             this.player = player;
         }
 
+        public void onMouseMove(Point pos)
+        {
+            LifePointsDisplay(pos.X,pos.Y);
+        }
+
+        public int GetHealthPoints()
+        {
+            return this.healthpoints;
+        }
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Unit> Units = new Dictionary<string, Unit>();
     }

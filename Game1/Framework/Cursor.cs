@@ -152,6 +152,10 @@ namespace Game1.Content
                 if (cursorState == CURSORSTATE.SELECT)
                 {
                     currentUnit = currentTile.getOccupant();
+                    if (currentUnit != null)
+                    {
+                        currentUnit.onMouseMove(currentTile.getPos());
+                    }
                 }
             }
         }

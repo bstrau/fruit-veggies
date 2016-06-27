@@ -10,21 +10,18 @@ namespace Game1.Content
     class AttackUnit : Unit
     {
         protected int attackpower;
-        protected int healthpoints;
         protected double ripostefactor;
 
         public AttackUnit(UnitType type, XmlNode node)
             : base(type, node)
         {
             this.attackpower = Convert.ToInt32(node.SelectSingleNode("attackpower").InnerText);
-            this.healthpoints = Convert.ToInt32(node.SelectSingleNode("healthpoints").InnerText);
             this.ripostefactor = Convert.ToDouble(node.SelectSingleNode("attackpower").InnerText);
         }
 
         public AttackUnit(AttackUnit attackUnit) :base(attackUnit)
         {
             this.attackpower = attackUnit.attackpower;
-            this.healthpoints = attackUnit.healthpoints;
             this.ripostefactor = attackUnit.ripostefactor;
         }
 

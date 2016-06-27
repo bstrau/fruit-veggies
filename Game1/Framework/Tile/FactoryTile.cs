@@ -38,10 +38,11 @@ namespace Game1.Content
 
             unit.setPlayer(owner);
             enter(unit);
+            owner.SubtractResourcePoints(unit.GetPrice());
             GameManager.gameState = GAMESTATE.MAP;
             buyMenu.Hide();
-           
 
+           
         }
 
         public void BuyMenu()

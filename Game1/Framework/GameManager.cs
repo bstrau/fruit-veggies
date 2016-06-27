@@ -25,6 +25,8 @@ namespace Game1
         // Cursor 
         public static Cursor cursor;
 
+        public static int gameRounds;
+
         // Aktuell gewählte Map
         Map currentMap;
          
@@ -50,7 +52,7 @@ namespace Game1
             playerTwo.SetResourcePoints(500);
 
             // Aktuell gewählte Map
-            currentMap = Map.Maps["0"];
+            currentMap = Map.Maps["TEST"];
             currentMap.Init();
             currentMap.MuteSound(true);
 

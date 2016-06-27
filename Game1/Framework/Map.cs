@@ -248,8 +248,15 @@ namespace Game1.Content
             playerTwo.addText("Player 2", new Point(10, 10));
             playerTwo.addText("Resourcen:" + GameManager.playerTwo.GetResourcePoints(), new Point(10, 40));
 
+            Pane roundDisplay = new Pane("menuoption", "rounddisplay");
+            roundDisplay.setPosition(this.sizeX * 64 / 5 * 2, 0);
+            roundDisplay.setDimensions(this.sizeX * 64 / 5, 64);
+            roundDisplay.setFont(new FontObject(Game1.font));
+            roundDisplay.addText("Rounds:" + GameManager.gameRounds.ToString(), new Point(10, 10));
+
             playerBar.AddPane(playerOne);
             playerBar.AddPane(playerTwo);
+            playerBar.AddPane(roundDisplay);
 
             playerBar.Register();
             playerBar.Show();

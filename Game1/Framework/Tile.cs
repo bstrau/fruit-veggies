@@ -139,7 +139,9 @@ namespace Game1.Content
 
         public virtual void onClick(MouseEventArgs e)
         {
-            if (occupant != null){}
+            if (occupant != null){
+                //occupant.onClick();
+            }
         }
 
         public Unit leave()

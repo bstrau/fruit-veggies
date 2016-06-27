@@ -53,5 +53,14 @@ namespace Game1.Content
         {
             this.resourcePoints = points;
         }
+
+        /// <summary>
+        /// Zieht eine Menge von Punkten den ressourepoints ab zb: bei kauf von units
+        /// </summary>
+        /// <param name="points"></param>
+        public void SubtractResourcePoints(int points)
+        {
+            resourcePoints = resourcePoints - points;
+        }
     }
 }
