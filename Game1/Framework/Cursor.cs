@@ -148,6 +148,9 @@ namespace Game1.Content
             // FIXME: Es kann momentan noch passieren, das die Positon der Maus negativ wird. Das sollte verhindert werden!
             if (currentMap.getTilebyPos(pos.X / 64, pos.Y / 64) != null)
             {
+                if(currentUnit != null)
+                    currentUnit.onCursorLeave();
+
                 currentTile = currentMap.getTilebyPos(pos.X / 64, pos.Y / 64);
                 if (cursorState == CURSORSTATE.SELECT)
                 {

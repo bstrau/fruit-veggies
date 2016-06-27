@@ -7,7 +7,7 @@ using Game1.Framework;
 
 namespace Game1.Content
 {
-    class Component
+    public class Component
     {
         protected String id;
 
@@ -22,7 +22,7 @@ namespace Game1.Content
         }
     }
 
-    class Text
+    public class Text
     {
         public Point pos;
         public String text;
@@ -34,7 +34,7 @@ namespace Game1.Content
         }
     }
 
-    class Pane : Component
+    public class Pane : Component
     {
         private GraphicsObject panel;
         private FontObject font;

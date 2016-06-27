@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Game1.Framework
 {
-    class FontObject
+    public class FontObject
     {
         SpriteFont spriteFont;
         Font font;

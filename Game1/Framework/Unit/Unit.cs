@@ -24,7 +24,9 @@ namespace Game1.Content
         protected UnitType type;
         protected int price;
         protected int movePoints;
-        
+
+        protected Pane lifePointsDisplay;
+
         // Wird true gesetzt, nachdem in einer Runde mit dieser Einheit gezogen wurde
         bool moved;
 
@@ -83,7 +85,7 @@ namespace Game1.Content
         public void LifePointsDisplay(int x, int y)
         {
             FontObject font = new FontObject(Game1.font);
-            Pane lifePointsDisplay = new Pane("menu", "lifePointsDisplay"+ this.id);
+            lifePointsDisplay = new Pane("menu", "lifePointsDisplay"+ this.id);
             lifePointsDisplay.setPosition(x, y);
             lifePointsDisplay.setDimensions(64, 12);
             lifePointsDisplay.setFont(font);
@@ -147,6 +149,11 @@ namespace Game1.Content
         public void onMouseMove(Point pos)
         {
             LifePointsDisplay(pos.X,pos.Y);
+        }
+
+        public void onCursorLeave()
+        {
+            lifePointsDisplay.Hide();
         }
 
         public int GetHealthPoints()
