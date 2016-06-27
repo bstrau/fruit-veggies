@@ -225,7 +225,6 @@ namespace Game1.Content
         {
             bgSound.startPlaying();
             AddPlayerPane();
-
         }
 
         public void AddPlayerPane()
@@ -262,7 +261,6 @@ namespace Game1.Content
             playerBar.Show();
             playerOne.Show();
             playerTwo.Show();
-
         }
 
         public void MuteSound(bool muted)

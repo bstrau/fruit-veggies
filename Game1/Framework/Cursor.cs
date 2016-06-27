@@ -31,7 +31,6 @@ namespace Game1.Content
         GraphicsObject graphics;
         GraphicsObject target;
 
-        Player currentPlayer;
         Map currentMap;
         Unit currentUnit;
 
@@ -67,11 +66,6 @@ namespace Game1.Content
         public void setCurrentTile(Tile currentTile)
         {
             this.currentTile = currentTile;
-        }
-
-        public void setPlayer(Player cp)
-        {
-            currentPlayer = cp;
         }
 
         public void findWay(List<Tile> tiles, Tile waypoint, int movepoints)
@@ -128,7 +122,7 @@ namespace Game1.Content
 
             else if(cursorState == CURSORSTATE.SELECT) 
             {
-                if (currentUnit != null)
+                if (currentUnit != null && currentUnit.getPlayer() == GameManager.currentPlayer && currentUnit.MayMove())
                 {
                     cursorState = CURSORSTATE.MOVE;
                     originTile = currentTile;
@@ -136,7 +130,6 @@ namespace Game1.Content
                 }
                 else {
                     currentTile.onClick(pos);
-                    
                 }
             }
 

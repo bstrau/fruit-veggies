@@ -29,7 +29,10 @@ namespace Game1
 
         // Aktuell gewählte Map
         Map currentMap;
-         
+
+        // Spieler, der in der aktuellen Runde zieht
+        public static Player currentPlayer;
+
         Pane mainMenu;
 
         MapEditor editor;
@@ -52,12 +55,11 @@ namespace Game1
             playerTwo.SetResourcePoints(500);
 
             // Aktuell gewählte Map
-            currentMap = Map.Maps["TEST"];
+            currentMap = Map.Maps["0"];
             currentMap.Init();
             currentMap.MuteSound(true);
 
             cursor = new Cursor(currentMap, currentMap.GetMapTiles()[25], spriteBatch);
-            cursor.setPlayer(playerOne);
 
             // Test der Units
             Unit a0 = Unit.Units["apple"].GetCopy();
@@ -82,6 +84,8 @@ namespace Game1
             InitializePanes();
 
             gameState = GAMESTATE.MAP;
+
+            onTurnBegin();
         }
 
         // Map Chosser
@@ -227,6 +231,28 @@ namespace Game1
         public void WasteStuff()
         {
             editor.Close();
+        }
+
+        public void onTurnBegin()
+        {
+            if (currentPlayer == null)
+            {
+                currentPlayer = playerOne;
+            }
+            else {
+                // Aktuellen Player wechseln
+                if (currentPlayer == playerOne)
+                    currentPlayer = playerTwo;
+                else
+                    currentPlayer = playerOne;
+            }
+
+            foreach (Tile tile in currentMap.GetMapTiles())
+            {
+                tile.onTurnBegin(currentPlayer);
+            }
+
+            gameRounds++;
         }
     }
 }

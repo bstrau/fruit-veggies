@@ -17,13 +17,11 @@ namespace Game1.Content
         public FactoryTile(TileType type, XmlNode node)
             : base(type, node)
         {
- 
         }
 
         public FactoryTile(FactoryTile ftile) 
             : base(ftile)
-        {
-            
+        {   
         }
 
         public override Tile GetCopy()
@@ -38,11 +36,9 @@ namespace Game1.Content
 
             unit.setPlayer(owner);
             enter(unit);
-            owner.SubtractResourcePoints(unit.GetPrice());
+            owner.SubtractRessourcePoints(unit.GetPrice());
             GameManager.gameState = GAMESTATE.MAP;
             buyMenu.Hide();
-
-           
         }
 
         public void BuyMenu()
@@ -63,28 +59,21 @@ namespace Game1.Content
                 buyUnitP.addText(u.GetTitle() + ": " + u.GetPrice() , new Point(5, 5));
                 buyUnitP.Clicked += BuyUnit;
                 buyMenu.AddPane(buyUnitP);
-                //buyUnitP.Register();
                 
                 buyUnitP.Show();
                 i += 32;
             }
-            //buyMenu.Register();
             buyMenu.Show();
         }
 
         public override void onClick(Point pos)
         {
+            if (GameManager.currentPlayer != owner)
+                return;
+
             base.onClick(pos);
             GameManager.gameState = GAMESTATE.MENU;
             BuyMenu();
-
-
         }
-        //public Unit createUnit(String unit_id)
-        //{
-        //    return (Unit.Units[unit_id]).GetCopy();
-        //}
-
-
     }
 }

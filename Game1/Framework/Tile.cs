@@ -122,6 +122,8 @@ namespace Game1.Content
 
             occupant = unit;
 
+            occupant.Moved();
+
             return true;
         }
 
@@ -172,6 +174,14 @@ namespace Game1.Content
         public virtual void onClick(Point pos)
         {
             
+        }
+
+        public virtual void onTurnBegin(Player currentplayer)
+        {
+            if(occupant != null && occupant.getPlayer() == currentplayer)
+            {
+                occupant.onRoundBegin(currentplayer);
+            }
         }
 
         // Global erreichbare Liste aller Tiles.

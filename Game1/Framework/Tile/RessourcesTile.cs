@@ -41,6 +41,14 @@ namespace Game1.Content
             return 0;
         }
 
-
+        public override void onTurnBegin(Player currentplayer)
+        {
+            base.onTurnBegin(currentplayer);
+            if (owner == currentplayer)
+            {
+                base.onTurnBegin(currentplayer);
+                owner.AddRessourcePoints(GetLoot());
+            }
+        }
     }
 }

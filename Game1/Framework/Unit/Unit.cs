@@ -160,6 +160,22 @@ namespace Game1.Content
         {
             return this.healthpoints;
         }
+
+        public void onRoundBegin(Player currentPlayer)
+        {
+            moved = false;
+        }
+
+        public void Moved()
+        {
+            moved = true;
+        }
+
+        public bool MayMove()
+        {
+            return !moved;
+        }
+
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Unit> Units = new Dictionary<string, Unit>();
     }
