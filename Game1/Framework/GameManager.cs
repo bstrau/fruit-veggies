@@ -251,13 +251,17 @@ namespace Game1
 
         public void ShowMapEditor(object sender, EventArgs eventArgs)
         {
-            editor.Show();
+            if (!editor.Visible)
+                editor.Show();
+            else
+                editor.Hide();
         }
 
         // Objekte in den Restmüll
         public void WasteStuff()
         {
             editor.Close();
+            editor = null;
         }
 
         public void onTurnBegin()
