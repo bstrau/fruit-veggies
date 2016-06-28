@@ -59,13 +59,13 @@ namespace Game1.Content
             this.resourcePoints = points;
         }
 
-        public void AddPlayerPane(Pane playerBar, Point pos)
+        public void AddPlayerPane(Pane playerBar, Point pos, Size size)
         {
-            statusDisplay = new Pane("menuoption", "playerone");
+            statusDisplay = new Pane("menuoption", "player"+this.id);
             statusDisplay.setPosition(pos.X, pos.Y);
-            statusDisplay.setDimensions(pos.X * 64 / 4, 64);
+            statusDisplay.setDimensions(size.Width, 64);
             statusDisplay.setFont(new FontObject(Game1.font));
-            statusDisplay.addText("Player 1", new Point(10, 10));
+            statusDisplay.addText( this.title , new Point(10, 10));
             statusDisplay.addText("Resourcen:", new Point(10,40));
             ressourcesString = new Text(this.GetResourcePoints().ToString(), 100, 40);
             statusDisplay.addText(ressourcesString);
