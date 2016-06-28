@@ -98,7 +98,7 @@ namespace Game1
 
             gameState = GAMESTATE.MAP;
 
-            onTurnBegin();
+            onTurnBegin(this, EventArgs.Empty);
         }
 
         // Map Chosser
@@ -144,21 +144,25 @@ namespace Game1
             roundDisplay.setPosition(currentMap.getSizeX() * 64 / 5 * 2, 0);
             roundDisplay.setDimensions(currentMap.getSizeX() * 64 / 5, 64);
             roundDisplay.setFont(font);
-            roundDisplay.addText("Rounds", new Point(80, 10));
+            roundDisplay.addText("Rounds", new Point(80, 26));
             roundDisplay.addText(roundDisplayString);
 
-            /* Kommt noch
-            Pane nextRoundDisplay = new Pane("menuoption", "nextrounddisplay");
-            nextRoundDisplay.setPosition(0,0);
-            nextRoundDisplay.setDimensions(10, 10);
+            
+            // Newt Round 
+            Pane nextRoundDisplay = new Pane("menugreen", "nextrounddisplay");
+            nextRoundDisplay.setPosition(currentMap.getSizeX() * 64 / 5 * 2, 0);
+            nextRoundDisplay.setDimensions(currentMap.getSizeX() * 64 / 5 , 24);
             nextRoundDisplay.setFont(font);
-            nextRoundDisplay.addText("Weiter", new Point(10, 10));
-            */
+            nextRoundDisplay.addText("Weiter", new Point(80, 2));
+            nextRoundDisplay.Clicked += onTurnBegin;
+           
+            nextRoundDisplay.Show();
 
             playerBar = new Pane("menu", "playerbar");
             playerBar.setPosition(0, currentMap.getSizeY() * 64);
             playerBar.setDimensions(currentMap.getSizeX() * 64, 64);
             playerBar.AddPane(roundDisplay);
+            playerBar.AddPane(nextRoundDisplay);
 
             playerOne.AddPlayerPane(playerBar,new Point(0, 0), new Size( currentMap.getSizeX() *64 / 4 , 64));
             playerTwo.AddPlayerPane(playerBar, new Point( currentMap.getSizeX() *64 / 4 *3, 0), new Size(currentMap.getSizeX() * 64 / 4, 64));
@@ -193,10 +197,12 @@ namespace Game1
             MouseState newMouseEvent = Mouse.GetState();
 
             // Events, die mit den Menus zu tun haben
-            this.MenuEvents(newKeyEvent, newMouseEvent);
-            //Events, die mit dem Spiel zu tun haben
-            this.GameEvents(newKeyEvent, newMouseEvent);
-
+            if (!this.MenuEvents(newKeyEvent, newMouseEvent))
+            {
+                //Events, die mit dem Spiel zu tun haben
+                this.GameEvents(newKeyEvent, newMouseEvent);
+            }
+            
             oldState = newKeyEvent;
             oldMouseEvent = newMouseEvent;
         }
@@ -204,7 +210,7 @@ namespace Game1
         /// <summary>
         /// Soll alle Events enthalten die mit den Panes oder Menus zu tun haben
         /// </summary>
-        public void MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
+        public bool MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
         {
             if (oldState.IsKeyDown(Keys.Tab) && newkeyboardEvent.IsKeyUp(Keys.Tab))
             {
@@ -212,6 +218,7 @@ namespace Game1
                 {
                     mainMenu.Hide();
                     gameState = GAMESTATE.MAP;
+                    
                 }
                 else
                 {
@@ -239,11 +246,15 @@ namespace Game1
                     foreach (Pane pane in copy)
                     {
                         if (pane.isHit(pos))
+                        {
                             pane.onClick(pos);
+                            return true;
+                        }
                     }
                 }
+                
             }
-            
+            return false;
         }
 
         /// <summary>
@@ -260,7 +271,19 @@ namespace Game1
             // MouseMove
             if (oldMouseEvent.Position != newMouseEvent.Position)
             {
+                System.Drawing.Point pos = new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y);
+
                 cursor.onMouseMove(new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y));
+                Pane[] copy = new Pane[Pane.currentPanes.Count];
+                Pane.currentPanes.CopyTo(copy);
+                foreach (Pane pane in copy)
+                {
+                    if (pane.isHit(pos))
+                    {
+                        pane.onClick(pos);
+                        
+                    }
+                }
             }
         }
 
@@ -275,7 +298,7 @@ namespace Game1
             editor.Close();
         }
 
-        public void onTurnBegin()
+        public void onTurnBegin(object sender, EventArgs eventArgs)
         {
             if (currentPlayer == null)
             {
