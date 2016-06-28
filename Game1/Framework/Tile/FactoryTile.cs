@@ -58,6 +58,11 @@ namespace Game1.Content
             int i = 10;
             foreach (Unit u in Unit.Units.Values)
             {
+                // Ein Spieler darf nur Einheiten kaufen, die seiner Fraktion/OwnerId angehören
+                if(u.getOwnerId() != GameManager.currentPlayer.GetId())
+                {
+                    continue;
+                }
                 Pane buyUnitP = new Pane("menuoption", u.GetId());
                 buyUnitP.setPosition(10, i);
                 buyUnitP.setDimensions(100, 25);
@@ -78,8 +83,13 @@ namespace Game1.Content
                 return;
 
             base.onClick(pos);
-            GameManager.gameState = GAMESTATE.MENU;
-            BuyMenu();
+
+            // Einheiten können nur gekauft werden wenn keine auf dem Feld steht, sie würde ja sonst überschrieben.
+            if (occupant == null)
+            {
+                GameManager.gameState = GAMESTATE.MENU;
+                BuyMenu();
+            }
         }
     }
 }
