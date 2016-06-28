@@ -224,43 +224,6 @@ namespace Game1.Content
         public void Init()
         {
             bgSound.startPlaying();
-            AddPlayerPane();
-        }
-
-        public void AddPlayerPane()
-        {
-            playerBar = new Pane("menu", "playerbar");
-            playerBar.setPosition(0, this.sizeY * 64);
-            playerBar.setDimensions(this.sizeX * 64 , 64);
-            
-            Pane playerOne = new Pane("menuoption","playerone");
-            playerOne.setPosition(0, 0);
-            playerOne.setDimensions(this.sizeX * 64 / 4, 64);
-            playerOne.setFont(new FontObject(Game1.font));
-            playerOne.addText("Player 1", new Point(10, 10));
-            playerOne.addText("Resourcen:"+ GameManager.playerOne.GetResourcePoints(), new Point(10,40));
-
-            Pane playerTwo = new Pane("menuoption", "playertwo");
-            playerTwo.setPosition(this.sizeX * 64 / 4 * 3, 0);
-            playerTwo.setDimensions(this.sizeX * 64 / 4, 64);
-            playerTwo.setFont(new FontObject(Game1.font));
-            playerTwo.addText("Player 2", new Point(10, 10));
-            playerTwo.addText("Resourcen:" + GameManager.playerTwo.GetResourcePoints(), new Point(10, 40));
-
-            Pane roundDisplay = new Pane("menuoption", "rounddisplay");
-            roundDisplay.setPosition(this.sizeX * 64 / 5 * 2, 0);
-            roundDisplay.setDimensions(this.sizeX * 64 / 5, 64);
-            roundDisplay.setFont(new FontObject(Game1.font));
-            roundDisplay.addText("Rounds:" + GameManager.gameRounds.ToString(), new Point(10, 10));
-
-            playerBar.AddPane(playerOne);
-            playerBar.AddPane(playerTwo);
-            playerBar.AddPane(roundDisplay);
-
-            playerBar.Register();
-            playerBar.Show();
-            playerOne.Show();
-            playerTwo.Show();
         }
 
         public void MuteSound(bool muted)

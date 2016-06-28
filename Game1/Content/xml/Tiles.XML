@@ -75,6 +75,20 @@
       <accessible>True</accessible>
       <graphic>railsEW</graphic>
     </tile>
+    <tile id = "B1" type = "BASE">
+      <title>Base1</title>
+      <accessible>True</accessible>
+      <ownerid>1</ownerid>
+      <graphic>base1</graphic>
+      <capturepoints>10</capturepoints>
+    </tile>
+    <tile id = "B2" type = "BASE">
+      <title>Base2</title>
+      <accessible>True</accessible>
+      <ownerid>2</ownerid>
+      <graphic>base2</graphic>
+      <capturepoints>10</capturepoints>
+    </tile>
   </tiles>
 </doc>
 

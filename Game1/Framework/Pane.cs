@@ -125,6 +125,12 @@ namespace Game1.Content
             texts.Add(new Text(text, pos.X, pos.Y));
         }
 
+        public void addText(Text text)
+        {
+            if(!texts.Contains(text))
+                texts.Add(text);
+        }
+
         /// <summary>
         /// Paneobj über die Id des Objekts
         /// </summary>

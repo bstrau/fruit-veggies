@@ -7,19 +7,34 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class BaseTile : CaptureTile
+    class BaseTile : FactoryTile
     {
-        protected int xxx;
+        string ownerId;
 
         public BaseTile(TileType type, XmlNode node): base(type,node)
         {
-            xxx = Convert.ToInt32(node.SelectSingleNode("xxx").InnerText); 
+            ownerId = node.SelectSingleNode("ownerid").InnerText; 
         }
 
         public BaseTile(BaseTile baseTile) : base(baseTile)
         {
-            this.xxx = baseTile.xxx;
+            this.ownerId = baseTile.ownerId;
+        }
 
+        public override Tile GetCopy()
+        {
+            return new BaseTile(this);
+        }
+
+        public void setOwnership()
+        {
+            if(GameManager.playerOne.GetId() == ownerId)
+            {
+                owner = GameManager.playerOne;
+            }
+            else {
+                owner = GameManager.playerTwo;
+            }
         }
     }
 }

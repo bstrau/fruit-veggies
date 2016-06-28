@@ -42,14 +42,17 @@ namespace Game1
         MouseState oldMouseEvent;
         public static GAMESTATE gameState;
 
+        // Menüs
+        Pane playerBar; 
+
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             this.spriteBatch = spriteBatch;
             this.spriteFont = spriteFont;
 
             // Spieler Initialisieren
-            playerOne = new Player("One");
-            playerTwo = new Player("Two");
+            playerOne = new Player("1");
+            playerTwo = new Player("2");
 
             playerOne.SetResourcePoints(500);
             playerTwo.SetResourcePoints(500);
@@ -76,6 +79,14 @@ namespace Game1
             currentMap.GetMapTiles()[17].enter(a1);
             currentMap.GetMapTiles()[2].enter(b0);
             currentMap.GetMapTiles()[18].enter(b1);
+
+            foreach(Tile tile in currentMap.GetMapTiles())
+            {
+                if(tile.GetTileType() == Tile.TileType.BASE)
+                {
+                    ((BaseTile)tile).setOwnership();
+                }
+            }
 
             // Map Editor
             editor = new MapEditor();
@@ -120,8 +131,25 @@ namespace Game1
 
             mainMenu.AddPane(editor);
             mainMenu.AddPane(mute);
+
             // Register Panes
             mainMenu.Register();
+
+            Pane roundDisplay = new Pane("menuoption", "rounddisplay");
+            roundDisplay.setPosition(currentMap.getSizeX() * 64 / 5 * 2, 0);
+            roundDisplay.setDimensions(currentMap.getSizeX() * 64 / 5, 64);
+            roundDisplay.setFont(new FontObject(Game1.font));
+            roundDisplay.addText("Rounds:" + GameManager.gameRounds.ToString(), new Point(10, 10));
+            
+            playerBar = new Pane("menu", "playerbar");
+            playerBar.setPosition(0, currentMap.getSizeY() * 64);
+            playerBar.setDimensions(currentMap.getSizeX() * 64, 64);
+            playerBar.AddPane(roundDisplay);
+
+            playerOne.AddPlayerPane(playerBar,new Point(0, 0));
+
+            roundDisplay.Show();
+            playerBar.Show();
         }
 
         public void Render()
@@ -137,7 +165,6 @@ namespace Game1
                 cursor.Draw();
 
             spriteBatch.End();
- 
         }
 
         public void RenderPanes()

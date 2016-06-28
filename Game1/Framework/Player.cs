@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Game1.Framework;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,9 @@ namespace Game1.Content
         //FIXME 1 Noch zu klären
         protected int fraction;
         //END VON FIXME 1
+
+        Pane statusDisplay;
+        Text ressourcesString;
 
         protected Int32 resourcePoints;
 
@@ -54,6 +59,21 @@ namespace Game1.Content
             this.resourcePoints = points;
         }
 
+        public void AddPlayerPane(Pane playerBar, Point pos)
+        {
+            statusDisplay = new Pane("menuoption", "playerone");
+            statusDisplay.setPosition(pos.X, pos.Y);
+            statusDisplay.setDimensions(pos.X * 64 / 4, 64);
+            statusDisplay.setFont(new FontObject(Game1.font));
+            statusDisplay.addText("Player 1", new Point(10, 10));
+            statusDisplay.addText("Resourcen:", new Point(10,40));
+            ressourcesString = new Text(this.GetResourcePoints().ToString(), 100, 40);
+            statusDisplay.addText(ressourcesString);
+
+            statusDisplay.Show();
+            playerBar.AddPane(statusDisplay);
+        }
+
         /// <summary>
         /// Zieht eine Menge von Punkten den ressourepoints ab zb: bei kauf von units
         /// </summary>
@@ -61,11 +81,18 @@ namespace Game1.Content
         public void SubtractRessourcePoints(int points)
         {
             resourcePoints = resourcePoints - points;
+            updateRessourcesString();
         }
 
         public void AddRessourcePoints(int points)
         {
             resourcePoints = resourcePoints + points;
+            updateRessourcesString();
+        }
+
+        public void updateRessourcesString()
+        {
+            ressourcesString.text = resourcePoints.ToString();
         }
     }
 }

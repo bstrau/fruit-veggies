@@ -43,6 +43,12 @@ namespace Game1.Content
 
         public void BuyMenu()
         {
+            // Abbrechen, da Einheit diese Tile besetzt
+            if(occupant != null)
+            {
+                return;
+            }
+
             FontObject font = new FontObject(Game1.font);
             buyMenu = new Pane("menu", "buyMenu");
             buyMenu.setPosition(0, 0);
