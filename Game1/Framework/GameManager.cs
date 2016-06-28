@@ -53,6 +53,8 @@ namespace Game1
             // Spieler Initialisieren
             playerOne = new Player("1");
             playerTwo = new Player("2");
+            playerOne.SetTitle("Player One");
+            playerTwo.SetTitle("Player Two");
 
             playerOne.SetResourcePoints(500);
             playerTwo.SetResourcePoints(500);
@@ -107,17 +109,19 @@ namespace Game1
 
         public void InitializePanes()
         {
+            FontObject font = new FontObject(spriteFont);
+
             // Main Menü
             mainMenu = new Pane("menu","mainMenue");
             mainMenu.setDimensions(800,500);
             mainMenu.setPosition(50,50);
-            mainMenu.setFont(new FontObject(spriteFont));
+            mainMenu.setFont(font);
 
             // LevelEditor öffnen
             Pane editor = new Pane("menuoption", "editor");
             editor.setPosition(new System.Drawing.Point(10, 10));
             editor.setDimensions(780, 50);
-            editor.setFont(new FontObject(spriteFont));
+            editor.setFont(font);
             editor.addText("Map-Editor starten", new Point(10, 10));
             editor.Clicked += ShowMapEditor;
 
@@ -125,7 +129,7 @@ namespace Game1
             Pane mute = new Pane("menuoption", "mute");
             mute.setPosition(new System.Drawing.Point(10, 70));
             mute.setDimensions(780, 50);
-            mute.setFont(new FontObject(spriteFont));
+            mute.setFont(font);
             mute.addText("Musik umschalten", new Point(10, 10));
             mute.Clicked += currentMap.ToggleSound;
 
@@ -135,18 +139,29 @@ namespace Game1
             // Register Panes
             mainMenu.Register();
 
+            Text roundDisplayString = new Text(gameRounds.ToString(),100,40);
             Pane roundDisplay = new Pane("menuoption", "rounddisplay");
             roundDisplay.setPosition(currentMap.getSizeX() * 64 / 5 * 2, 0);
             roundDisplay.setDimensions(currentMap.getSizeX() * 64 / 5, 64);
-            roundDisplay.setFont(new FontObject(Game1.font));
-            roundDisplay.addText("Rounds:" + GameManager.gameRounds.ToString(), new Point(10, 10));
-            
+            roundDisplay.setFont(font);
+            roundDisplay.addText("Rounds", new Point(80, 10));
+            roundDisplay.addText(roundDisplayString);
+
+            /* Kommt noch
+            Pane nextRoundDisplay = new Pane("menuoption", "nextrounddisplay");
+            nextRoundDisplay.setPosition(0,0);
+            nextRoundDisplay.setDimensions(10, 10);
+            nextRoundDisplay.setFont(font);
+            nextRoundDisplay.addText("Weiter", new Point(10, 10));
+            */
+
             playerBar = new Pane("menu", "playerbar");
             playerBar.setPosition(0, currentMap.getSizeY() * 64);
             playerBar.setDimensions(currentMap.getSizeX() * 64, 64);
             playerBar.AddPane(roundDisplay);
 
-            playerOne.AddPlayerPane(playerBar,new Point(0, 0));
+            playerOne.AddPlayerPane(playerBar,new Point(0, 0), new Size( currentMap.getSizeX() *64 / 4 , 64));
+            playerTwo.AddPlayerPane(playerBar, new Point( currentMap.getSizeX() *64 / 4 *3, 0), new Size(currentMap.getSizeX() * 64 / 4, 64));
 
             roundDisplay.Show();
             playerBar.Show();
