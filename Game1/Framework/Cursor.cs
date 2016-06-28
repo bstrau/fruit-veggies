@@ -116,14 +116,22 @@ namespace Game1.Content
                 {
                     currentTile.enter(originTile.leave());
                 }
+
+                // Prüfe, ob gegnerische Einheit neben CurrentTile steht
+                // Nimm diese Unit und die CurrentUnit, übergib sie einem FightManager
+
                 reachableTiles.Clear();
                 cursorState = CURSORSTATE.SELECT;
             }
+
 
             else if(cursorState == CURSORSTATE.SELECT) 
             {
                 if (currentUnit != null && currentUnit.getPlayer() == GameManager.currentPlayer && currentUnit.MayMove())
                 {
+                    // Prüfe, ob gegnerische Einheit neben CurrentTile steht
+                    // Nimm diese Unit und die CurrentUnit, übergib sie einem FightManager
+                    // Wenn gekämpft, dann return
                     cursorState = CURSORSTATE.MOVE;
                     originTile = currentTile;
                     findWay(reachableTiles, originTile, currentUnit.getMovePoints());
