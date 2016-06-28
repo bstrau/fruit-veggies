@@ -53,7 +53,7 @@ namespace Game1.Content
 
         public void Draw(Graphics g)
         {
-            g.DrawImage(bitmap, pos);
+            g.DrawImage(bitmap, pos.X, pos.Y);
         }
 
         public void SetPos(int x, int y)

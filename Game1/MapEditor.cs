@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using Game1.Content;
+using System.Xml;
 
 namespace Game1
 {
@@ -68,18 +69,20 @@ namespace Game1
 
         private void openToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            map = Map.Maps["0"];
-            panel1.Size = new Size(map.getSizeX() * 64, map.getSizeY() * 64);
-            this.Size = new Size(map.getSizeX() * 64 + 100, map.getSizeY() * 64 + 300);
-
-            this.timer1.Start();
-
-            /*
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                XmlLoader.loadAllMaps(openFileDialog1.FileName);
-                Console.WriteLine(Map.Maps.First().Key);
-            } */
+                XmlDocument xdoc = new XmlDocument();
+                xdoc.Load(openFileDialog1.FileName);
+
+                XmlNodeList maps = xdoc.GetElementsByTagName("map");
+                map = new Map(maps[0]);
+                
+
+                panel1.Size = new Size(map.getSizeX() * 64, map.getSizeY() * 64);
+                this.Size = new Size(map.getSizeX() * 64 + 200, map.getSizeY() * 64 + 50);
+
+                this.timer1.Start();
+            }
         }
 
         // Speichern
@@ -95,7 +98,7 @@ namespace Game1
             this.map = new Map();
             this.timer1.Start();
             panel1.Size = new Size(map.getSizeX() * 64, map.getSizeY() * 64);
-            this.Size = new Size(map.getSizeX() * 64 + 100, map.getSizeY() * 64 + 300);
+            this.Size = new Size(map.getSizeX() * 64 + 200, map.getSizeY() * 64 + 100);
         }
 
         // Tile Auswahl

@@ -38,6 +38,7 @@ namespace Game1.Content
             tiles = new Tile[sizeY, sizeX];
 
             string[] tileids = node.SelectSingleNode("tiles").InnerText.Split(',');
+
             if(tileids.Length < sizeX * sizeY - 1)
             {
                 Exception e = new Exception("Zu wenige Tiles für Map definiert!");
@@ -162,9 +163,9 @@ namespace Game1.Content
 
                 XmlElement tiles = doc.CreateElement("tiles");
                 String tileIdRange = "";
-                for (int y = 0; y < sizeY; y++)
+                for (int x = 0; x < sizeX; x++)
                 {
-                    for (int x = 0; x < sizeX; x++)
+                    for (int y = 0; y < sizeY; y++)
                     {
                         if (y != 0 || x != 0)
                         {
