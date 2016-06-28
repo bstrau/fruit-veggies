@@ -263,27 +263,28 @@ namespace Game1
         public void GameEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent)
         {
             // Left Click
+            System.Drawing.Point pos = new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y);
             if (oldMouseEvent.LeftButton == ButtonState.Pressed && newMouseEvent.LeftButton == ButtonState.Released)
             {
-                cursor.onLeftClick(new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y));
+                cursor.onLeftClick(new System.Drawing.Point(pos.X, pos.Y));
+
+                {
+                    Pane[] copy = new Pane[Pane.currentPanes.Count];
+                    Pane.currentPanes.CopyTo(copy);
+                    foreach (Pane pane in copy)
+                    {
+                        if (pane.isHit(pos))
+                        {
+                            pane.onClick(pos);
+                        }
+                    }
+                }
             }
 
             // MouseMove
             if (oldMouseEvent.Position != newMouseEvent.Position)
             {
-                System.Drawing.Point pos = new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y);
-
                 cursor.onMouseMove(new System.Drawing.Point(newMouseEvent.Position.X, newMouseEvent.Position.Y));
-                Pane[] copy = new Pane[Pane.currentPanes.Count];
-                Pane.currentPanes.CopyTo(copy);
-                foreach (Pane pane in copy)
-                {
-                    if (pane.isHit(pos))
-                    {
-                        pane.onClick(pos);
-                        
-                    }
-                }
             }
         }
 
