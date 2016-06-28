@@ -17,6 +17,7 @@ namespace Game1.Content
             this.map = map;
         }
 
+        // Regelt den Kampf und weist den Units ihre neuen Healthpoints zu
         public void Fight (AttackUnit attacking, AttackUnit defender)
         {
             double attackpoints;
@@ -26,8 +27,6 @@ namespace Game1.Content
             randomfactor = rand.NextDouble() * 0.2 + 1;
             attackpoints = attackpoints * randomfactor;
             defender.Defend((int)attackpoints);
-
-            map.Update();
 
             if (defender != null || defender.IsDead() == false)
             {

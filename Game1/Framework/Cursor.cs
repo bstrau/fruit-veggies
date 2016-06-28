@@ -11,6 +11,7 @@ namespace Game1.Content
 {
     public class Cursor
     {
+        // Status ob der Cursor eine Unit auswählen kann, bewegen kann, oder angreifen kann
         public enum CURSORSTATE
         {
             SELECT,
@@ -18,6 +19,7 @@ namespace Game1.Content
             ACTION
         };
 
+        // Richtungen in die sich eine Unit bewegen kann
         public enum DIRECTION
         {
             UP,
@@ -68,13 +70,14 @@ namespace Game1.Content
             this.currentTile = currentTile;
         }
 
+
+        // Rekursive Methode zum Finden der Möglichen Tiles, die die angewälte Unit laufen kann.
         public void findWay(List<Tile> tiles, Tile waypoint, int movepoints)
         {
             // Abbruchbedingung
             if (movepoints == 0)
                 return;
 
-            
             for(DIRECTION direction = DIRECTION.UP; direction < DIRECTION.MAXDIRECTION; direction++)
             {
                 Tile neighbour = null;
@@ -108,6 +111,7 @@ namespace Game1.Content
             graphics.Draw(batch);
         }
 
+        // Linksklich Eventhandler
         public void onLeftClick(Point pos)
         {
             if(cursorState == CURSORSTATE.MOVE)
@@ -140,10 +144,10 @@ namespace Game1.Content
                     currentTile.onClick(pos);
                 }
             }
-
-           
         }
 
+        // Mouse Move Event
+        // Regelt die Markierung der Kachel und des Unit Lebensanzeige
         public void onMouseMove(Point pos)
         {
             // FIXME: Es kann momentan noch passieren, das die Positon der Maus negativ wird. Das sollte verhindert werden!

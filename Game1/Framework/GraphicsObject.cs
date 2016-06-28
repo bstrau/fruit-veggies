@@ -82,6 +82,7 @@ namespace Game1.Content
             bitmap.Dispose();
         }
 
+        // Läd die Grafiken aus den Grakordner in das Statische Dictionary graphicObjects. 
         public static void LoadGraphics(String path, ContentManager content)
         {
             String[] files = Directory.GetFiles(path);

@@ -60,8 +60,6 @@ namespace Game1
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-            
-            
             // Liste der Grafikobjekte initialisieren
             GraphicsObject.graphicObjects = new Dictionary<string, GraphicsObject>();
             GraphicsObject.LoadGraphics("Content\\graphics\\tiles", Content);

@@ -12,22 +12,16 @@ namespace Game1.Content
     {
         GraphicsObject graphics;
         SoundObject sound;
+        Pane statusDisplay;
+        Text ressourcesString;
 
         protected string title;
         protected bool defeated ;
         protected string id;
-        //FIXME 1 Noch zu klären
         protected int fraction;
-        //END VON FIXME 1
+        protected Int32 resourcePoints; 
 
-        Pane statusDisplay;
-        Text ressourcesString;
-
-        protected Int32 resourcePoints;
-
-        public Player()
-        { 
-        }
+        public Player(){}
 
         public Player(String id)
         {
@@ -35,8 +29,8 @@ namespace Game1.Content
         }
 
         public String GetId()
-        {
-            return id;
+        { 
+            return id; 
         }
 
         public String GetTitle()
@@ -54,11 +48,20 @@ namespace Game1.Content
             this.title = title;
         }
 
+        /// <summary>
+        /// Setzt den Kontostand des Panels auf den im Parameter übergebenen Wert
+        /// </summary>
+        /// <param name="points"></param>
         public void SetResourcePoints(int points)
         {
             this.resourcePoints = points;
         }
 
+        /// <summary>
+        /// Fügt eine Resourcen Anzeige des Spielers hinzu
+        /// </summary>
+        /// <param name="playerBar"></param>
+        /// <param name="pos"></param>
         public void AddPlayerPane(Pane playerBar, Point pos)
         {
             statusDisplay = new Pane("menuoption", "playerone");
@@ -69,8 +72,8 @@ namespace Game1.Content
             statusDisplay.addText("Resourcen:", new Point(10,40));
             ressourcesString = new Text(this.GetResourcePoints().ToString(), 100, 40);
             statusDisplay.addText(ressourcesString);
-
             statusDisplay.Show();
+
             playerBar.AddPane(statusDisplay);
         }
 
@@ -84,12 +87,19 @@ namespace Game1.Content
             updateRessourcesString();
         }
 
+        /// <summary>
+        /// Fügt die angegebene Ressourcen Punkte dem Konto des Spielers hinzu
+        /// </summary>
+        /// <param name="points"></param>
         public void AddRessourcePoints(int points)
         {
             resourcePoints = resourcePoints + points;
             updateRessourcesString();
         }
 
+        /// <summary>
+        ///  Updates die Ressourcen Text des Panes
+        /// </summary>
         public void updateRessourcesString()
         {
             ressourcesString.text = resourcePoints.ToString();

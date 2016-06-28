@@ -38,34 +38,29 @@ namespace Game1.Content
     {
         private GraphicsObject panel;
         private FontObject font;
-
-        private System.Drawing.Point pos;
         private Size size;
-
+        private System.Drawing.Point pos;
         // Kind Objekte
         private Dictionary<String,Pane> container;
         private List<Text> texts;
-
         protected Pane parent;
         public event EventHandler Clicked;
 
         /// <summary>
         /// Pane Klasse zum erstellen eines Menüs
-        /// 
         /// </summary>
         /// <param name="background_id">Graphicsobject</param>
         /// <param name="component_id">Id der Componente</param>
         public Pane(String background_id, String component_id)  : base(component_id)
         {
+            // SET Pos and Size
             pos = new Point(0, 0);
             size = new Size(320, 180);
-
             // Background und Dimension des Panels konfigurieren
             panel = GraphicsObject.graphicObjects[background_id];
-
             // Texte initialisieren
             texts = new List<Text>();
-
+            // Container für Kind Elemente
             container = new Dictionary<string, Pane>();
         }
 
@@ -89,26 +84,11 @@ namespace Game1.Content
             this.size = new Size(width, height);
         }
 
-        /// <summary>
-        /// Zeichnet das Fenster mit allen seinen enthaltenen Kind-Objekten
-        /// </summary>
-        /// <param name="batch"></param>
-        public void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
+        public void setFont(FontObject font)
         {
-            panel.SetPos(absolute_position());
-            panel.setDimension(size);
-            panel.Draw(batch);
-
-            foreach(Text text in texts)
-            {
-                batch.DrawString(font.getSpriteFont(), text.text, new Microsoft.Xna.Framework.Vector2( absolute_position().X + text.pos.X, absolute_position().Y + text.pos.Y), Microsoft.Xna.Framework.Color.Black);
-            }
-
-            foreach (Pane w in this.container.Values)
-            {
-                w.Draw(batch);
-            }
+            this.font = font;
         }
+
 
         /// <summary>
         /// Hinzufügen von einem Pane Objekt
@@ -194,9 +174,25 @@ namespace Game1.Content
             }
         }
 
-        public void setFont(FontObject font)
+        /// <summary>
+        /// Zeichnet das Fenster mit allen seinen enthaltenen Kind-Objekten
+        /// </summary>
+        /// <param name="batch"></param>
+        public void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch batch)
         {
-            this.font = font;
+            panel.SetPos(absolute_position());
+            panel.setDimension(size);
+            panel.Draw(batch);
+
+            foreach (Text text in texts)
+            {
+                batch.DrawString(font.getSpriteFont(), text.text, new Microsoft.Xna.Framework.Vector2(absolute_position().X + text.pos.X, absolute_position().Y + text.pos.Y), Microsoft.Xna.Framework.Color.Black);
+            }
+
+            foreach (Pane w in this.container.Values)
+            {
+                w.Draw(batch);
+            }
         }
 
         public void onClick(Point pos)

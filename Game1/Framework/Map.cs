@@ -115,6 +115,7 @@ namespace Game1.Content
                 }
             }
         }
+
         public List<Tile> GetMapTiles()
         {
             List<Tile> tilelist = new List<Tile>();
@@ -132,6 +133,7 @@ namespace Game1.Content
             tiles[yPos, xPos] = t;
         }
 
+        // Die Map als XML abspeichern
         public void writeToFile(String path)
         {
             XmlDocument doc = null;
@@ -192,6 +194,7 @@ namespace Game1.Content
             doc.Save(path);
         }
 
+        // Mit dem angegeben Tile die Position auf der Map erfragen
         public Point getTilePos(Tile tile)
         {
             for(int y = 0; y < sizeY; y++)
@@ -208,6 +211,7 @@ namespace Game1.Content
             return new Point(-1, -1);
         }
 
+        // Tile finden auf dem die übergebene Einheit steht
         public Tile findUnit(Unit unit)
         {
             foreach(Tile tile in tiles)
@@ -226,6 +230,7 @@ namespace Game1.Content
             bgSound.startPlaying();
         }
 
+        // Sound Stumm schalten
         public void MuteSound(bool muted)
         {
             if (muted)
@@ -234,6 +239,7 @@ namespace Game1.Content
                 bgSound.startPlaying();
         }
 
+        // Nachbar Tile rausfinden mit der übergebenen Tile und der Richtung
         public Tile getNeighbour(Tile tile, Cursor.DIRECTION direction)
         {
             Point pos = this.getTilePos(tile);
@@ -271,7 +277,12 @@ namespace Game1.Content
          
         }
 
-
+        /// <summary>
+        /// Tiles über die Position auf der Map erfragen
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
         public Tile getTilebyPos(int x, int y)
         {
             // Wenn x und y Werte zwischen 0 und size
@@ -281,6 +292,7 @@ namespace Game1.Content
                 return null;
         }
 
+        // Sound an oder abschalten
         public void ToggleSound(object sender, EventArgs eventArgs)
         {
             if(bgSound.muted)
@@ -291,11 +303,6 @@ namespace Game1.Content
             {
                 bgSound.stopPlaying();
             }
-        }
-
-        public void Update()
-        {
-            // KP: ???
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

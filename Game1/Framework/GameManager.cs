@@ -25,6 +25,7 @@ namespace Game1
         // Cursor 
         public static Cursor cursor;
 
+        // Spiel Runden
         public static int gameRounds;
 
         // Aktuell gewählte Map
@@ -33,17 +34,15 @@ namespace Game1
         // Spieler, der in der aktuellen Runde zieht
         public static Player currentPlayer;
 
+        // Menüs
         Pane mainMenu;
-
         MapEditor editor;
+        Pane playerBar; 
 
         // States
         KeyboardState oldState;
         MouseState oldMouseEvent;
         public static GAMESTATE gameState;
-
-        // Menüs
-        Pane playerBar; 
 
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
@@ -53,7 +52,6 @@ namespace Game1
             // Spieler Initialisieren
             playerOne = new Player("1");
             playerTwo = new Player("2");
-
             playerOne.SetResourcePoints(500);
             playerTwo.SetResourcePoints(500);
 
@@ -95,7 +93,6 @@ namespace Game1
             InitializePanes();
 
             gameState = GAMESTATE.MAP;
-
             onTurnBegin();
         }
 
@@ -107,11 +104,7 @@ namespace Game1
 
         public void InitializePanes()
         {
-            // Main Menü
-            mainMenu = new Pane("menu","mainMenue");
-            mainMenu.setDimensions(800,500);
-            mainMenu.setPosition(50,50);
-            mainMenu.setFont(new FontObject(spriteFont));
+           
 
             // LevelEditor öffnen
             Pane editor = new Pane("menuoption", "editor");
@@ -129,9 +122,13 @@ namespace Game1
             mute.addText("Musik umschalten", new Point(10, 10));
             mute.Clicked += currentMap.ToggleSound;
 
+            // Main Menü
+            mainMenu = new Pane("menu", "mainMenue");
+            mainMenu.setDimensions(800, 500);
+            mainMenu.setPosition(50, 50);
+            mainMenu.setFont(new FontObject(spriteFont));
             mainMenu.AddPane(editor);
             mainMenu.AddPane(mute);
-
             // Register Panes
             mainMenu.Register();
 
@@ -152,12 +149,12 @@ namespace Game1
             playerBar.Show();
         }
 
+        // Map und deren Komponenten zeichnen
         public void Render()
         {
             spriteBatch.Begin();
 
             currentMap.Draw(spriteBatch);
-
             RenderPanes();
 
             // Cursor nur Zeichen, wenn kein Menu angezeigt wird
@@ -167,11 +164,13 @@ namespace Game1
             spriteBatch.End();
         }
 
+        // Paned Zeichnen
         public void RenderPanes()
         {
             Pane.DrawPanes(spriteBatch);
         }
 
+        // Events an Bearbeitende Instanzen weitergeben
         public void Update()
         {            
             KeyboardState newKeyEvent = Keyboard.GetState();
@@ -249,6 +248,7 @@ namespace Game1
             }
         }
 
+        // Mapeditor anzeigen. Wird über eine Tastenkombi aufgerufen, die in Update definiert ist
         public void ShowMapEditor(object sender, EventArgs eventArgs)
         {
             editor.Show();
@@ -260,6 +260,7 @@ namespace Game1
             editor.Close();
         }
 
+        // Runden Manager
         public void onTurnBegin()
         {
             if (currentPlayer == null)
