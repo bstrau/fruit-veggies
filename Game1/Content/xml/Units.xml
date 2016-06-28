@@ -3,6 +3,7 @@
     <unit id = "apple" type = "APPLE">
       <title>Apfel</title>
       <graphic>apfel</graphic>
+      <ownerId>1</ownerId>
       <movepoints>4</movepoints>
       <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>
@@ -11,6 +12,7 @@
     <unit id = "banana" type = "BANANA">
       <title>Banane</title>
       <graphic>banane</graphic>
+      <ownerId>1</ownerId>
       <movepoints>3</movepoints>
       <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>
@@ -19,6 +21,7 @@
     <unit id = "carrot" type = "APPLE">
       <title>Karotte</title>
       <graphic>karotte</graphic>
+      <ownerId>2</ownerId>
       <movepoints>4</movepoints>
       <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>
@@ -27,6 +30,7 @@
     <unit id = "potato" type = "BANANA">
       <title>Kartoffel</title>
       <graphic>kartoffel</graphic>
+      <ownerId>2</ownerId>
       <movepoints>4</movepoints>
       <healthpoints>100</healthpoints>
       <attackpower>10</attackpower>

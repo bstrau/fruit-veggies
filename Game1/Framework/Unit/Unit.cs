@@ -24,6 +24,7 @@ namespace Game1.Content
         protected UnitType type;
         protected int price;
         protected int movePoints;
+        protected string ownerId;
 
         protected Pane lifePointsDisplay;
 
@@ -61,13 +62,18 @@ namespace Game1.Content
         public Unit(UnitType type, XmlNode node)
         {
             id = node.Attributes.GetNamedItem("id").Value;
+
             this.type = type;
+
             price = Convert.ToInt32(node.SelectSingleNode("price").InnerText);
 
             movePoints = Convert.ToInt32(node.SelectSingleNode("movepoints").InnerText);
+
             title = node.SelectSingleNode("title").InnerText;
 
             this.healthpoints = Convert.ToInt32(node.SelectSingleNode("healthpoints").InnerText);
+
+            ownerId = node.SelectSingleNode("ownerId").InnerText;
 
             String graphic = node.SelectSingleNode("graphic").InnerText;
 
@@ -174,6 +180,11 @@ namespace Game1.Content
         public bool MayMove()
         {
             return !moved;
+        }
+
+        public string getOwnerId()
+        {
+            return ownerId;
         }
 
         // Global erreichbare Liste aller Tiles.
