@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class AttackUnit : Unit
+    public class AttackUnit : Unit
     {
         protected int attackpower;
         protected double ripostefactor;
@@ -16,7 +16,7 @@ namespace Game1.Content
             : base(type, node)
         {
             this.attackpower = Convert.ToInt32(node.SelectSingleNode("attackpower").InnerText);
-            this.ripostefactor = Convert.ToDouble(node.SelectSingleNode("attackpower").InnerText);
+            this.ripostefactor = Convert.ToDouble(node.SelectSingleNode("ripostefactor").InnerText);
         }
 
         public AttackUnit(AttackUnit attackUnit) :base(attackUnit)
@@ -32,8 +32,7 @@ namespace Game1.Content
 
         public void Defend (int attackpoints)
         {
-            healthpoints = healthpoints - attackpoints;
-            
+            healthpoints = healthpoints - attackpoints;    
         }
 
         public int GetAttack ()

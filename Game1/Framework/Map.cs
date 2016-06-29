@@ -293,7 +293,13 @@ namespace Game1.Content
 
         public void Update()
         {
-            // KP: ???
+            foreach(Tile tile in tiles)
+            {
+                if(tile.getOccupant() != null && ((AttackUnit)tile.getOccupant()).IsDead())
+                {
+                    tile.leave();
+                }
+            }
         }
 
         public static Dictionary<String, Map> Maps = new Dictionary<string, Map>();

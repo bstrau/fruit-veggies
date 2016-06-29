@@ -15,7 +15,7 @@ namespace Game1.Content
         {
             SELECT,
             MOVE,
-            ACTION
+            ACTION,
         };
 
         public enum DIRECTION
@@ -30,6 +30,7 @@ namespace Game1.Content
         SpriteBatch batch;
         GraphicsObject graphics;
         GraphicsObject target;
+        GraphicsObject fightTarget;
 
         Map currentMap;
         Unit currentUnit;
@@ -38,8 +39,10 @@ namespace Game1.Content
         Tile originTile;
 
         List<Tile> reachableTiles;
+        List<Tile> attackableTiles;
 
         CURSORSTATE cursorState;
+        CURSORSTATE previosState;
 
         public Cursor(Map cm, Tile ct, SpriteBatch batch)
         {
@@ -50,9 +53,11 @@ namespace Game1.Content
             originTile = null;
 
             reachableTiles = new List<Tile>();
+            attackableTiles = new List<Tile>();
 
             graphics = GraphicsObject.graphicObjects["cursor"];
             target = GraphicsObject.graphicObjects["target"];
+            fightTarget = GraphicsObject.graphicObjects["fightTarget"];
 
             graphics.setDimension(64, 64);
             target.setDimension(64, 64);
@@ -66,6 +71,12 @@ namespace Game1.Content
         public void setCurrentTile(Tile currentTile)
         {
             this.currentTile = currentTile;
+        }
+
+        private void setCursorState(CURSORSTATE state)
+        {
+            previosState = cursorState;
+            cursorState = state;
         }
 
         public void findWay(List<Tile> tiles, Tile waypoint, int movepoints)
@@ -92,16 +103,33 @@ namespace Game1.Content
                 }
             }
         }
+        public void findFight(List<Tile> tiles)
+        {
+            attackableTiles.Clear();
+            Tile neighbour;
+            for (DIRECTION direction = DIRECTION.UP; direction < DIRECTION.MAXDIRECTION; direction++)
+            {
+                neighbour = currentMap.getNeighbour(currentTile, direction);
+                if (neighbour != null && attackableTiles.Contains(neighbour) == false &&
+                     neighbour.getOccupant() != null && neighbour.getOccupant().getPlayer() != GameManager.currentPlayer)
+                {
+                    attackableTiles.Add(neighbour);
+                }
+            }
+        }
         
         public void Draw()
         {
-            if(cursorState == CURSORSTATE.MOVE)
+            foreach (Tile tile in attackableTiles)
             {
-                foreach(Tile tile in reachableTiles)
-                {
-                    target.SetPos(tile.getPos());
-                    target.Draw(batch);
-                }
+                fightTarget.SetPos(tile.getPos());
+                fightTarget.Draw(batch);
+            }
+
+            foreach (Tile tile in reachableTiles)
+            {
+                target.SetPos(tile.getPos());
+                target.Draw(batch);
             }
 
             graphics.SetPos(currentTile.getPos());
@@ -110,38 +138,63 @@ namespace Game1.Content
 
         public void onLeftClick(Point pos)
         {
-            if(cursorState == CURSORSTATE.MOVE)
-            {
-                if (reachableTiles.Contains(currentTile))
-                {
-                    currentTile.enter(originTile.leave());
-                }
-
-                // Prüfe, ob gegnerische Einheit neben CurrentTile steht
-                // Nimm diese Unit und die CurrentUnit, übergib sie einem FightManager
-
-                reachableTiles.Clear();
-                cursorState = CURSORSTATE.SELECT;
-            }
-
-
-            else if(cursorState == CURSORSTATE.SELECT) 
+            if (cursorState == CURSORSTATE.SELECT)
             {
                 if (currentUnit != null && currentUnit.getPlayer() == GameManager.currentPlayer && currentUnit.MayMove())
                 {
                     // Prüfe, ob gegnerische Einheit neben CurrentTile steht
                     // Nimm diese Unit und die CurrentUnit, übergib sie einem FightManager
                     // Wenn gekämpft, dann return
-                    cursorState = CURSORSTATE.MOVE;
+                    findFight(attackableTiles);
+                    setCursorState(CURSORSTATE.MOVE);
                     originTile = currentTile;
                     findWay(reachableTiles, originTile, currentUnit.getMovePoints());
+                    cursorState = CURSORSTATE.MOVE;
                 }
-                else {
+                else
+                {
                     currentTile.onClick(pos);
                 }
             }
+            else if (cursorState == CURSORSTATE.MOVE)
+            {
+                // Schau, ob ein Kampftile ausgewählt wurde
+                setCursorState(CURSORSTATE.SELECT);
+                if (attackableTiles.Contains(currentTile))
+                {
+                    AttackUnit attacker = (AttackUnit)currentUnit;
+                    AttackUnit defender = (AttackUnit)currentTile.getOccupant();
+                    GameManager.fightManager.Fight(attacker, defender);
+                    
+                    attacker.Moved();
+                    attackableTiles.Clear();
+                }
 
-           
+                if (reachableTiles.Contains(currentTile))
+                {
+                    currentTile.enter(originTile.leave());
+                    findFight(attackableTiles);
+                    if(attackableTiles.Count != 0)
+                    {
+                        cursorState = CURSORSTATE.ACTION;
+                    }
+                }
+                currentUnit.Moved();
+                reachableTiles.Clear();
+            }
+            else if (cursorState == CURSORSTATE.ACTION)
+            {
+                if (attackableTiles.Contains(currentTile))
+                {
+                    AttackUnit attacker = (AttackUnit)currentUnit;
+                    AttackUnit defender = (AttackUnit)currentTile.getOccupant();
+                    GameManager.fightManager.Fight(attacker, defender);
+
+                    attacker.Moved();
+                    attackableTiles.Clear();
+                    cursorState = CURSORSTATE.SELECT;
+                }
+            }
         }
 
         public void onMouseMove(Point pos)

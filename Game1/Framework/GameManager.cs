@@ -45,6 +45,8 @@ namespace Game1
         // Menüs
         Pane playerBar; 
 
+        public static FightManager fightManager;
+
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             this.spriteBatch = spriteBatch;
@@ -64,6 +66,8 @@ namespace Game1
             currentMap.Init();
             currentMap.MuteSound(true);
 
+            fightManager = new FightManager(currentMap);
+            
             cursor = new Cursor(currentMap, currentMap.GetMapTiles()[25], spriteBatch);
 
             // Test der Units
@@ -79,7 +83,7 @@ namespace Game1
 
             currentMap.GetMapTiles()[1].enter(a0);
             currentMap.GetMapTiles()[17].enter(a1);
-            currentMap.GetMapTiles()[2].enter(b0);
+            currentMap.GetMapTiles()[4].enter(b0);
             currentMap.GetMapTiles()[18].enter(b1);
 
             foreach(Tile tile in currentMap.GetMapTiles())

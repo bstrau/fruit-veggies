@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game1.Content
 {
-    class FightManager
+    public class FightManager
     {
         Random rand;
         Map map;
@@ -35,7 +35,9 @@ namespace Game1.Content
                 randomfactor = rand.NextDouble() * 0.2 + 1;
                 attackpoints = attackpoints * randomfactor;
                 attacking.Defend((int)attackpoints);
-            }            
+            }
+
+            map.Update();     
         }
     }
 }

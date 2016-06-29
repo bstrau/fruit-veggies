@@ -122,8 +122,6 @@ namespace Game1.Content
 
             occupant = unit;
 
-            occupant.Moved();
-
             return true;
         }
 
