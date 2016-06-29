@@ -195,6 +195,7 @@ namespace Game1.Content
                     attackableTiles.Clear();
                     cursorState = CURSORSTATE.SELECT;
                 }
+
             }
         }
 
