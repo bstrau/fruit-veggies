@@ -5,6 +5,7 @@ using Game1.Framework;
 using System;
 using System.Drawing;
 
+
 namespace Game1
 {
     public enum GAMESTATE
@@ -140,6 +141,15 @@ namespace Game1
             mute.addText("Musik umschalten", new Point(10, 10));
             mute.Clicked += currentMap.ToggleSound;
 
+            // Map wählen
+            Pane chooseMap = new Pane("menuoption", "chooseMap");
+            chooseMap.setPosition(new System.Drawing.Point(10, 140));
+            chooseMap.setDimensions(780, 50);
+            chooseMap.setFont(font);
+            chooseMap.addText("Map auf Datei Laden", new Point(10, 10));
+            chooseMap.Clicked += openMapChooser;
+
+            mainMenu.AddPane(chooseMap);
             mainMenu.AddPane(editor);
             mainMenu.AddPane(mute);
 
@@ -332,6 +342,21 @@ namespace Game1
             gameRounds++;
             if(gameRounds % 2 == 0)
                 roundDisplayString.text = (gameRounds / 2 ).ToString();
+        }
+
+        public void openMapChooser(object sender, EventArgs eventArgs)
+        {
+            System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog();
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Map choosenMap = XmlLoader.loadMap(fd.FileName);
+                if (choosenMap != null)
+                {
+                    currentMap = choosenMap;
+                }
+               
+            }
+          
         }
     }
 }
