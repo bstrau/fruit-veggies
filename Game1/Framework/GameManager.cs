@@ -47,6 +47,9 @@ namespace Game1
 
         public static FightManager fightManager;
 
+        // Runden Display
+        Text roundDisplayString;
+
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             this.spriteBatch = spriteBatch;
@@ -143,14 +146,14 @@ namespace Game1
             // Register Panes
             mainMenu.Register();
 
-            Text roundDisplayString = new Text(gameRounds.ToString(),100,40);
+            roundDisplayString = new Text(gameRounds.ToString(),100,40);
             Pane roundDisplay = new Pane("menuoption", "rounddisplay");
             roundDisplay.setPosition(currentMap.getSizeX() * 64 / 5 * 2, 0);
             roundDisplay.setDimensions(currentMap.getSizeX() * 64 / 5, 64);
             roundDisplay.setFont(font);
             roundDisplay.addText("Rounds", new Point(80, 26));
             roundDisplay.addText(roundDisplayString);
-
+            
             
             // Newt Round 
             Pane nextRoundDisplay = new Pane("menugreen", "nextrounddisplay");
@@ -327,6 +330,7 @@ namespace Game1
             }
 
             gameRounds++;
+            roundDisplayString.text = gameRounds.ToString();
         }
     }
 }

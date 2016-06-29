@@ -170,7 +170,7 @@ namespace Game1.Content
                     attackableTiles.Clear();
                 }
 
-                if (reachableTiles.Contains(currentTile))
+                else if (reachableTiles.Contains(currentTile))
                 {
                     currentTile.enter(originTile.leave());
                     findFight(attackableTiles);
@@ -178,8 +178,9 @@ namespace Game1.Content
                     {
                         cursorState = CURSORSTATE.ACTION;
                     }
+                    currentUnit.Moved();
                 }
-                currentUnit.Moved();
+                
                 reachableTiles.Clear();
             }
             else if (cursorState == CURSORSTATE.ACTION)
