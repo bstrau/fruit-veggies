@@ -42,6 +42,7 @@ namespace Game1.Content
         List<Tile> attackableTiles;
 
         CURSORSTATE cursorState;
+        CURSORSTATE previosState;
 
         public Cursor(Map cm, Tile ct, SpriteBatch batch)
         {
@@ -70,6 +71,12 @@ namespace Game1.Content
         public void setCurrentTile(Tile currentTile)
         {
             this.currentTile = currentTile;
+        }
+
+        private void setCursorState(CURSORSTATE state)
+        {
+            previosState = cursorState;
+            cursorState = state;
         }
 
         public void findWay(List<Tile> tiles, Tile waypoint, int movepoints)
@@ -152,11 +159,11 @@ namespace Game1.Content
                 findFight(attackableTiles);
                 if (attackableTiles.Count != 0)
                 {
-                    cursorState = CURSORSTATE.ACTION;
+                    setCursorState(CURSORSTATE.ACTION);
                 }
                 else
                 {
-                    cursorState = CURSORSTATE.SELECT;
+                    setCursorState(CURSORSTATE.SELECT);
                 }
 
                 reachableTiles.Clear();
@@ -171,12 +178,12 @@ namespace Game1.Content
                     findFight(attackableTiles);
                     if (attackableTiles.Count != 0)
                     {
-                        cursorState = CURSORSTATE.ACTION;
+                        setCursorState(CURSORSTATE.ACTION);
                     }
 
                     else
                     {
-                        cursorState = CURSORSTATE.MOVE;
+                        setCursorState(CURSORSTATE.MOVE);
                         originTile = currentTile;
                         findWay(reachableTiles, originTile, currentUnit.getMovePoints());
                     }
@@ -196,11 +203,8 @@ namespace Game1.Content
                     GameManager.fightManager.Fight(attacker, defender);
                     attacker.Moved();
                 }
-                cursorState = CURSORSTATE.SELECT;
+                setCursorState(CURSORSTATE.SELECT);
             }
-
-
-
         }
 
         public void onMouseMove(Point pos)
