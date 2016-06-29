@@ -13,7 +13,7 @@ namespace Game1.Content
 {
     public class Tile
     {
-        GraphicsObject graphics;
+        protected GraphicsObject graphics;
 
         protected int xPos, yPos;
         protected Point pos;
@@ -102,17 +102,6 @@ namespace Game1.Content
             return type;
         }
 
-        public void Draw(SpriteBatch batch)
-        {
-            graphics.SetPos(xPos, yPos);
-            graphics.Draw(batch);
-            if (occupant != null)
-            {
-                occupant.SetPos(xPos, yPos);
-                occupant.Draw(batch);
-            }
-        }
-
         public bool enter(Unit unit)
         {
             if (accessible == false)
@@ -125,10 +114,21 @@ namespace Game1.Content
             return true;
         }
 
-        public void Draw(Graphics g)
+        public virtual void Draw(Graphics g)
         {
             graphics.SetPos(xPos, yPos);
             graphics.Draw(g);
+        }
+
+        public virtual void Draw(SpriteBatch batch)
+        {
+            graphics.SetPos(xPos, yPos);
+            graphics.Draw(batch);
+            if (occupant != null)
+            {
+                occupant.SetPos(xPos, yPos);
+                occupant.Draw(batch);
+            }
         }
 
         public Unit getOccupant()

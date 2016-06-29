@@ -25,7 +25,7 @@
       <capturepoints>10</capturepoints>
       <cash>
         <rounds>10</rounds>
-        <amount>1</amount>
+        <amount>25</amount>
       </cash>
     </tile>
 
@@ -34,8 +34,8 @@
       <accessible>True</accessible>
       <graphic>skyscrapertwins</graphic>
       <cash>
-        <rounds>10</rounds>
-        <amount>1</amount>
+        <rounds>1</rounds>
+        <amount>10</amount>
       </cash>
     </tile>
 

@@ -10,7 +10,8 @@ namespace Game1
     public enum GAMESTATE
     {
         MENU,
-        MAP
+        MAP,
+        END
     }
 
     public class GameManager
@@ -203,15 +204,58 @@ namespace Game1
             KeyboardState newKeyEvent = Keyboard.GetState();
             MouseState newMouseEvent = Mouse.GetState();
 
-            // Events, die mit den Menus zu tun haben
+            // Events, die mit den Menus zu tun haben. Wenn ein Menü eine Eingabe erhält, so wird das Ereignis nicht an die GameEvents weitergereicht.
             if (!this.MenuEvents(newKeyEvent, newMouseEvent))
             {
                 //Events, die mit dem Spiel zu tun haben
                 this.GameEvents(newKeyEvent, newMouseEvent);
             }
-            
+
+            // Prüfen, ob ein Spieler keine Basis mehr besitzt. Ist dies für einen der Fall, so verliert er und dass Spiel ist zu Ende.
+            bool playerOneAlive = false;
+            bool playerTwoAlive = false;
+
+            // 
+            foreach(Tile tile in currentMap.GetMapTiles())
+            {
+                if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerOne)
+                    playerOneAlive = true;
+                if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerOne)
+                    playerTwoAlive = true;
+            }
+
+            if(playerOneAlive == false)
+            {
+                EndGame(playerTwo, playerOne);
+            }
+            if (playerTwoAlive == false)
+            {
+                EndGame(playerOne, playerTwo);
+            }
+
             oldState = newKeyEvent;
             oldMouseEvent = newMouseEvent;
+        }
+
+        public void EndGame(Player winner, Player loser)
+        {
+            gameState = GAMESTATE.END;
+
+            Pane.currentPanes.Clear();
+
+            FontObject font = new FontObject(spriteFont);
+
+            Pane resultScreen = new Pane("menu", "resultScreen");
+            resultScreen.setDimensions(800, 500);
+            resultScreen.setPosition(50, 50);
+            resultScreen.setFont(font);
+            resultScreen.addText(new Text(winner.GetTitle() + " hat gewonnen!", 10,10));
+            resultScreen.addText(new Text(winner.GetTitle() + " hat das Spiel mit " + winner.GetResourcePoints() + "Ressourcenpunkten abgeschlosssen.", 10, 30));
+            resultScreen.addText(new Text(loser.GetTitle() + " hat verloren!", 10, 70));
+            resultScreen.addText(new Text(loser.GetTitle() + " hat das Spiel mit " + loser.GetResourcePoints() + "Ressourcenpunkten abgeschlosssen.", 10, 90));
+            resultScreen.addText(new Text("Spiel dauerte " + gameRounds + " Runden", 10, 130));
+            resultScreen.addText(new Text("Druecke Escape, um das Spiel zu beenden.", 10, 200));
+            resultScreen.Show();
         }
 
         /// <summary>
@@ -219,6 +263,12 @@ namespace Game1
         /// </summary>
         public bool MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
         {
+            // Alle Eingaben verwerfen. Das Programm muss für eine zweite Runde neu gestartet werden, oder über Escape beendet werden.
+            if(gameState == GAMESTATE.END)
+            {
+                return true;
+            }
+
             if (oldState.IsKeyDown(Keys.Tab) && newkeyboardEvent.IsKeyUp(Keys.Tab))
             {
                 if (mainMenu.isVisible())

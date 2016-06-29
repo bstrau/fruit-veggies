@@ -180,7 +180,13 @@ namespace Game1.Content
                     }
                     currentUnit.Moved();
                 }
-                
+
+                // Besitzer für das Tile setzen, sofern es vom BesitzTile ableitet.
+                if (currentTile as CaptureTile != null)
+                {
+                    ((CaptureTile)currentTile).Capture(currentUnit);
+                }
+
                 reachableTiles.Clear();
             }
             else if (cursorState == CURSORSTATE.ACTION)
