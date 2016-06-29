@@ -75,6 +75,13 @@
       <accessible>True</accessible>
       <graphic>railsEW</graphic>
     </tile>
+
+    <tile id = "D7" type = "DEFAULT">
+      <title>MountainRange</title>
+      <accessible>False</accessible>
+      <graphic>mountains</graphic>
+    </tile>
+    
     <tile id = "B1" type = "BASE">
       <title>Base1</title>
       <accessible>True</accessible>
