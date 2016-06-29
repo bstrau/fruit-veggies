@@ -215,6 +215,15 @@ namespace Game1.Content
                         currentUnit.onMouseMove(currentTile.getPos());
                     }
                 }
+
+                if (cursorState == CURSORSTATE.ACTION)
+                {
+                    currentUnit = currentTile.getOccupant();
+                    if (currentUnit != null)
+                    {
+                        currentUnit.onMouseMove(currentTile.getPos());
+                    }
+                }
             }
         }
     }

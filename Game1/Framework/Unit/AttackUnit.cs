@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Game1.Framework;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,5 +56,27 @@ namespace Game1.Content
         {
             return (int)( ripostefactor * GetAttack() );
         }
+
+        public override void LifePointsDisplay(int x, int y)
+        {
+            FontObject font = new FontObject(Game1.font);
+            base.LifePointsDisplay(x, y);
+            attackpowerDisplay = new Pane("menuoption", "attackposerdisplay" + this.id);
+            attackpowerDisplay.setPosition(x + 32, y);
+            attackpowerDisplay.setDimensions(32, 12);
+            attackpowerDisplay.setFont(font);
+            attackpowerDisplay.addText(this.attackpower.ToString(), new Point(2,2));
+            //lifePointsDisplay.Register();
+            
+            attackpowerDisplay.Show();
+        
+        }
+
+        public override void onCursorLeave()
+        {
+ 	        base.onCursorLeave();
+            attackpowerDisplay.Hide();
+        }
+        
     }
 }

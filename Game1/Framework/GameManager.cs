@@ -330,7 +330,8 @@ namespace Game1
             }
 
             gameRounds++;
-            roundDisplayString.text = gameRounds.ToString();
+            if(gameRounds % 2 == 0)
+                roundDisplayString.text = (gameRounds / 2 ).ToString();
         }
     }
 }
