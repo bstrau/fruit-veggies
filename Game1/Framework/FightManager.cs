@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game1.Content
 {
-    class FightManager
+    public class FightManager
     {
         Random rand;
         Map map;

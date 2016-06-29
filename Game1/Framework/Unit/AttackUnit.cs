@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace Game1.Content
 {
-    class AttackUnit : Unit
+    public class AttackUnit : Unit
     {
         protected int attackpower;
         protected double ripostefactor;
