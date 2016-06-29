@@ -36,6 +36,7 @@ namespace Game1.Content
 
             unit.setPlayer(owner);
             enter(unit);
+            unit.Moved();
             owner.SubtractRessourcePoints(unit.GetPrice());
             GameManager.gameState = GAMESTATE.MAP;
             buyMenu.Hide();
