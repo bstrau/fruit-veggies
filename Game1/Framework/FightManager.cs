@@ -37,6 +37,7 @@ namespace Game1.Content
                 attacking.Defend((int)attackpoints);
             }
 
+           
             map.Update();     
         }
     }

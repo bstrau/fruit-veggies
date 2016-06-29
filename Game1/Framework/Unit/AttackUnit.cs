@@ -46,7 +46,11 @@ namespace Game1.Content
         {
             if (healthpoints <= 0)
             {
+                this.lifePointsDisplay.Hide();
+                this.attackpowerDisplay.Hide();
+
                 return true;
+
             }
             else
                 return false;

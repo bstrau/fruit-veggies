@@ -216,14 +216,14 @@ namespace Game1.Content
                     }
                 }
 
-                if (cursorState == CURSORSTATE.ACTION)
+                if (cursorState == CURSORSTATE.MOVE || cursorState == CURSORSTATE.ACTION)
                 {
-                    currentUnit = currentTile.getOccupant();
-                    if (currentUnit != null)
+                    if (currentTile.getOccupant() != null)
                     {
                         currentUnit.onMouseMove(currentTile.getPos());
                     }
                 }
+
             }
         }
     }
