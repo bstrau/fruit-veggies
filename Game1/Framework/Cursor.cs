@@ -139,7 +139,7 @@ namespace Game1.Content
 
         public void onLeftClick(Point pos)
         {
-            if (!currentUnit.MayMove())
+            if (currentUnit != null && !currentUnit.MayMove())
                 return;
 
             if (cursorState == CURSORSTATE.MOVE)
@@ -196,7 +196,7 @@ namespace Game1.Content
                     GameManager.fightManager.Fight(attacker, defender);
                     attacker.Moved();
                 }
-                cursorState = CURSORSTATE.MOVE;
+                cursorState = CURSORSTATE.SELECT;
             }
 
 
