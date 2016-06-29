@@ -60,7 +60,7 @@ namespace Game1
             playerTwo.SetResourcePoints(500);
 
             // Aktuell gewählte Map
-            currentMap = Map.Maps["0"];
+            currentMap = Map.Maps[""];
             currentMap.Init();
             currentMap.MuteSound(true);
 

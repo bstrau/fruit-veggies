@@ -22,7 +22,7 @@ namespace Game1
 
         public MapEditor()
         {
-            this.mapSize = this.Size;
+            this.mapSize = new Size(16,9);
             this.formSize = this.Size;            
             this.TileXMLPath = "Content\\xml\\Tiles.XML";
             InitializeComponent();
