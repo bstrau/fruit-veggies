@@ -91,7 +91,7 @@ namespace Game1.Content
 
         public virtual void LifePointsDisplay(int x, int y)
         {
-            FontObject font = new FontObject(Game1.font);
+            FontObject font = new FontObject(Game1.font_small);
             lifePointsDisplay = new Pane("menugreen", "lifePointsDisplay" + this.id);
             lifePointsDisplay.setPosition(x, y);
             lifePointsDisplay.setDimensions(32, 12);

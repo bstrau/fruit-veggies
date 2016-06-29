@@ -59,7 +59,7 @@ namespace Game1.Content
 
         public override void LifePointsDisplay(int x, int y)
         {
-            FontObject font = new FontObject(Game1.font);
+            FontObject font = new FontObject(Game1.font_small);
             base.LifePointsDisplay(x, y);
             attackpowerDisplay = new Pane("menuoption", "attackposerdisplay" + this.id);
             attackpowerDisplay.setPosition(x + 32, y);
