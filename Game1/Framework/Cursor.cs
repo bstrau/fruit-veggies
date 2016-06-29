@@ -192,10 +192,9 @@ namespace Game1.Content
                     GameManager.fightManager.Fight(attacker, defender);
 
                     attacker.Moved();
-                    attackableTiles.Clear();
-                    cursorState = CURSORSTATE.SELECT;
                 }
-
+                attackableTiles.Clear();
+                cursorState = CURSORSTATE.SELECT;
             }
         }
 
