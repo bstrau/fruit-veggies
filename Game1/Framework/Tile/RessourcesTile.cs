@@ -43,12 +43,17 @@ namespace Game1.Content
 
         public override void onTurnBegin(Player currentplayer)
         {
-            base.onTurnBegin(currentplayer);
-            if (owner == currentplayer)
+            if (occupant == null)
+                return;
+
+            if (this.occupant.getPlayer() == currentplayer)
             {
                 base.onTurnBegin(currentplayer);
-                owner.AddRessourcePoints(GetLoot());
+                currentplayer.AddRessourcePoints(GetLoot());
+                currentplayer.updateRessourcesString();
             }
+            base.onTurnBegin(currentplayer);
+
         }
     }
 }

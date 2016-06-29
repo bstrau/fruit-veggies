@@ -49,6 +49,11 @@ namespace Game1.Content
             return resourcePoints;
         }
 
+        public string GetOwnerId()
+        {
+            return this.id;
+        }
+
         public void SetTitle(String title)
         {
             this.title = title;
