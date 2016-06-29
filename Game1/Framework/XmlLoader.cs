@@ -78,6 +78,38 @@ namespace Game1.Content
             }
         }
 
+        public static Map loadMap(String xmlfilepath)
+        {
+            XmlDocument xdoc = new XmlDocument();
+
+            try
+            {
+                xdoc.Load(xmlfilepath);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            XmlNodeList maps = xdoc.GetElementsByTagName("map");
+
+            XmlNode xmlMap = null;
+
+            if (maps == null)
+            {
+                System.Windows.Forms.MessageBox.Show("Keine Map gefunden");
+                
+            }
+
+            if (maps.Count >= 1)
+            {
+                xmlMap = maps[0];
+            }
+
+            return new Map(xmlMap);
+             
+           
+        }
         public static void loadAllUnits(String xmlfilepath)
         {
             XmlDocument xdoc = new XmlDocument();

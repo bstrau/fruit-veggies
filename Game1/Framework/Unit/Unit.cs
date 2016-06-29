@@ -27,6 +27,7 @@ namespace Game1.Content
         protected string ownerId;
 
         protected Pane lifePointsDisplay;
+        protected Pane attackpowerDisplay;
 
         // Wird true gesetzt, nachdem in einer Runde mit dieser Einheit gezogen wurde
         bool moved;
@@ -88,16 +89,14 @@ namespace Game1.Content
             pos = new Point(x,y);
         }
 
-        public void LifePointsDisplay(int x, int y)
+        public virtual void LifePointsDisplay(int x, int y)
         {
-            FontObject font = new FontObject(Game1.font);
-            lifePointsDisplay = new Pane("menu", "lifePointsDisplay"+ this.id);
+            FontObject font = new FontObject(Game1.font_small);
+            lifePointsDisplay = new Pane("menugreen", "lifePointsDisplay" + this.id);
             lifePointsDisplay.setPosition(x, y);
-            lifePointsDisplay.setDimensions(64, 12);
+            lifePointsDisplay.setDimensions(32, 12);
             lifePointsDisplay.setFont(font);
             lifePointsDisplay.addText(this.healthpoints.ToString(), new Point(2, 2));
-
-            //lifePointsDisplay.Register();
             lifePointsDisplay.Show();
         }
 
@@ -157,7 +156,7 @@ namespace Game1.Content
             LifePointsDisplay(pos.X,pos.Y);
         }
 
-        public void onCursorLeave()
+        public virtual void onCursorLeave()
         {
             lifePointsDisplay.Hide();
         }
@@ -186,6 +185,8 @@ namespace Game1.Content
         {
             return ownerId;
         }
+
+       
 
         // Global erreichbare Liste aller Tiles.
         public static Dictionary<String, Unit> Units = new Dictionary<string, Unit>();

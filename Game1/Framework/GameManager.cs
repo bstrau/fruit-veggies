@@ -5,6 +5,7 @@ using Game1.Framework;
 using System;
 using System.Drawing;
 
+
 namespace Game1
 {
     public enum GAMESTATE
@@ -119,16 +120,17 @@ namespace Game1
         {
             FontObject font = new FontObject(spriteFont);
 
+
             // Main Menü
             mainMenu = new Pane("menu","mainMenue");
-            mainMenu.setDimensions(800,500);
-            mainMenu.setPosition(50,50);
+            mainMenu.setDimensions(8*64, 5*64);
+            mainMenu.setPosition(4*64, 50);
             mainMenu.setFont(font);
 
             // LevelEditor öffnen
             Pane editor = new Pane("menuoption", "editor");
             editor.setPosition(new System.Drawing.Point(10, 10));
-            editor.setDimensions(780, 50);
+            editor.setDimensions(8*64-20, 50);
             editor.setFont(font);
             editor.addText("Map-Editor starten", new Point(10, 10));
             editor.Clicked += ShowMapEditor;
@@ -136,11 +138,20 @@ namespace Game1
             // Music abstellen
             Pane mute = new Pane("menuoption", "mute");
             mute.setPosition(new System.Drawing.Point(10, 70));
-            mute.setDimensions(780, 50);
+            mute.setDimensions(8 * 64 - 20, 50);
             mute.setFont(font);
             mute.addText("Musik umschalten", new Point(10, 10));
             mute.Clicked += currentMap.ToggleSound;
 
+            // Map wählen
+            Pane chooseMap = new Pane("menuoption", "chooseMap");
+            chooseMap.setPosition(new System.Drawing.Point(10, 130));
+            chooseMap.setDimensions(8 * 64 - 20, 50);
+            chooseMap.setFont(font);
+            chooseMap.addText("Map auf Datei Laden", new Point(10, 10));
+            chooseMap.Clicked += openMapChooser;
+
+            mainMenu.AddPane(chooseMap);
             mainMenu.AddPane(editor);
             mainMenu.AddPane(mute);
 
@@ -349,6 +360,7 @@ namespace Game1
         {
             if (!editor.Visible)
                 editor.Show();
+                
             else
                 editor.Hide();
         }
@@ -380,7 +392,23 @@ namespace Game1
             }
 
             gameRounds++;
-            roundDisplayString.text = gameRounds.ToString();
+            if(gameRounds % 2 == 0)
+                roundDisplayString.text = (gameRounds / 2 ).ToString();
+        }
+
+        public void openMapChooser(object sender, EventArgs eventArgs)
+        {
+            System.Windows.Forms.OpenFileDialog fd = new System.Windows.Forms.OpenFileDialog();
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Map choosenMap = XmlLoader.loadMap(fd.FileName);
+                if (choosenMap != null)
+                {
+                    currentMap = choosenMap;
+                }
+               
+            }
+          
         }
     }
 }

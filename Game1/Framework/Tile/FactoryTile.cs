@@ -37,9 +37,16 @@ namespace Game1.Content
             unit.setPlayer(owner);
             enter(unit);
             unit.Moved();
-            owner.SubtractRessourcePoints(unit.GetPrice());
-            GameManager.gameState = GAMESTATE.MAP;
-            buyMenu.Hide();
+            if (owner.GetResourcePoints() >= unit.GetPrice())
+            {
+                owner.SubtractRessourcePoints(unit.GetPrice());
+                GameManager.gameState = GAMESTATE.MAP;
+                buyMenu.Hide();
+            }
+            else {
+                System.Windows.Forms.MessageBox.Show("Du hast nicht genug Ressoucen", "Einheit erstellung Failed", MessageBoxButtons.OK);
+                buyMenu.Hide();
+            }
         }
 
         public void BuyMenu()

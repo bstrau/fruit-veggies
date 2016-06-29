@@ -17,6 +17,7 @@ namespace Game1
     public class Game1 : Game
     {
         public static SpriteFont font;
+        public static SpriteFont font_small;
         public static SpriteBatch spriteBatch;
 
         GraphicsDeviceManager graphics;
@@ -35,9 +36,16 @@ namespace Game1
             graphics.PreferredBackBufferHeight = 64 * (SPIELFELDHOEHE + 1);
             graphics.PreferredBackBufferWidth = 64 * SPIELFELDBREITE;
             graphics.ApplyChanges();
-
+            
+            // Titel
+            this.Window.Title = "Fruit vs. Veggies";
+            // Nur mit Vorsicht zu genießen
+            this.Window.AllowUserResizing = true;
+            // Mouse Zeigen
             this.IsMouseVisible = true;
+            
         }
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -49,6 +57,7 @@ namespace Game1
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            
         }
 
         /// <summary>
@@ -75,6 +84,7 @@ namespace Game1
 
             // Font laden
             font = Content.Load<SpriteFont>("fonts/font");
+            font_small = Content.Load<SpriteFont>("fonts/font_size_10");
 
             String[] files = Directory.GetFiles("Content\\sounds\\bg");
             foreach (String file in files)

@@ -151,7 +151,8 @@ namespace Game1.Content
 
         public void Register()
         {
-            Panes.Add(id, this);
+            if(!Panes.ContainsKey(id))
+                Panes.Add(id, this);
         }
 
         public bool isVisible()
