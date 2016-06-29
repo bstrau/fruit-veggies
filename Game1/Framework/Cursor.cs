@@ -120,24 +120,16 @@ namespace Game1.Content
         
         public void Draw()
         {
-            // Bewegungsradius anzeigen
-            if(cursorState == CURSORSTATE.MOVE)
+            foreach (Tile tile in attackableTiles)
             {
-                foreach(Tile tile in reachableTiles)
-                {
-                    target.SetPos(tile.getPos());
-                    target.Draw(batch);
-                }
+                fightTarget.SetPos(tile.getPos());
+                fightTarget.Draw(batch);
             }
 
-            // Mögliche Kampffelder anzeigen
-            if (cursorState == CURSORSTATE.ACTION)
+            foreach (Tile tile in reachableTiles)
             {
-                foreach (Tile tile in attackableTiles)
-                {
-                    fightTarget.SetPos(tile.getPos());
-                    fightTarget.Draw(batch);
-                }
+                target.SetPos(tile.getPos());
+                target.Draw(batch);
             }
 
             graphics.SetPos(currentTile.getPos());
@@ -146,29 +138,7 @@ namespace Game1.Content
 
         public void onLeftClick(Point pos)
         {
-            if (currentUnit != null && !currentUnit.MayMove())
-                return;
-
-            if (cursorState == CURSORSTATE.MOVE)
-            {
-                if (reachableTiles.Contains(currentTile))
-                {
-                    currentTile.enter(originTile.leave());
-                }
-
-                findFight(attackableTiles);
-                if (attackableTiles.Count != 0)
-                {
-                    setCursorState(CURSORSTATE.ACTION);
-                }
-                else
-                {
-                    setCursorState(CURSORSTATE.SELECT);
-                }
-
-                reachableTiles.Clear();
-            }
-            else if (cursorState == CURSORSTATE.SELECT)
+            if (cursorState == CURSORSTATE.SELECT)
             {
                 if (currentUnit != null && currentUnit.getPlayer() == GameManager.currentPlayer && currentUnit.MayMove())
                 {
@@ -176,34 +146,54 @@ namespace Game1.Content
                     // Nimm diese Unit und die CurrentUnit, übergib sie einem FightManager
                     // Wenn gekämpft, dann return
                     findFight(attackableTiles);
-                    if (attackableTiles.Count != 0)
-                    {
-                        setCursorState(CURSORSTATE.ACTION);
-                    }
-
-                    else
-                    {
-                        setCursorState(CURSORSTATE.MOVE);
-                        originTile = currentTile;
-                        findWay(reachableTiles, originTile, currentUnit.getMovePoints());
-                    }
+                    setCursorState(CURSORSTATE.MOVE);
+                    originTile = currentTile;
+                    findWay(reachableTiles, originTile, currentUnit.getMovePoints());
+                    cursorState = CURSORSTATE.MOVE;
                 }
                 else
                 {
                     currentTile.onClick(pos);
                 }
             }
-            else if (cursorState == CURSORSTATE.ACTION)
+            else if (cursorState == CURSORSTATE.MOVE)
             {
-                // Auf den angreifbaren Tiles steht ein Gegner, beginne den Kampf!
-                if(attackableTiles.Contains(currentTile))
+                // Schau, ob ein Kampftile ausgewählt wurde
+                setCursorState(CURSORSTATE.SELECT);
+                if (attackableTiles.Contains(currentTile))
                 {
                     AttackUnit attacker = (AttackUnit)currentUnit;
                     AttackUnit defender = (AttackUnit)currentTile.getOccupant();
                     GameManager.fightManager.Fight(attacker, defender);
+                    
                     attacker.Moved();
+                    attackableTiles.Clear();
                 }
-                setCursorState(CURSORSTATE.SELECT);
+
+                if (reachableTiles.Contains(currentTile))
+                {
+                    currentTile.enter(originTile.leave());
+                    findFight(attackableTiles);
+                    if(attackableTiles.Count != 0)
+                    {
+                        cursorState = CURSORSTATE.ACTION;
+                    }
+                }
+                currentUnit.Moved();
+                reachableTiles.Clear();
+            }
+            else if (cursorState == CURSORSTATE.ACTION)
+            {
+                if (attackableTiles.Contains(currentTile))
+                {
+                    AttackUnit attacker = (AttackUnit)currentUnit;
+                    AttackUnit defender = (AttackUnit)currentTile.getOccupant();
+                    GameManager.fightManager.Fight(attacker, defender);
+
+                    attacker.Moved();
+                    attackableTiles.Clear();
+                    cursorState = CURSORSTATE.SELECT;
+                }
             }
         }
 
