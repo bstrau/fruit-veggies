@@ -43,7 +43,9 @@ namespace Game1
             this.Window.AllowUserResizing = true;
             // Mouse Zeigen
             this.IsMouseVisible = true;
+            
         }
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -55,6 +57,7 @@ namespace Game1
         {
             // TODO: Add your initialization logic here
             base.Initialize();
+            
         }
 
         /// <summary>

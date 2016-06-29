@@ -1,0 +1,11 @@
+<doc>
+  <maps>
+    <map id="">
+      <title>Test</title>
+      <sound>MACINTOSH_PLUS</sound>
+      <SizeX>16</SizeX>
+      <SizeY>16</SizeY>
+      <tiles>D1,R1,D2,R2,R3,T1,D4,D2,D2,T1,T1,R3,D1,D1,D1,D1,R1,D2,R2,R3,T1,D4,T1,D2,D2,T1,T1,T1,D1,D1,D1,D1,D2,R2,R3,T1,D4,D3,D3,D2,D2,D3,D3,R2,D1,D1,D1,D1,R2,R3,T1,D4,T1,T1,T1,D2,D2,T1,T1,T1,D1,D1,D1,D1,R3,T1,D4,D1,T1,T1,T1,D2,D2,T1,T1,T1,D1,D1,D1,D1,T1,D4,R1,R1,R1,R1,R1,D2,D2,R1,R1,R1,R1,R1,R1,R1,D4,R1,R1,R1,R1,R1,R1,D2,D2,R1,R1,R1,R1,R1,R1,R1,D3,D3,D3,D3,D3,D3,D3,D4,D4,D3,D3,D3,D3,D3,D3,D4,D3,D3,D3,D3,D3,D3,D3,D4,D4,D3,D3,D3,D3,D3,D3,D4</tiles>
+    </map>
+  </maps>
+</doc>

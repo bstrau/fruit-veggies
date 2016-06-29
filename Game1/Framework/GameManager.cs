@@ -310,6 +310,7 @@ namespace Game1
         {
             if (!editor.Visible)
                 editor.Show();
+                
             else
                 editor.Hide();
         }
