@@ -255,7 +255,7 @@ namespace Game1
             resultScreen.addText(new Text(winner.GetTitle() + " hat das Spiel mit " + winner.GetResourcePoints() + " Ressourcenpunkten abgeschlosssen.", 10, 30));
             resultScreen.addText(new Text(loser.GetTitle() + " hat verloren!", 10, 70));
             resultScreen.addText(new Text(loser.GetTitle() + " hat das Spiel mit " + loser.GetResourcePoints() + " Ressourcenpunkten abgeschlosssen.", 10, 90));
-            resultScreen.addText(new Text("Spiel dauerte " + gameRounds + " Züge.", 10, 130));
+            resultScreen.addText(new Text("Spiel dauerte " + gameRounds + " Zuege.", 10, 130));
             resultScreen.addText(new Text("Ueber das Menue kann eine neue Map ausgewaehlt werden!", 10, 200));
             resultScreen.Show();
         }
