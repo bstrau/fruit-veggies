@@ -12,51 +12,57 @@ namespace Game1
     {
         MENU,
         MAP,
-        END
+        RESULT
     }
 
     public class GameManager
     {
-        SpriteBatch spriteBatch;
-        SpriteFont spriteFont;
-
-        // Spieler
         public static Player playerOne;
         public static Player playerTwo;
-
-        // Cursor 
-        public static Cursor cursor;
-
-        public static int gameRounds;
-
-        // Aktuell gewählte Map
-        Map currentMap;
-
-        // Spieler, der in der aktuellen Runde zieht
         public static Player currentPlayer;
+        public static Cursor cursor;
+        public static int gameRounds;
+        public static FightManager fightManager;
+        public static GAMESTATE gameState;
 
+        // Menüs
+        Pane playerBar;
         Pane mainMenu;
+        // Zeigt aktuelle Runde in der playerBar an
+        Text roundDisplayString;
+
+        // Ergebnis-Anzeige
+        Pane resultScreen = null;
 
         MapEditor editor;
+        Map currentMap;
+
+        // Zeichenbezogen Attribute
+        SpriteBatch spriteBatch;
+        SpriteFont spriteFont;
 
         // States
         KeyboardState oldState;
         MouseState oldMouseEvent;
-        public static GAMESTATE gameState;
-
-        // Menüs
-        Pane playerBar; 
-
-        public static FightManager fightManager;
-
-        // Runden Display
-        Text roundDisplayString;
 
         public GameManager(SpriteBatch spriteBatch, SpriteFont spriteFont)
         {
             this.spriteBatch = spriteBatch;
             this.spriteFont = spriteFont;
 
+            // Aktuell gewählte Map
+            currentMap = Map.Maps[""];
+            currentMap.Init();
+            currentMap.MuteSound(true);
+
+            // Map Editor
+            editor = new MapEditor();
+
+            Initialize();
+        }
+
+        public void Initialize()
+        {
             // Spieler Initialisieren
             playerOne = new Player("1");
             playerTwo = new Player("2");
@@ -66,60 +72,37 @@ namespace Game1
             playerOne.SetResourcePoints(500);
             playerTwo.SetResourcePoints(500);
 
-            // Aktuell gewählte Map
-            currentMap = Map.Maps[""];
-            currentMap.Init();
-            currentMap.MuteSound(true);
-
             fightManager = new FightManager(currentMap);
-            
             cursor = new Cursor(currentMap, currentMap.GetMapTiles()[25], spriteBatch);
 
-            // Test der Units
-            Unit a0 = Unit.Units["apple"].GetCopy();
-            Unit a1 = Unit.Units["banana"].GetCopy();
-            Unit b0 = Unit.Units["carrot"].GetCopy();
-            Unit b1 = Unit.Units["potato"].GetCopy();
+            gameRounds = 0;
 
-            a0.setPlayer(playerOne);
-            a1.setPlayer(playerOne);
-            b0.setPlayer(playerTwo);
-            b1.setPlayer(playerTwo);
+            // Menüs initialisieren
+            InitializePanes();
 
-            currentMap.GetMapTiles()[1].enter(a0);
-            currentMap.GetMapTiles()[17].enter(a1);
-            currentMap.GetMapTiles()[4].enter(b0);
-            currentMap.GetMapTiles()[18].enter(b1);
-
-            foreach(Tile tile in currentMap.GetMapTiles())
+            // Ownership der Basen setzen
+            foreach (Tile tile in currentMap.GetMapTiles())
             {
-                if(tile.GetTileType() == Tile.TileType.BASE)
+                if (tile.GetTileType() == Tile.TileType.BASE)
                 {
                     ((BaseTile)tile).setOwnership();
                 }
             }
 
-            // Map Editor
-            editor = new MapEditor();
-
-            // Menüs initialisieren
-            InitializePanes();
-
             gameState = GAMESTATE.MAP;
-
             onTurnBegin(this, EventArgs.Empty);
         }
 
         // Map Chosser
         public Map chooseMap() {
-
             return null;
         }
 
         public void InitializePanes()
         {
-            FontObject font = new FontObject(spriteFont);
+            Pane.currentPanes.Clear();
 
+            FontObject font = new FontObject(spriteFont);
 
             // Main Menü
             mainMenu = new Pane("menu","mainMenue");
@@ -223,25 +206,26 @@ namespace Game1
             }
 
             // Prüfen, ob ein Spieler keine Basis mehr besitzt. Ist dies für einen der Fall, so verliert er und dass Spiel ist zu Ende.
-            bool playerOneAlive = false;
-            bool playerTwoAlive = false;
+            if (gameState == GAMESTATE.MAP)
+            {
+                bool playerOneAlive = false;
+                bool playerTwoAlive = false;
+                foreach (Tile tile in currentMap.GetMapTiles())
+                {
+                    if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerOne)
+                        playerOneAlive = true;
+                    if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerTwo)
+                        playerTwoAlive = true;
+                }
 
-            // 
-            foreach(Tile tile in currentMap.GetMapTiles())
-            {
-                if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerOne)
-                    playerOneAlive = true;
-                if (tile.GetTileType() == Tile.TileType.BASE && ((BaseTile)tile).getOwner() == playerOne)
-                    playerTwoAlive = true;
-            }
-
-            if(playerOneAlive == false)
-            {
-                EndGame(playerTwo, playerOne);
-            }
-            if (playerTwoAlive == false)
-            {
-                EndGame(playerOne, playerTwo);
+                if (playerOneAlive == false)
+                {
+                    EndGame(playerTwo, playerOne);
+                }
+                if (playerTwoAlive == false)
+                {
+                    EndGame(playerOne, playerTwo);
+                }
             }
 
             oldState = newKeyEvent;
@@ -250,22 +234,19 @@ namespace Game1
 
         public void EndGame(Player winner, Player loser)
         {
-            gameState = GAMESTATE.END;
-
-            Pane.currentPanes.Clear();
-
+            gameState = GAMESTATE.RESULT;
             FontObject font = new FontObject(spriteFont);
 
-            Pane resultScreen = new Pane("menu", "resultScreen");
-            resultScreen.setDimensions(800, 500);
-            resultScreen.setPosition(50, 50);
+            resultScreen = new Pane("menu", "resultScreen");
+            resultScreen.setDimensions(8 * 64, 5 * 64);
+            resultScreen.setPosition(4 * 64, 50);
             resultScreen.setFont(font);
             resultScreen.addText(new Text(winner.GetTitle() + " hat gewonnen!", 10,10));
-            resultScreen.addText(new Text(winner.GetTitle() + " hat das Spiel mit " + winner.GetResourcePoints() + "Ressourcenpunkten abgeschlosssen.", 10, 30));
+            resultScreen.addText(new Text(winner.GetTitle() + " hat das Spiel mit " + winner.GetResourcePoints() + " Ressourcenpunkten abgeschlosssen.", 10, 30));
             resultScreen.addText(new Text(loser.GetTitle() + " hat verloren!", 10, 70));
-            resultScreen.addText(new Text(loser.GetTitle() + " hat das Spiel mit " + loser.GetResourcePoints() + "Ressourcenpunkten abgeschlosssen.", 10, 90));
-            resultScreen.addText(new Text("Spiel dauerte " + gameRounds + " Runden", 10, 130));
-            resultScreen.addText(new Text("Druecke Escape, um das Spiel zu beenden.", 10, 200));
+            resultScreen.addText(new Text(loser.GetTitle() + " hat das Spiel mit " + loser.GetResourcePoints() + " Ressourcenpunkten abgeschlosssen.", 10, 90));
+            resultScreen.addText(new Text("Spiel dauerte " + gameRounds + " Züge.", 10, 130));
+            resultScreen.addText(new Text("Ueber das Menue kann eine neue Map ausgewaehlt werden!", 10, 200));
             resultScreen.Show();
         }
 
@@ -274,19 +255,19 @@ namespace Game1
         /// </summary>
         public bool MenuEvents(KeyboardState newkeyboardEvent, MouseState newMouseEvent ) 
         {
-            // Alle Eingaben verwerfen. Das Programm muss für eine zweite Runde neu gestartet werden, oder über Escape beendet werden.
-            if(gameState == GAMESTATE.END)
-            {
-                return true;
-            }
-
             if (oldState.IsKeyDown(Keys.Tab) && newkeyboardEvent.IsKeyUp(Keys.Tab))
             {
+                // Ergebnis-Anzeige verbergen und löschen, falls ein Spiel beendet wurde.
+                if(resultScreen != null)
+                {
+                    resultScreen.Hide();
+                    resultScreen = null;
+                }
+
                 if (mainMenu.isVisible())
                 {
                     mainMenu.Hide();
                     gameState = GAMESTATE.MAP;
-                    
                 }
                 else
                 {
@@ -320,7 +301,6 @@ namespace Game1
                         }
                     }
                 }
-                
             }
             return false;
         }
@@ -405,10 +385,9 @@ namespace Game1
                 if (choosenMap != null)
                 {
                     currentMap = choosenMap;
+                    Initialize();
                 }
-               
             }
-          
         }
     }
 }

@@ -71,7 +71,7 @@ namespace Game1.Content
             statusDisplay.setDimensions(size.Width, 64);
             statusDisplay.setFont(new FontObject(Game1.font));
             statusDisplay.addText( this.title , new Point(10, 10));
-            statusDisplay.addText("Resourcen:", new Point(10,40));
+            statusDisplay.addText("Ressourcen:", new Point(10,40));
             ressourcesString = new Text(this.GetResourcePoints().ToString(), 100, 40);
             statusDisplay.addText(ressourcesString);
 
