@@ -288,7 +288,7 @@ namespace Game1
             // Left Click
             if (oldMouseEvent.LeftButton == ButtonState.Pressed && newMouseEvent.LeftButton == ButtonState.Released)
             {
-                if (gameState == GAMESTATE.MENU)
+                //if (gameState == GAMESTATE.MENU)
                 {
                     Pane[] copy = new Pane[Pane.currentPanes.Count];
                     Pane.currentPanes.CopyTo(copy);
@@ -315,18 +315,6 @@ namespace Game1
             if (oldMouseEvent.LeftButton == ButtonState.Pressed && newMouseEvent.LeftButton == ButtonState.Released)
             {
                 cursor.onLeftClick(new System.Drawing.Point(pos.X, pos.Y));
-
-                {
-                    Pane[] copy = new Pane[Pane.currentPanes.Count];
-                    Pane.currentPanes.CopyTo(copy);
-                    foreach (Pane pane in copy)
-                    {
-                        if (pane.isHit(pos))
-                        {
-                            pane.onClick(pos);
-                        }
-                    }
-                }
             }
 
             // MouseMove

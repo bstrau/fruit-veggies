@@ -61,7 +61,7 @@ namespace Game1.Content
 
             FontObject font = new FontObject(Game1.font);
             buyMenu = new Pane("menu", "buyMenu");
-            buyMenu.setPosition(0, 0);
+            buyMenu.setPosition(7 * 64, 10);
             buyMenu.setDimensions(200, 200);
             buyMenu.setFont(font);
 
