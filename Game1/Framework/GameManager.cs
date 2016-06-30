@@ -4,7 +4,7 @@ using Game1.Content;
 using Game1.Framework;
 using System;
 using System.Drawing;
-
+using System.IO;
 
 namespace Game1
 {
@@ -134,9 +134,19 @@ namespace Game1
             chooseMap.addText("Map aus Datei Laden", new Point(10, 10));
             chooseMap.Clicked += openMapChooser;
 
+            // Doku öffnen
+            Pane openManual = new Pane("menuoption", "openDoku");
+            openManual.setPosition(new System.Drawing.Point(10, 190));
+            openManual.setDimensions(8 * 64 - 20, 50);
+            openManual.setFont(font);
+            openManual.addText("Anleitung(Doku) oeffnen", new Point(10, 10));
+            openManual.Clicked += openDoku;
+
+
             mainMenu.AddPane(chooseMap);
             mainMenu.AddPane(editor);
             mainMenu.AddPane(mute);
+            mainMenu.AddPane(openManual);
 
             // Register Panes
             mainMenu.Register();
@@ -377,6 +387,11 @@ namespace Game1
                     Initialize();
                 }
             }
+        }
+
+        public void openDoku(object sender, EventArgs eventArgs)
+        {
+            System.Diagnostics.Process.Start("Content\\Doku.pdf");
         }
     }
 }
