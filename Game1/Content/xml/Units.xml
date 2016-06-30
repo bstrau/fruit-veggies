@@ -10,7 +10,7 @@
       <ripostefactor>1</ripostefactor>
       <price>50</price>  
     </unit>
-    <unit id = "banana" type = "BANANA">
+    <unit id = "banana" type = "APPLE">
       <title>Banane</title>
       <graphic>banane</graphic>
       <ownerId>1</ownerId>
@@ -19,6 +19,16 @@
       <attackpower>50</attackpower>
       <ripostefactor>1</ripostefactor>
       <price>100</price>
+    </unit>
+    <unit id = "pear" type = "APPLE">
+      <title>Birne</title>
+      <graphic>Birne</graphic>
+      <ownerId>1</ownerId>
+      <movepoints>2</movepoints>
+      <healthpoints>200</healthpoints>
+      <attackpower>50</attackpower>
+      <ripostefactor>1</ripostefactor>
+      <price>250</price>
     </unit>
     <unit id = "carrot" type = "APPLE">
       <title>Karotte</title>
@@ -39,6 +49,16 @@
       <attackpower>50</attackpower>
       <ripostefactor>1</ripostefactor>
       <price>100</price>
+    </unit>
+    <unit id = "tomato" type = "APPLE">
+      <title>Tomate</title>
+      <graphic>Tomate</graphic>
+      <ownerId>2</ownerId>
+      <movepoints>2</movepoints>
+      <healthpoints>200</healthpoints>
+      <attackpower>50</attackpower>
+      <ripostefactor>1</ripostefactor>
+      <price>250</price>
     </unit>
   </units>
 </doc>

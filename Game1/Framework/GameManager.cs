@@ -131,7 +131,7 @@ namespace Game1
             chooseMap.setPosition(new System.Drawing.Point(10, 130));
             chooseMap.setDimensions(8 * 64 - 20, 50);
             chooseMap.setFont(font);
-            chooseMap.addText("Map auf Datei Laden", new Point(10, 10));
+            chooseMap.addText("Map aus Datei Laden", new Point(10, 10));
             chooseMap.Clicked += openMapChooser;
 
             mainMenu.AddPane(chooseMap);

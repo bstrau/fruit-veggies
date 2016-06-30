@@ -32,13 +32,7 @@ namespace Game1.Content
         // Translators note: Loot heißt Beute
         public int GetLoot()
         {
-            if (cash_rounds > 0)
-            {
-                cash_rounds--;
-                return cash_amount;
-            }
-
-            return 0;
+            return cash_amount;
         }
 
         public override void onTurnBegin(Player currentplayer)
