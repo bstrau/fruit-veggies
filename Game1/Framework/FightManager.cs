@@ -29,7 +29,7 @@ namespace Game1.Content
 
             map.Update();
 
-            if (defender != null || defender.IsDead() == false)
+            if (defender != null && defender.IsDead() == false)
             {
                 attackpoints = defender.GetRiposte();
                 randomfactor = rand.NextDouble() * 0.2 + 1;

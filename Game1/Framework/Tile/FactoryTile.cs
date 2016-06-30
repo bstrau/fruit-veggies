@@ -34,12 +34,14 @@ namespace Game1.Content
             Pane clickedPane = (Pane)sender;
             Unit unit = Unit.Units[clickedPane.GetId()].GetCopy();
 
-            unit.setPlayer(owner);
-            enter(unit);
-            unit.Moved();
             if (owner.GetResourcePoints() >= unit.GetPrice())
             {
                 owner.SubtractRessourcePoints(unit.GetPrice());
+
+                unit.setPlayer(owner);
+                enter(unit);
+                unit.Moved();
+
                 GameManager.gameState = GAMESTATE.MAP;
                 buyMenu.Hide();
             }

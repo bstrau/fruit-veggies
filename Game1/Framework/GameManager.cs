@@ -358,6 +358,7 @@ namespace Game1
             {
                 currentPlayer = playerOne;
             }
+
             else {
                 // Aktuellen Player wechseln
                 if (currentPlayer == playerOne)
